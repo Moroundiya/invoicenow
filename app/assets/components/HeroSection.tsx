@@ -5,7 +5,7 @@ import DotFilledIcon from "@iconify-react/radix-icons/dot-filled";
 import Link from "next/link";
 import invoice from "@/app/assets/images/invoice.png";
 import { RoughNotation } from "react-rough-notation";
-
+import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
 
 export default function HeroSection() {
 	return (
