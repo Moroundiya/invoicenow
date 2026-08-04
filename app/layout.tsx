@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+
+const outfit = Outfit({
 	subsets: ["latin"],
-	variable: "--font-inter",
+	variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
@@ -71,7 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
 		<html
 			lang="en"
-			className={inter.variable}>
+			className={cn("font-sans", inter.variable)}>
 			<body className="min-h-full flex flex-col">{children}</body>
 		</html>
 	);
