@@ -45,17 +45,21 @@ export default function HeroSection() {
 							</RoughNotation>
 						</span>
 					</p>
-					<p className="text-lg text-[#eeeeee9e] mt-6 w-10/12 leading-tight font-light">
+					<p className="text-lg text-[#eeeeee9e] mt-7 w-10/12 leading-tight font-light">
 						InvoiceNow helps freelancers and businesses create, customize,
 						download professional invoices effortlessly and get paid faster,
 						without the stress or hassle.
 					</p>
-					<div className="flex flex-row space-x-4 mt-10">
+					<div className="flex flex-row space-x-8 mt-10 items-center">
 						<Link
 							href="/create"
-							className="text-white bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50]   py-2 px-4 rounded-sm transition duration-300">
-							Create your first invoice
+							className="text-white bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] font-semibold py-2 px-4 rounded-sm transition duration-300 flex items-center justify-center space-x-2 hover:bg-[#0066FF]">
+							<span>Create your first invoice</span>
+							<ArrowRightLineIcon className="text-white h-5" />
 						</Link>
+						<p className="font-semibold text-[#00B7FF]">
+							Explore Features
+						</p>
 					</div>
 				</div>
 				<div className="flex justify-center items-center">
