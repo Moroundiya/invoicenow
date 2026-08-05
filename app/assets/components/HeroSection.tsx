@@ -9,8 +9,8 @@ import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
 
 export default function HeroSection() {
 	return (
-		<div className="px-3 pt-20 lg:px-12 w-full h-dvh flex justify-center items-center">
-			<div className="w-full h-full grid lg:grid-cols-2">
+		<div className="px-3 w-full h-dvh flex justify-center items-center bg-[url('/background.png')] bg-cover bg-center bg-no-repeat pt-13 lg:px-12">
+			<div className="w-full grid lg:grid-cols-2 ">
 				<div className="flex flex-col justify-center items-start">
 					<div className="bg-[#00B7FF] py-1 px-3 rounded-full flex flex-row items-center justify-center mb-4 space-x-2 text-[#041636] font-semibold text-sm">
 						<FlashIcon className="text-[#041636] h-3.5" />
@@ -29,7 +29,7 @@ export default function HeroSection() {
 						}}>
 						Create Professional Invoices in
 						<span
-							className="text-[#00B7FF] text-6xl ms-4"
+							className="text-[#00B7FF] text-7xl ms-4 font-allura"
 							style={{
 								textShadow: "1.5px 1.5px 0 #fff",
 							}}>
@@ -57,16 +57,14 @@ export default function HeroSection() {
 							<span>Create your first invoice</span>
 							<ArrowRightLineIcon className="text-white h-5" />
 						</Link>
-						<p className="font-semibold text-[#00B7FF]">
-							Explore Features
-						</p>
+						<p className="font-semibold text-[#00B7FF]">Explore Features</p>
 					</div>
 				</div>
 				<div className="flex justify-center items-center">
 					<Image
 						src={invoice}
 						alt="Invoice"
-						className="w-10/12 h-10/12 object-contain"
+						className="w-150 h-150 object-contain"
 					/>
 				</div>
 			</div>

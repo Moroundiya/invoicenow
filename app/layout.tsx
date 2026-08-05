@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Allura, Inter } from "next/font/google";
 import "./globals.css";
-import { Outfit } from "next/font/google";
-import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-
-const outfit = Outfit({
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const allura = Allura({
+	variable: "--font-allura",
 	subsets: ["latin"],
-	variable: "--font-outfit",
+	weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -72,10 +70,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<html
-			lang="en"
-			className={cn("font-sans", inter.variable)}>
-			<body className="min-h-full flex flex-col">{children}</body>
+		<html lang="en">
+			<body className={`${inter.variable} ${allura.variable} antialiased`}>{children}</body>
 		</html>
 	);
 }
