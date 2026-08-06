@@ -9,10 +9,10 @@ import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
 
 export default function HeroSection() {
 	return (
-		<div className="px-3 w-full h-dvh flex justify-center items-center bg-[url('/background.png')] bg-cover bg-center bg-no-repeat pt-13 lg:px-12">
-			<div className="w-full grid lg:grid-cols-2 ">
+		<div className="px-3 w-full min-h-dvh flex justify-center items-center bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat pt-20 pb-10 lg:px-12">
+			<div className="w-full h-full grid lg:grid-cols-2">
 				<div className="flex flex-col justify-center items-start">
-					<div className="bg-[#00B7FF] py-1 px-3 rounded-full flex flex-row items-center justify-center mb-4 space-x-2 text-[#041636] font-semibold text-sm">
+					<div className="bg-[#00B7FF] py-1 px-3 rounded-full flex flex-row items-center justify-center mb-6 space-x-2 text-[#041636] font-semibold text-sm">
 						<FlashIcon className="text-[#041636] h-3.5" />
 						<div className="flex flex-row space-x-0.5 items-center justify-center">
 							<p>Create</p>
@@ -23,7 +23,7 @@ export default function HeroSection() {
 						</div>
 					</div>
 					<p
-						className="text-7xl font-bold leading-[1.1] text-white"
+						className="text-7xl font-bold leading-none text-white font-asllura"
 						style={{
 							textShadow: "1.5px 1.5px 0 #00B7FF",
 						}}>
