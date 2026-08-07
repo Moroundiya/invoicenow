@@ -10,10 +10,18 @@ export default function Features() {
 				}}>
 				Features
 			</p>
-
-			<p className="text-lg text-white mt-2 w-10/12 leading-tight font-light text-center">
+			<p className="text-2xl text-white text-center font-regular leading-none">
 				Everything You Need to Get Paid Faster
 			</p>
+
+			<div className="mt-12 grid grid-cols-3">
+                <div className="w-full h-[250px] rounded-2xl bg-[#041f5049] border-2 border-[#041E50]">
+                    <div className='w-1/3'>
+                    <div></div>
+                    </div>
+                    <div></div>
+                </div>
+			</div>
 		</div>
 	);
 }
