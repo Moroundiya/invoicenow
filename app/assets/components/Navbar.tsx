@@ -43,7 +43,7 @@ export default function Navbar() {
 				</div>
 				<Link
 					href="/create"
-					className="text-white bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] py-2 px-4 rounded-sm transition duration-300">
+					className="text-white text-sm bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] py-2 px-4 rounded-sm transition duration-300">
 					Create Invoice
 				</Link>
 			</div>

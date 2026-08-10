@@ -29,7 +29,7 @@ export default function HeroSection() {
 						}}>
 						Create Professional Invoices in
 						<span
-							className="text-[#00B7FF] text-7xl ms-4 font-allura"
+							className="text-[#00B7FF] text-7xl ms-4 font-italianno"
 							style={{
 								textShadow: "1.5px 1.5px 0 #fff",
 							}}>
@@ -45,7 +45,7 @@ export default function HeroSection() {
 							</RoughNotation>
 						</span>
 					</p>
-					<p className="text-lg text-[#eeeeee9e] mt-7 w-10/12 leading-tight font-light">
+					<p className="text-[#eeeeee9e] mt-7 w-10/12 leading-tight font-light">
 						InvoiceNow helps freelancers and businesses create, customize,
 						download professional invoices effortlessly and get paid faster,
 						without the stress or hassle.

@@ -6,5 +6,5 @@ body {
 
 @theme {
             --font-jakarta: var(--font-jakarta);
-            --font-allura: var(--font-italianno);
+            --font-italianno: var(--font-italianno);
     }
