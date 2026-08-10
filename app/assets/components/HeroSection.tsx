@@ -45,7 +45,7 @@ export default function HeroSection() {
 							</RoughNotation>
 						</span>
 					</p>
-					<p className="text-[#eeeeee9e] mt-7 w-10/12 leading-tight font-light">
+					<p className="text-[#eeeeee9e] mt-5 w-10/12 leading-tight font-light">
 						InvoiceNow helps freelancers and businesses create, customize,
 						download professional invoices effortlessly and get paid faster,
 						without the stress or hassle.
