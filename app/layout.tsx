@@ -35,14 +35,14 @@ export const metadata: Metadata = {
 
 	openGraph: {
 		type: "website",
-		url: "https://your-invoicenow-domain.com",
+		url: "https://invoicenow.vercel.app",
 		title: "InvoiceNow — Free Invoice Generator",
 		description:
 			"Create professional invoices in seconds. Simple, fast, and free.",
 		siteName: "InvoiceNow",
 		images: [
 			{
-				url: "/og-image.png",
+				url: "@/",
 				width: 1200,
 				height: 630,
 				alt: "InvoiceNow — Free Invoice Generator",
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
 		title: "InvoiceNow — Free Invoice Generator",
 		description:
 			"Create professional invoices in seconds. Simple, fast, and free.",
-		images: ["/og-image.png"],
-		creator: "@yourusername",
+		images: ["/logo.png"],
+		creator: "@moroundiya08",
 	},
 
 	robots: {
@@ -65,8 +65,9 @@ export const metadata: Metadata = {
 	},
 
 	icons: {
-		icon: "/favicon.ico",
-		apple: "/apple-touch-icon.png",
+		icon: "/icon.png",
+		shortcut: "/icon.png",
+		apple: "/icon.png",
 	},
 };
 
