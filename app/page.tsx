@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Navbar from "./assets/components/Navbar";
+import HeroSection from "./assets/components/HeroSection";
 
 export default function Home() {
 	return (
-		<div className="flex flex-col items-center justify-center min-h-dvh py-2 bg-[#AFC9ED]">
+		<div className="w-full min-h-dvh bg-[#E7EDF6]">
 			<Navbar />
+			<HeroSection />
+			<p>Hello World</p>
 		</div>
 	);
 }
