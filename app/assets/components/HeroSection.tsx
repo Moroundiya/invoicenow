@@ -6,11 +6,15 @@ import Link from "next/link";
 import invoice from "@/app/assets/images/invoice.png";
 import { RoughNotation } from "react-rough-notation";
 import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
+import { Check } from "lucide-react";
+import Navbar from "./Navbar";
 
 export default function HeroSection() {
 	return (
-		<div className="px-3 w-full min-h-dvh flex justify-center items-center bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat pt-20 pb-10 lg:px-12">
-			<div className="w-full h-full grid lg:grid-cols-2">
+		<div className="px-3 w-full min-h-dvh flex flex-col justify-center items-center bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat pt-5 pb-10 lg:px-12">
+			<Navbar />
+
+			<div className="w-full h-full grid lg:grid-cols-2 mt-8">
 				<div className="flex flex-col justify-center items-start">
 					<div className="bg-[#00B7FF] py-1 px-3 rounded-full flex flex-row items-center justify-center mb-6 space-x-2 text-[#041636] font-semibold text-sm">
 						<FlashIcon className="text-[#041636] h-3.5" />
@@ -45,11 +49,48 @@ export default function HeroSection() {
 							</RoughNotation>
 						</span>
 					</p>
-					<p className="text-[#eeeeee9e] mt-5 w-10/12 leading-tight font-light">
+					<p className="text-white/70 mt-5 w-10/12 font-light">
 						InvoiceNow helps freelancers and businesses create, customize,
 						download professional invoices effortlessly and get paid faster,
 						without the stress or hassle.
 					</p>
+
+					<div className="flex flex-wrap items-center gap-3 text-sm text-white/70 mt-5">
+						<div className="flex items-center gap-2">
+							<div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#009EFF]">
+								<Check
+									className="h-3 w-3 text-[#041636]"
+									strokeWidth={3}
+								/>
+							</div>
+							<span>No complicated setup</span>
+						</div>
+
+						<div className="h-4 w-px bg-white/20" />
+
+						<div className="flex items-center gap-2">
+							<div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#009EFF]">
+								<Check
+									className="h-3 w-3 text-[#041636]"
+									strokeWidth={3}
+								/>
+							</div>
+							<span>No sign up</span>
+						</div>
+
+						<div className="h-4 w-px bg-white/20" />
+
+						<div className="flex items-center gap-2">
+							<div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#009EFF]">
+								<Check
+									className="h-3 w-3 text-[#041636]"
+									strokeWidth={3}
+								/>
+							</div>
+							<span>No credit card required</span>
+						</div>
+					</div>
+
 					<div className="flex flex-row space-x-8 mt-10 items-center">
 						<Link
 							href="/create"
@@ -60,6 +101,7 @@ export default function HeroSection() {
 						<p className="font-semibold text-[#00B7FF]">Explore Features</p>
 					</div>
 				</div>
+
 				<div className="flex justify-center items-center">
 					<Image
 						src={invoice}

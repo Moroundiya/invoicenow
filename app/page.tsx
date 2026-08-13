@@ -10,7 +10,6 @@ import Reviews from "./assets/components/Reviews";
 export default function Home() {
 	return (
 		<div className="relative w-full min-h-dvh">
-			<Navbar />
 			<HeroSection />
 			<Features />
 			<HowItWorks />
