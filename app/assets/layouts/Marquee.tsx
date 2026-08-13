@@ -78,7 +78,6 @@ function TestimonialCard({
 }) {
 	return (
 		<div className="mx-2 flex h-34 w-[280px] shrink-0 flex-col justify-center rounded-2xl border-2 border-[#041E50] bg-[#041f5049] px-4 shadow-sm sm:mx-3 sm:h-40 sm:w-[360px] sm:px-5">
-			{/* User */}
 			<div className="flex items-center gap-2 sm:gap-3">
 				<Image
 					src={testimonial.image}
