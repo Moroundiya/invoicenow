@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Navbar from "./assets/components/Navbar";
+import Navbar from "./assets/layouts/Navbar";
 import HeroSection from "./assets/components/HeroSection";
 import logo from "./assets/images/logo.png";
 import Features from "./assets/components/Features";

@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import FlashIcon from "@iconify-react/fontisto/flash";
 import DotFilledIcon from "@iconify-react/radix-icons/dot-filled";
@@ -7,33 +8,34 @@ import invoice from "@/app/assets/images/invoice.png";
 import { RoughNotation } from "react-rough-notation";
 import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
 import { Check } from "lucide-react";
-import Navbar from "./Navbar";
+import Navbar from "../layouts/Navbar";
 
 export default function HeroSection() {
 	return (
-		<div className="px-3 w-full min-h-dvh flex flex-col justify-center items-center bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat pt-5 pb-10 lg:px-12">
+		<div className="min-h-dvh w-full overflow-hidden bg-[url('/background-mobile.png')] bg-cover bg-center bg-no-repeat px-3 py-5 lg:py-7 lg:px-6 lg:bg-[url('/background.png')] xl:px-10">
 			<Navbar />
 
-			<div className="w-full h-full grid lg:grid-cols-2 mt-8">
-				<div className="flex flex-col justify-center items-start">
-					<div className="bg-[#00B7FF] py-1 px-3 rounded-full flex flex-row items-center justify-center mb-6 space-x-2 text-[#041636] font-semibold text-sm">
-						<FlashIcon className="text-[#041636] h-3.5" />
-						<div className="flex flex-row space-x-0.5 items-center justify-center">
+			<div className="mx-auto mt-10 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
+				<div className="flex w-full flex-col items-start justify-center">
+					<div className="mb-5 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 text-sm font-semibold text-[#041636] sm:mb-6 lg:px-3">
+						<FlashIcon className="h-3.5 text-[#041636]" />
+						<div className="flex items-center justify-center space-x-0.5 text-xs lg:text-sm">
 							<p>Create</p>
-							<DotFilledIcon className="h-4" />
+							<DotFilledIcon className="h-3.5 lg:h-4" />
 							<p>Send</p>
-							<DotFilledIcon className="h-4" />
+							<DotFilledIcon className="h-3.5 lg:h-4" />
 							<p>Get paid</p>
 						</div>
 					</div>
+
 					<p
-						className="text-7xl font-bold leading-none text-white font-asllura"
+						className="max-w-3xl text-[2.8rem] font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]"
 						style={{
 							textShadow: "1.5px 1.5px 0 #00B7FF",
 						}}>
 						Create Professional Invoices in
 						<span
-							className="text-[#00B7FF] text-7xl ms-4 font-italianno"
+							className="ms-2 text-[2.8rem] text-[#00B7FF] font-italianno sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
 							style={{
 								textShadow: "1.5px 1.5px 0 #fff",
 							}}>
@@ -49,15 +51,14 @@ export default function HeroSection() {
 							</RoughNotation>
 						</span>
 					</p>
-					<p className="text-white/70 mt-5 w-10/12 font-light">
+					<p className="mt-5 w-full max-w-2xl text-sm font-light text-white/70 sm:text-base lg:w-10/12 lg:leading-6">
 						InvoiceNow helps freelancers and businesses create, customize,
 						download professional invoices effortlessly and get paid faster,
 						without the stress or hassle.
 					</p>
-
-					<div className="flex flex-wrap items-center gap-3 text-sm text-white/70 mt-5">
+					<div className="mt-5 flex w-full flex-col gap-x-3 gap-y-2 text-sm text-white/70 lg:flex-row lg:items-center">
 						<div className="flex items-center gap-2">
-							<div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#009EFF]">
+							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
 									className="h-3 w-3 text-[#041636]"
 									strokeWidth={3}
@@ -66,10 +67,10 @@ export default function HeroSection() {
 							<span>No complicated setup</span>
 						</div>
 
-						<div className="h-4 w-px bg-white/20" />
+						<div className="hidden h-4 w-px bg-white/20 lg:block" />
 
 						<div className="flex items-center gap-2">
-							<div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#009EFF]">
+							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
 									className="h-3 w-3 text-[#041636]"
 									strokeWidth={3}
@@ -78,10 +79,10 @@ export default function HeroSection() {
 							<span>No sign up</span>
 						</div>
 
-						<div className="h-4 w-px bg-white/20" />
+						<div className="hidden h-4 w-px bg-white/20 lg:block" />
 
 						<div className="flex items-center gap-2">
-							<div className="flex h-4 w-4 items-center justify-center rounded-full bg-[#009EFF]">
+							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
 									className="h-3 w-3 text-[#041636]"
 									strokeWidth={3}
@@ -91,22 +92,28 @@ export default function HeroSection() {
 						</div>
 					</div>
 
-					<div className="flex flex-row space-x-8 mt-10 items-center">
+					<div className="mt-8 flex w-full flex-row items-center gap-8 sm:mt-10 sm:items-center sm:gap-8">
 						<Link
 							href="/create"
-							className="text-white bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] font-semibold py-2 px-4 rounded-sm transition duration-300 flex items-center justify-center space-x-2 hover:bg-[#0066FF]">
+							className="flex items-center justify-center space-x-2 rounded-sm bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0066FF] sm:w-auto">
 							<span>Create your first invoice</span>
-							<ArrowRightLineIcon className="text-white h-5" />
+							<ArrowRightLineIcon className="h-5 text-white" />
 						</Link>
-						<p className="font-semibold text-[#00B7FF]">Explore Features</p>
+
+						<Link
+							href="#features"
+							className="font-semibold text-[#00B7FF] transition hover:text-white">
+							Explore Features
+						</Link>
 					</div>
 				</div>
 
-				<div className="flex justify-center items-center">
+				<div className="flex w-full items-center justify-center">
 					<Image
 						src={invoice}
 						alt="Invoice"
-						className="w-150 h-150 object-contain"
+						priority
+						className="h-auto w-[85%] max-w-105 object-contain sm:w-[70%] lg:w-[530px] lg:max-w-none"
 					/>
 				</div>
 			</div>

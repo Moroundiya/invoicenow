@@ -4,7 +4,7 @@ import { features } from "@/data/featuresData";
 
 export default function Features() {
 	return (
-		<div className='w-full px-3 pb-12 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
+		<div className='w-full px-3 pt-3 pb-4 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat lg:px-6 xl:px-10'>
 			<div className="max-w-7xl mx-auto h-full">
 				<p
 					className="text-[#00B7FF] text-6xl font-italianno text-center"
@@ -16,7 +16,7 @@ export default function Features() {
 				<p className="text-lg text-white text-center font-regular leading-none">
 					Everything You Need to Get Paid Faster
 				</p>
-				<div className="mt-12 grid lg:grid-cols-3 gap-6 ">
+				<div className="mt-12 grid md:grid-cols-2 xl:grid-cols-3 gap-6 ">
 					{features.map((feature) => (
 						<div
 							key={feature.title}
@@ -33,7 +33,7 @@ export default function Features() {
 								<p className="text-4xl text-white font-italianno font-regular">
 									{feature.title}
 								</p>
-								<p className="text-[#eeeeee9e] text-sm mt-0 w-full leading-tight font-light">
+								<p className="text-[#eeeeee9e] text-sm mt-0 w-full leading-snug font-light">
 									{feature.description}
 								</p>
 							</div>

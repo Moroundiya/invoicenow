@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
 	return (
-		<footer className="bg-[#041636] px-5 pt-16 text-white md:px-10">
+		<footer className="bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat px-5 pt-16 text-white md:px-10">
 			<div className="mx-auto max-w-7xl">
 				<div className="flex flex-col items-center border-b border-white/10 pb-12 text-center">
 					<Link
@@ -17,11 +17,11 @@ export default function Footer() {
 							alt="InvoiceNow"
 							width={240}
 							height={70}
-							className="h-auto w-48 object-contain"
+							className="h-auto w-48 lg:w-70 object-contain"
 						/>
 					</Link>
 
-					<p className="font-inter mt-5 max-w-md text-sm leading-6 text-white/50">
+					<p className="font-inter mt-5 max-w-md text-sm leading-snug text-white/50">
 						Create professional invoices in seconds. Simple, fast, and built for
 						freelancers and businesses.
 					</p>
@@ -35,7 +35,7 @@ export default function Footer() {
 				</div>
 
 				<div className="flex flex-col items-center gap-3 py-6 text-center">
-					<p className="font-inter text-xs text-white/40">
+					<p className="font-inter text-sm text-white/40">
 						© {new Date().getFullYear()} InvoiceNow
 					</p>
 				</div>
