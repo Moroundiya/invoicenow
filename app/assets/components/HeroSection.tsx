@@ -38,7 +38,7 @@ export default function HeroSection() {
 								animationDelay={100}
 								color="#00B7FF"
 								strokeWidth={2}
-								padding={12}
+								padding={5}
 								animate
 								show>
 								Seconds

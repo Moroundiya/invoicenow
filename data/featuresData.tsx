@@ -30,7 +30,7 @@ export const features = [
 			"Download as PDF/PNG or share directly with your clients via email.",
 	},
 	{
-		icon: <SecuredFilledIcon className="text-white h-8" />,
+		icon: <SecuredFilledIcon className="text-white h-7.5" />,
 		title: "Reliable & Secure",
 		description:
 			"Your clients’ information and payment details are secure and protected, only you can access them.",
