@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 body {
-        font-family: var(--font-outfit), sans-serif;
+        font-family: var(--font-jakarta), sans-serif;
     }
 
 @theme {
-            --font-inter: var(--font-inter);
-            --font-allura: var(--font-allura);
+            --font-jakarta: var(--font-jakarta);
+            --font-allura: var(--font-italianno);
     }

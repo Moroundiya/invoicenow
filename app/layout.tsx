@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Allura, Inter } from "next/font/google";
+import { Italianno, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const allura = Allura({
-	variable: "--font-allura",
+const jakarta = Plus_Jakarta_Sans({
+	variable: "--font-jakarta",
 	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
+});
+
+const italianno = Italianno({
+	subsets: ["latin"],
+	variable: "--font-italianno",
 	weight: "400",
 });
 
@@ -71,7 +76,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
 		<html lang="en">
-			<body className={`${inter.variable} ${allura.variable} antialiased`}>{children}</body>
+			<body className={`${italianno.variable} ${jakarta.variable} antialiased`}>
+				{children}
+			</body>
 		</html>
 	);
 }
