@@ -37,7 +37,7 @@ const steps: Array<{
 
 export default function HowItWorks() {
 	return (
-		<div className='w-full px-3 py-5 lg:py-10 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
+		<div className='w-full px-3 pt-5 lg:pt-10 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
 			<div className="lg:w-10/12 mx-auto h-full">
 				<p
 					className="text-[#00B7FF] text-6xl font-italianno text-center"

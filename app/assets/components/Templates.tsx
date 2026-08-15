@@ -1,7 +1,10 @@
+import sample from "@/app/assets/images/sample.png";
+import Carousel from "../layouts/Carousel";
+
 export default function Templates() {
 	return (
-		<div className='w-full px-3 pb-5 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
-			<div className="max-w-6xl mx-auto h-full">
+		<div className='w-full min-h-dvh px-3 pb-5 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
+			<div className="max-w-7xl mx-auto h-full">
 				<p
 					className="text-[#00B7FF] text-6xl font-italianno text-center"
 					style={{
@@ -12,9 +15,9 @@ export default function Templates() {
 				<p className="text-lg text-white text-center font-regular leading-none">
 					Choose from our collections of professional invoice templates.
 				</p>
-                <section className="w-full px-6 py-20">
-                    
-                </section>
+				<section className="w-full h-auto px-6 pt-12 pb-5">
+					<Carousel />
+				</section>
 			</div>
 		</div>
 	);
