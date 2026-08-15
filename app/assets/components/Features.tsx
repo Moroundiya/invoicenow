@@ -23,7 +23,7 @@ export default function Features() {
 							className="w-full h-33 rounded-2xl bg-[#041f5049] border-2 border-[#041E50] p-3 justify-center items-center flex space-x-3">
 							<div className="w-1/5 h-full flex justify-center">
 								<div className="relative w-12 h-12">
-									<div className="absolute inset-0 translate-y-[1px] translate-x-[1px] rounded-full bg-[#00B7FF]" />
+									<div className="absolute inset-0 translate-y-px translate-x-px rounded-full bg-[#00B7FF]" />
 									<div className="relative w-full h-full rounded-full  flex justify-center items-center bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50]">
 										{feature.icon}
 									</div>
