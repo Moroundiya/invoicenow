@@ -46,7 +46,7 @@ export default function HowItWorks() {
 					}}>
 					How It Works
 				</p>
-				<p className="text-xl text-white text-center font-regular leading-none">
+				<p className="text-lg text-white text-center font-regular leading-none">
 					3 simple steps to get paid
 				</p>
 				<section className="w-full px-6 py-20">

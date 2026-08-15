@@ -4,6 +4,7 @@ import HeroSection from "./assets/components/HeroSection";
 import logo from "./assets/images/logo.png";
 import Features from "./assets/components/Features";
 import HowItWorks from "./assets/components/HowItWorks";
+import Templates from "./assets/components/Templates";
 
 export default function Home() {
 	return (
@@ -12,6 +13,7 @@ export default function Home() {
 			<HeroSection />
 			<Features />
 			<HowItWorks />
+			<Templates />
 		</div>
 	);
 }
