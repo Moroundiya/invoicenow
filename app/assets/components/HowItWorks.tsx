@@ -1,8 +1,10 @@
+"use client";
 import { FilePlus2, Send, WalletCards, ArrowRight } from "lucide-react";
 import create from "@/app/assets/images/create.png";
 import paid from "@/app/assets/images/paid.png";
 import send from "@/app/assets/images/send.png";
 import Image, { type StaticImageData } from "next/image";
+import ArrowRightIcon from "@iconify-react/vadivam/arrow-right";
 
 const steps: Array<{
 	number: string;
@@ -101,11 +103,7 @@ export default function HowItWorks() {
 									{index < steps.length - 1 && (
 										<div className="absolute left-[calc(50%+135px)] top-[55px] hidden w-[100px] items-center md:flex">
 											<div className="w-full border-t-4 border-dotted border-[#00B7FF]" />
-											<ArrowRight
-												size={22}
-												strokeWidth={2}
-												className="ml-1 shrink-0 text-[#00B7FF]"
-											/>
+											<ArrowRightIcon className="ml-1 h-7 text-[#00B7FF]" />
 										</div>
 									)}
 
@@ -113,11 +111,7 @@ export default function HowItWorks() {
 									{index < steps.length - 1 && (
 										<div className="my-5 flex h-20 flex-col items-center md:hidden">
 											<div className="h-14 border-l-4 border-dotted border-[#00B7FF]" />
-											<ArrowRight
-												size={22}
-												strokeWidth={2}
-												className="rotate-90 text-[#00B7FF]"
-											/>
+											<ArrowRightIcon className="mt-1 rotate-90 h-7 text-[#00B7FF]" />
 										</div>
 									)}
 								</div>

@@ -18,6 +18,7 @@
     "@iconify-react/radix-icons": "^1.0.2",
     "@iconify-react/tabler": "^1.0.12",
     "@iconify-react/tdesign": "^1.0.7",
+    "@iconify-react/vadivam": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
