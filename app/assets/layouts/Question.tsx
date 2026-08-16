@@ -46,15 +46,14 @@ export default function Questions() {
 		<div className="grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-x-8">
 			{faqs.map((faq, index) => {
 				const isOpen = openIndex === index;
-
 				return (
 					<div
 						key={faq.question}
-						className="overflow-hidden rounded-xl border border-[#12305A] bg-[#071F45]/70">
+						className="overflow-hidden rounded-2xl border-2 border-[#041E50] bg-[#041f5049]">
 						<button
 							type="button"
 							onClick={() => toggleFAQ(index)}
-							className="flex w-full items-center justify-between px-4 py-4 text-left"
+							className="flex w-full items-center justify-between px-4 py-4 text-left cursor-pointer"
 							aria-expanded={isOpen}>
 							<span className="font-inter text-sm text-white/90">
 								{faq.question}
