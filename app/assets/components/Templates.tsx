@@ -1,4 +1,4 @@
-import sample from "@/app/assets/images/sample.png";
+
 import Carousel from "../layouts/Carousel";
 
 export default function Templates() {
