@@ -1,4 +1,3 @@
-import React from "react";
 import Testimonials from "../layouts/Marquee";
 
 export default function Reviews() {

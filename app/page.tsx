@@ -6,6 +6,7 @@ import Features from "./assets/components/Features";
 import HowItWorks from "./assets/components/HowItWorks";
 import Templates from "./assets/components/Templates";
 import Reviews from "./assets/components/Reviews";
+import Faq from "./assets/components/Faq";
 
 export default function Home() {
 	return (
@@ -15,6 +16,7 @@ export default function Home() {
 			<HowItWorks />
 			<Templates />
 			<Reviews />
+			<Faq />
 		</div>
 	);
 }
