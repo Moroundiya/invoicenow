@@ -21,7 +21,7 @@ export default function Navbar() {
 						alt="InvoiceNow"
 						width={150}
 						height={45}
-						className="h-auto w-32 sm:w-53"
+						className="h-auto w-45 sm:w-53"
 					/>
 				</Link>
 
@@ -59,8 +59,12 @@ export default function Navbar() {
 					onClick={() => setIsOpen((prev) => !prev)}
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
-					className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10 lg:hidden">
-					{isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+					className="flex h-10 w-10 items-center justify-center rounded-full bg-[#041f5049] border-2 border-[#00B7FF] text-white transition hover:bg-white/10 lg:hidden">
+					{isOpen ? (
+						<X className="h-5 w-5 text-[#00B7FF]" />
+					) : (
+						<Menu className="h-5 w-5 text-[#00B7FF]" />
+					)}
 				</button>
 			</div>
 

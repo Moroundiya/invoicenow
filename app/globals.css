@@ -8,3 +8,12 @@ body {
             --font-jakarta: var(--font-jakarta);
             --font-italianno: var(--font-italianno);
     }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}

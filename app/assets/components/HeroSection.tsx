@@ -92,17 +92,16 @@ export default function HeroSection() {
 						</div>
 					</div>
 
-					<div className="mt-8 flex w-full flex-row items-center gap-8 sm:mt-10 sm:items-center sm:gap-8">
+					<div className="mt-8 flex w-full flex-row items-center gap-5 sm:mt-10 sm:items-center sm:gap-8">
 						<Link
 							href="/create"
-							className="flex items-center justify-center space-x-2 rounded-sm bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0066FF] sm:w-auto">
+							className="flex items-center justify-center space-x-1 rounded-xl bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-3 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#0066FF] sm:w-auto lg:text-base lg:space-x-2 lg:px-5">
 							<span>Create your first invoice</span>
 							<ArrowRightLineIcon className="h-5 text-white" />
 						</Link>
-
 						<Link
 							href="#features"
-							className="font-semibold text-[#00B7FF] transition hover:text-white">
+							className="text-sm font-semibold text-[#00B7FF] transition hover:text-white lg:text-base">
 							Explore Features
 						</Link>
 					</div>
