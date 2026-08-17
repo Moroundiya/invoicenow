@@ -15,9 +15,9 @@ export default function HeroSection() {
 		<div className="min-h-dvh w-full overflow-hidden bg-[url('/background-mobile.png')] bg-cover bg-center bg-no-repeat px-3 py-5 lg:py-7 lg:px-6 lg:bg-[url('/background.png')] xl:px-10">
 			<Navbar />
 
-			<div className="mx-auto mt-10 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
+			<div className="mx-auto mt-18 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
 				<div className="flex w-full flex-col items-start justify-center">
-					<div className="mb-5 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 text-sm font-semibold text-[#041636] sm:mb-6 lg:px-3">
+					<div className="mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 text-sm font-semibold text-[#041636] sm:mb-6 lg:px-3">
 						<FlashIcon className="h-3.5 text-[#041636]" />
 						<div className="flex items-center justify-center space-x-0.5 text-xs lg:text-sm">
 							<p>Create</p>
