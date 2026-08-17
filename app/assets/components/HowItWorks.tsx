@@ -40,16 +40,16 @@ export default function HowItWorks() {
 		<div className='w-full px-3 pt-5 lg:pt-10 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
 			<div className="lg:w-10/12 mx-auto h-full">
 				<p
-					className="text-[#00B7FF] text-6xl font-italianno text-center"
+					className="text-[#00B7FF] text-5xl font-italianno text-center lg:text-6xl"
 					style={{
 						textShadow: "1px 1px 0 #fff",
 					}}>
 					How It Works
 				</p>
-				<p className="text-lg text-white text-center font-regular leading-none">
+				<p className="text-white text-center font-regular leading-none lg:text-lg">
 					3 simple steps to get paid
 				</p>
-				<section className="w-full px-6 py-20">
+				<section className="w-full px-6 py-10 lg:py-20">
 					<div className="mx-auto flex max-w-6xl flex-col md:flex-row">
 						{steps.map((step, index) => {
 							const image = step.image;
@@ -58,16 +58,9 @@ export default function HowItWorks() {
 								<div
 									key={step.number}
 									className="relative flex flex-1 flex-col items-center">
-									{/* Step */}
 									<div className="flex flex-col items-center">
-										{/* Icon */}
 										<div className="relative">
 											<div className="flex h-36 w-36 items-center justify-center rounded-full bg-[#041f5049] border-2 border-[#041E50]">
-												{/* <Icon
-													size={58}
-													strokeWidth={1.5}
-													className="text-white"
-                                                /> */}
 												<Image
 													src={image}
 													alt="Image"
@@ -75,31 +68,24 @@ export default function HowItWorks() {
 												/>
 											</div>
 
-											{/* Number */}
 											<div className="absolute bottom-0 right-3 flex h-8 w-8 items-center justify-center">
 												<div className="w-full h-full">
 													<div className="absolute inset-0 translate-y-px translate-x-px rounded-full bg-[#00B7FF]" />
-
 													<div className="relative flex h-full w-full items-center justify-center rounded-full bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] text-lg font-bold text-white">
 														{step.number}
 													</div>
 												</div>
 											</div>
 										</div>
-
-										{/* Text */}
-										<div className="mt-7 max-w-[280px] text-center">
+										<div className="mt-5 max-w-70 text-center lg:mt-7">
 											<h3 className="text-4xl text-white font-italianno">
 												{step.title}
 											</h3>
-
-											<p className="mt-1 font-jakarta text-sm leading-snug text-white/60">
+											<p className="text-sm leading-snug text-white/60">
 												{step.description}
 											</p>
 										</div>
 									</div>
-
-									{/* Desktop Arrow */}
 									{index < steps.length - 1 && (
 										<div className="absolute left-[calc(50%+135px)] top-[55px] hidden w-[100px] items-center md:flex">
 											<div className="w-full border-t-4 border-dotted border-[#00B7FF]" />
@@ -107,7 +93,6 @@ export default function HowItWorks() {
 										</div>
 									)}
 
-									{/* Mobile Arrow */}
 									{index < steps.length - 1 && (
 										<div className="my-5 flex h-20 flex-col items-center md:hidden">
 											<div className="h-14 border-l-4 border-dotted border-[#00B7FF]" />
