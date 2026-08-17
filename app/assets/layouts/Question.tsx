@@ -2,38 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-
-const faqs = [
-	{
-		question: "Is InvoiceNow free to use?",
-		answer:
-			"Yes, InvoiceNow is free to use. You can create professional invoices without paying anything.",
-	},
-	{
-		question: "Can I use my own logo and colors?",
-		answer:
-			"Yes. You can customize your invoices with your own logo, colors, and branding.",
-	},
-	{
-		question: "Can I customize my invoices?",
-		answer:
-			"Absolutely. Customize your invoice details, branding, and appearance to match your business.",
-	},
-	{
-		question: "Is my data secure?",
-		answer:
-			"Yes. Your invoice information and client details are kept secure and protected.",
-	},
-	{
-		question: "How do I get paid?",
-		answer:
-			"Send your invoice directly to your client and provide your preferred payment details.",
-	},
-	{
-		question: "Can I upgrade or downgrade anytime?",
-		answer: "Yes. You can change your plan whenever you need to.",
-	},
-];
+import { faqs } from "@/data/faqs";
 
 export default function Questions() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
