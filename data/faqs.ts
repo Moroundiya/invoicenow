@@ -2,7 +2,7 @@ export const faqs = [
 	{
 		question: "Is InvoiceNow free to use?",
 		answer:
-			"Yes. InvoiceNow is free to use, with no subscription or hidden fees required to create your invoices.",
+			"Yes. InvoiceNow is free to use, with no subscription, no credit card or hidden fees required to create your invoices.",
 	},
 	{
 		question: "Do I need to create an account?",
@@ -17,12 +17,7 @@ export const faqs = [
 	{
 		question: "Can I download my invoice?",
 		answer:
-			"Yes. You can download your completed invoice as a PDF and share it with your clients.",
-	},
-	{
-		question: "Can I send invoices directly to my clients?",
-		answer:
-			"Yes. You can easily share your invoice with your clients after creating it.",
+			"Yes. You can download your completed invoice as a PDF/PNG and share it with your clients.",
 	},
 	{
 		question: "Is my clients’ information secure?",
@@ -39,14 +34,5 @@ export const faqs = [
 		answer:
 			"Yes. You can create invoices for different clients and customize each invoice with their specific details.",
 	},
-	{
-		question: "Can I edit an invoice after creating it?",
-		answer:
-			"Yes. You can update the invoice details before downloading or sharing the final version.",
-	},
-	{
-		question: "Do I need accounting experience to use InvoiceNow?",
-		answer:
-			"Not at all. InvoiceNow is designed to be simple and easy to use, even if you've never created an invoice before.",
-	},
+	
 ];

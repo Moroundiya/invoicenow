@@ -42,7 +42,7 @@ export default function Questions() {
 									: "grid-rows-[0fr] opacity-0"
 							}`}>
 							<div className="overflow-hidden">
-								<p className="px-4 pb-4 text-sm leading-6 text-white/50">
+								<p className="px-4 pb-4 text-sm leading-snug text-white/50">
 									{faq.answer}
 								</p>
 							</div>
