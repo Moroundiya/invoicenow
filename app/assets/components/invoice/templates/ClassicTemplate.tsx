@@ -414,43 +414,52 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 					<div className="mt-[25px] w-full overflow-hidden">
 						{/* TABLE HEADER */}
-
 						<div
 							className="
-								grid
-								grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
-								items-center
-								border
-								px-[10px]
-								py-[9px]
-								text-[9.5px]
-								font-bold
-								uppercase
-								leading-none
-								text-white
-							"
+			grid
+			w-full
+			grid-cols-[43px_minmax(0,1fr)_90px_55px_90px]
+			items-center
+			border
+			px-[10px]
+			py-[9px]
+			text-[9.5px]
+			font-bold
+			uppercase
+			leading-none
+			text-white
+			box-border
+		"
 							style={{
 								backgroundColor: primary,
 								borderColor: primary,
 							}}>
-							<span className="border-r border-white/30 text-center">NO</span>
+							{/* NO */}
+							<span className="min-w-0 border-r border-white/30 text-center">
+								NO
+							</span>
 
-							<span className="border-r border-white/30 pl-[10px] text-left">
+							{/* DESCRIPTION */}
+							<span className="min-w-0 border-r border-white/30 pl-[10px] text-left">
 								PRODUCT DESCRIPTION
 							</span>
 
-							<span className="border-r border-white/30 text-center">
+							{/* UNIT PRICE */}
+							<span className="min-w-0 border-r border-white/30 px-[3px] text-center">
 								UNIT PRICE
 							</span>
 
-							<span className="border-r border-white/30 text-center">QTY</span>
+							{/* QTY */}
+							<span className="min-w-0 border-r border-white/30 text-center">
+								QTY
+							</span>
 
-							<span className="text-center">TOTAL</span>
+							{/* TOTAL */}
+							<span className="min-w-0 px-[3px] text-center">TOTAL</span>
 						</div>
 
 						{/* TABLE BODY */}
-
-						<div>
+						<div className="w-full">
 							{invoice.items.length > 0 ? (
 								invoice.items.map((item, index) => {
 									const lineTotal = Number(item.quantity) * Number(item.rate);
@@ -459,63 +468,123 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										<div
 											key={item.id || index}
 											className="
-												grid
-												grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
-												min-h-[35px]
-												items-center
-												border-x
-												border-b
-												px-[10px]
-												text-[10px]
-												text-[#222]
-											"
+							grid
+							w-full
+							grid-cols-[43px_minmax(0,1fr)_90px_55px_90px]
+							min-h-[35px]
+							items-stretch
+							border-x
+							border-b
+							px-[10px]
+							text-[10px]
+							text-[#222]
+							box-border
+						"
 											style={{
 												backgroundColor: index % 2 === 1 ? rowGray : "#ffffff",
 												borderColor: lightBorder,
 											}}>
 											{/* NO */}
-
-											<span className="border-r border-[#BDBDBD] py-[10px] text-center">
-												{String(index + 1).padStart(2, "0")}
-											</span>
+											<div className="flex min-w-0 items-center justify-center border-r border-[#BDBDBD] py-[10px]">
+												<span className="min-w-0">
+													{String(index + 1).padStart(2, "0")}
+												</span>
+											</div>
 
 											{/* DESCRIPTION */}
-
-											<div className="min-w-0 border-r border-[#BDBDBD] py-[10px] pl-[10px] pr-[8px]">
-												<div className="truncate">
+											<div className="min-w-0 overflow-hidden border-r border-[#BDBDBD] py-[10px] pl-[10px] pr-[8px]">
+												<div className="min-w-0 break-words">
 													{item.description || "Item description"}
 												</div>
 
 												{item.details && (
-													<div className="mt-[1px] truncate text-[8px] text-[#777]">
+													<div className="mt-[1px] min-w-0 break-words text-[8px] leading-tight text-[#777]">
 														{item.details}
 													</div>
 												)}
 											</div>
 
 											{/* UNIT PRICE */}
-
-											<span className="border-r border-[#BDBDBD] py-[10px] text-center">
-												{formatMoney(Number(item.rate))}
-											</span>
+											<div
+												className="
+								flex
+								min-w-0
+								max-w-full
+								items-center
+								justify-center
+								overflow-hidden
+								border-r
+								border-[#BDBDBD]
+								px-[4px]
+								py-[10px]
+								box-border
+							">
+												<span
+													className="
+									block
+									w-full
+									min-w-0
+									max-w-full
+									break-all
+									text-center
+									text-[9px]
+									leading-tight
+								">
+													{formatMoney(Number(item.rate))}
+												</span>
+											</div>
 
 											{/* QTY */}
-
-											<span className="border-r border-[#BDBDBD] py-[10px] text-center">
-												{item.quantity}
-											</span>
+											<div className="flex min-w-0 items-center justify-center border-r border-[#BDBDBD] px-[2px] py-[10px]">
+												<span className="min-w-0 max-w-full text-center">
+													{item.quantity}
+												</span>
+											</div>
 
 											{/* TOTAL */}
-
-											<span className="py-[10px] text-center">
-												{formatMoney(lineTotal)}
-											</span>
+											<div
+												className="
+								flex
+								min-w-0
+								max-w-full
+								items-center
+								justify-center
+								overflow-hidden
+								px-[4px]
+								py-[10px]
+								box-border
+							">
+												<span
+													className="
+									block
+									w-full
+									min-w-0
+									max-w-full
+									break-all
+									text-center
+									text-[9px]
+									font-medium
+									leading-tight
+								">
+													{formatMoney(lineTotal)}
+												</span>
+											</div>
 										</div>
 									);
 								})
 							) : (
 								<div
-									className="flex min-h-[120px] items-start justify-center border-x border-b pt-[15px] text-[10px] text-[#999]"
+									className="
+					flex
+					min-h-[120px]
+					items-start
+					justify-center
+					border-x
+					border-b
+					pt-[15px]
+					text-[10px]
+					text-[#999]
+				"
 									style={{
 										borderColor: lightBorder,
 									}}>
@@ -524,7 +593,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 							)}
 						</div>
 					</div>
-
 					{/* =============================================
 					    LOWER CONTENT
 					============================================= */}
@@ -549,48 +617,74 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 						{/* RIGHT LOWER SECTION */}
 
-						<div className="relative min-h-[160px]">
+						<div className="relative min-h-[160px] mt-5 mb-8">
 							{/* TOTALS */}
+							<div
+								className="
+			mt-[4px]
+			w-full
+			max-w-full
+			overflow-hidden
+			border
+			border-[#D0D0D0]
+			bg-[#E5E5E5]
+			px-[13px]
+			py-[8px]
+			box-border
+			
+		">
+								<div className="w-full min-w-0 space-y-0.5">
+									{/* SUB TOTAL */}
+									<div className="flex min-w-0 items-start justify-between gap-[12px] text-[9px] leading-[1.65] text-[#222]">
+										<span className="min-w-0 shrink-0">Sub Total</span>
 
-							<div className="mt-[4px] border border-[#D0D0D0] bg-[#E5E5E5] px-[13px] py-[8px]">
-								<div className="flex items-center justify-between text-[9px] leading-[1.65] text-[#222]">
-									<span>Sub Total</span>
-
-									<span>{formatMoney(subtotal)}</span>
-								</div>
-
-								{discountRate > 0 && (
-									<div className="flex items-center justify-between text-[9px] leading-[1.65] text-[#222]">
-										<span>Discount {discountRate}%</span>
-
-										<span>-{formatMoney(discountAmount)}</span>
+										<span className="min-w-0 max-w-[65%] break-all text-right">
+											{formatMoney(subtotal)}
+										</span>
 									</div>
-								)}
 
-								<div className="flex items-center justify-between text-[9px] leading-[1.65] text-[#222]">
-									<span>Tax {taxRate}%</span>
+									{/* DISCOUNT */}
+									{discountRate > 0 && (
+										<div className="flex min-w-0 items-start justify-between gap-[12px] text-[9px] leading-[1.65] text-[#222]">
+											<span className="min-w-0 shrink-0">
+												Discount {discountRate}%
+											</span>
 
-									<span>{formatMoney(taxAmount)}</span>
-								</div>
+											<span className="min-w-0 max-w-[65%] break-all text-right">
+												-{formatMoney(discountAmount)}
+											</span>
+										</div>
+									)}
 
-								<div className="flex items-center justify-between text-[9.5px] font-bold leading-[1.65] text-[#222]">
-									<span>Grand Total</span>
+									{/* TAX */}
+									<div className="flex min-w-0 items-start justify-between gap-[12px] text-[9px] leading-[1.65] text-[#222]">
+										<span className="min-w-0 shrink-0">Tax {taxRate}%</span>
 
-									<span>{formatMoney(total)}</span>
+										<span className="min-w-0 max-w-[65%] break-all text-right">
+											{formatMoney(taxAmount)}
+										</span>
+									</div>
+
+									{/* GRAND TOTAL */}
+									<div className="mt-3 flex min-w-0 items-start justify-between gap-[12px] text-[9.5px] font-bold leading-[1.65] text-[#222]">
+										<span className="min-w-0 shrink-0">Grand Total</span>
+
+										<span className="min-w-0 max-w-[65%] break-all text-right">
+											{formatMoney(total)}
+										</span>
+									</div>
 								</div>
 							</div>
 
 							{/* MANUAL SIGNATURE */}
-
 							{hasSignature ? (
 								<div className="absolute bottom-[11px] right-[2px] w-[96px] text-center">
 									{/* Signature image */}
-
 									<div className="flex h-[34px] items-end justify-center overflow-hidden">
 										<img
 											src={invoice.signature!.image}
 											alt="Authorized signature"
-											className="mx-auto mb-[2px] w-full h-full object-cover"
+											className="mx-auto mb-[2px] h-full w-full object-cover"
 											style={{
 												filter: "brightness(0)",
 											}}
@@ -598,7 +692,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 									</div>
 
 									{/* Signature line */}
-
 									<div
 										className="h-px w-full"
 										style={{
@@ -607,13 +700,11 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 									/>
 
 									{/* Signatory name */}
-
 									<p className="mt-[5px] text-[10px] font-normal text-[#222]">
 										{invoice.signature?.name || "Authorized Signature"}
 									</p>
 
 									{/* Signatory title */}
-
 									{invoice.signature?.title && (
 										<p className="mt-[1px] text-[8px] text-[#666]">
 											{invoice.signature.title}
@@ -621,7 +712,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 									)}
 								</div>
 							) : (
-								<div className="absolute bottom-[13px] right-[2px] w-[96px] text-center">
+								<div className="absolute -bottom-4 right-[2px] w-[96px] text-center">
 									<div
 										className="h-px w-full"
 										style={{

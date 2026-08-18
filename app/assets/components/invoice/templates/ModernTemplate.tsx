@@ -367,7 +367,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				<div className="overflow-hidden rounded-lg border border-slate-300">
 					{/* Header */}
 					<div
-						className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-center text-[10px] font-bold uppercase tracking-wide text-white"
+						className="grid grid-cols-[42px_minmax(0,1fr)_minmax(75px,108px)_55px_minmax(75px,108px)] items-center text-[10px] font-bold uppercase tracking-wide text-white"
 						style={{
 							backgroundColor: "#172033",
 						}}>
@@ -375,11 +375,11 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							No
 						</div>
 
-						<div className="border-r border-white/20 px-3 py-2">
+						<div className="min-w-0 border-r border-white/20 px-3 py-2">
 							Description
 						</div>
 
-						<div className="border-r border-white/20 px-2 py-2 text-right">
+						<div className="min-w-0 border-r border-white/20 px-2 py-2 text-right">
 							Unit Price
 						</div>
 
@@ -387,7 +387,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							Qty
 						</div>
 
-						<div className="px-2 py-2 text-right">Total</div>
+						<div className="min-w-0 px-2 py-2 text-right">Total</div>
 					</div>
 
 					{/* Rows */}
@@ -395,11 +395,13 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						invoice.items.map((item, index) => (
 							<div
 								key={item.id}
-								className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-stretch border-t border-slate-200 text-[11px]">
-								<div className="flex items-center justify-center border-r border-slate-200 px-2 py-3">
+								className="grid grid-cols-[42px_minmax(0,1fr)_minmax(75px,108px)_55px_minmax(75px,108px)] items-stretch border-t border-slate-200 text-[11px]">
+								{/* No */}
+								<div className="flex min-w-0 items-center justify-center border-r border-slate-200 px-2 py-3">
 									{String(index + 1).padStart(2, "0")}
 								</div>
 
+								{/* Description */}
 								<div className="min-w-0 border-r border-slate-200 px-3 py-3">
 									<p className="break-words font-semibold">
 										{item.description || "Item description"}
@@ -412,16 +414,23 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									)}
 								</div>
 
-								<div className="flex items-center justify-end border-r border-slate-200 px-2 py-3">
-									{formatMoney(item.rate)}
+								{/* Unit Price */}
+								<div className="flex min-w-0 items-center justify-end border-r border-slate-200 px-2 py-3 text-right">
+									<span className="min-w-0 max-w-full break-all text-[10px] leading-tight">
+										{formatMoney(item.rate)}
+									</span>
 								</div>
 
-								<div className="flex items-center justify-center border-r border-slate-200 px-2 py-3">
-									{item.quantity}
+								{/* Quantity */}
+								<div className="flex min-w-0 items-center justify-center border-r border-slate-200 px-2 py-3">
+									<span className="whitespace-nowrap">{item.quantity}</span>
 								</div>
 
-								<div className="flex items-center justify-end px-2 py-3 font-medium">
-									{formatMoney(item.quantity * item.rate)}
+								{/* Total */}
+								<div className="flex min-w-0 items-center justify-end px-2 py-3 text-right font-medium">
+									<span className="min-w-0 max-w-full break-all text-[10px] leading-tight">
+										{formatMoney(item.quantity * item.rate)}
+									</span>
 								</div>
 							</div>
 						))
@@ -533,7 +542,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								</svg>
 							</div>
 
-							<div className="min-w-0 space-y-1 text-[11px] leading-[1.5] text-slate-600">
+							<div className="min-w-0 space-y-1 mt-1 text-[11px] leading-[1.5] text-slate-600">
 								{invoice.from.phone && (
 									<p className="break-words">{invoice.from.phone}</p>
 								)}
@@ -557,27 +566,35 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								backgroundColor: "#fafbfc",
 							}}>
 							<div className="space-y-2 text-[11px]">
-								<div className="flex items-center justify-between gap-4">
-									<span className="text-slate-600">Subtotal</span>
+								<div className="flex min-w-0 items-center justify-between gap-4">
+									<span className="min-w-0 text-slate-600">Subtotal</span>
 
-									<span className="font-semibold">{formatMoney(subtotal)}</span>
+									<span className="shrink-0 text-right font-semibold">
+										{formatMoney(subtotal)}
+									</span>
 								</div>
 
 								{invoice.discount > 0 && (
-									<div className="flex items-center justify-between gap-4">
-										<span className="text-slate-600">
+									<div className="flex min-w-0 items-center justify-between gap-4">
+										<span className="min-w-0 text-slate-600">
 											Discount ({invoice.discount}%)
 										</span>
 
-										<span>-{formatMoney(discountAmount)}</span>
+										<span className="shrink-0 text-right">
+											-{formatMoney(discountAmount)}
+										</span>
 									</div>
 								)}
 
 								{invoice.tax > 0 && (
-									<div className="flex items-center justify-between gap-4">
-										<span className="text-slate-600">Tax ({invoice.tax}%)</span>
+									<div className="flex min-w-0 items-center justify-between gap-4">
+										<span className="min-w-0 text-slate-600">
+											Tax ({invoice.tax}%)
+										</span>
 
-										<span>{formatMoney(taxAmount)}</span>
+										<span className="shrink-0 text-right">
+											{formatMoney(taxAmount)}
+										</span>
 									</div>
 								)}
 							</div>
@@ -589,9 +606,10 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								}}
 							/>
 
-							<div className="flex items-center justify-between gap-3">
+							{/* Grand Total */}
+							<div className="flex min-w-0 items-start justify-between gap-3">
 								<span
-									className="text-[14px] font-bold uppercase"
+									className="min-w-0 shrink text-[14px] font-bold uppercase"
 									style={{
 										color: primaryColor,
 									}}>
@@ -599,7 +617,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								</span>
 
 								<span
-									className="text-[19px] font-bold"
+									className="min-w-0 max-w-[65%] break-words text-right text-[15px] font-bold leading-tight"
 									style={{
 										color: primaryColor,
 									}}>

@@ -1,10 +1,17 @@
 "use client";
 
+import success from '@/app/assets/images/success.png'
+
 import TemplateSelector from "./TemplateSelector";
 import InvoiceTemplateRenderer from "./templates/InvoiceTemplateRenderer";
 import InvoiceDetailsForm from "./InvoiceDetailsForm";
 import InvoiceCustomizeForm from "./InvoiceCustomizeForm";
 import InvoiceDownload from "./InvoiceDownload";
+
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import type {
 	InvoiceData,
@@ -12,6 +19,7 @@ import type {
 } from "@/app/assets/types/invoiceType";
 
 import type { InvoiceStep } from "@/app/assets/layouts/invoice/CreateInvoiceLayout";
+import Image from "next/image";
 
 interface InvoiceWorkspaceProps {
 	currentStep: InvoiceStep;
@@ -68,6 +76,212 @@ export default function InvoiceWorkspace({
 	onCreateAnother,
 }: InvoiceWorkspaceProps) {
 	const current = content[currentStep];
+
+	const successRef = useRef<HTMLImageElement>(null);
+
+	const successContainerRef = useRef<HTMLDivElement>(null);
+	const successContentRef = useRef<HTMLDivElement>(null);
+	const successTitleRef = useRef<HTMLHeadingElement>(null);
+	const successDescriptionRef = useRef<HTMLParagraphElement>(null);
+	const downloadRef = useRef<HTMLDivElement>(null);
+	const dividerRef = useRef<HTMLDivElement>(null);
+	const createAnotherRef = useRef<HTMLButtonElement>(null);
+	const bottomTextRef = useRef<HTMLParagraphElement>(null);
+
+useGSAP(
+	() => {
+		if (currentStep !== 5) return;
+
+		const emoji = successRef.current;
+		const container = successContainerRef.current;
+		const content = successContentRef.current;
+		const title = successTitleRef.current;
+		const description = successDescriptionRef.current;
+		const download = downloadRef.current;
+		const divider = dividerRef.current;
+		const createAnother = createAnotherRef.current;
+		const bottomText = bottomTextRef.current;
+
+		if (
+			!emoji ||
+			!container ||
+			!content ||
+			!title ||
+			!description ||
+			!download ||
+			!divider ||
+			!createAnother ||
+			!bottomText
+		) {
+			return;
+		}
+
+		/*
+		=========================================================
+		INITIAL STATES
+		=========================================================
+		*/
+
+		gsap.set(container, {
+			opacity: 0,
+			y: 25,
+		});
+
+		gsap.set(emoji, {
+			opacity: 0,
+			scale: 0.45,
+			y: 30,
+			rotation: -10,
+			transformOrigin: "50% 50%",
+		});
+
+		gsap.set(
+			[title, description, download, divider, createAnother, bottomText],
+			{
+				opacity: 0,
+				y: 18,
+			},
+		);
+
+		/*
+		=========================================================
+		MAIN ENTRANCE TIMELINE
+		=========================================================
+		*/
+
+		const tl = gsap.timeline({
+			defaults: {
+				ease: "power3.out",
+			},
+		});
+
+		// Main card
+		tl.to(container, {
+			opacity: 1,
+			y: 0,
+			duration: 0.55,
+		});
+
+		// Success emoji
+		tl.to(
+			emoji,
+			{
+				opacity: 1,
+				scale: 1,
+				y: 0,
+				rotation: 0,
+				duration: 0.8,
+				ease: "back.out(1.8)",
+			},
+			"-=0.25",
+		);
+
+		// Title
+		tl.to(
+			title,
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.45,
+			},
+			"-=0.35",
+		);
+
+		// Description
+		tl.to(
+			description,
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.4,
+			},
+			"-=0.25",
+		);
+
+		// Download button
+		tl.to(
+			download,
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.5,
+				ease: "back.out(1.4)",
+			},
+			"-=0.15",
+		);
+
+		// Divider
+		tl.to(
+			divider,
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.4,
+			},
+			"-=0.15",
+		);
+
+		// Create Another Invoice
+		tl.to(
+			createAnother,
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.45,
+				ease: "back.out(1.3)",
+			},
+			"-=0.15",
+		);
+
+		// Bottom text
+		tl.to(
+			bottomText,
+			{
+				opacity: 1,
+				y: 0,
+				duration: 0.35,
+			},
+			"-=0.2",
+		);
+
+		/*
+		=========================================================
+		EMOJI FLOATING ANIMATION
+		=========================================================
+		*/
+
+		gsap.to(emoji, {
+			y: -7,
+			rotation: 2,
+			duration: 1.8,
+			ease: "sine.inOut",
+			yoyo: true,
+			repeat: -1,
+			delay: 1.2,
+		});
+
+		/*
+		=========================================================
+		EMOJI BREATHING / SUBTLE PULSE
+		=========================================================
+		*/
+
+		gsap.to(emoji, {
+			scale: 1.035,
+			duration: 1.5,
+			ease: "sine.inOut",
+			yoyo: true,
+			repeat: -1,
+			delay: 1.2,
+		});
+	},
+	{
+		dependencies: [currentStep],
+		revertOnUpdate: true,
+	},
+);
+
+
 
 	return (
 		<section className="grid min-w-0 w-full gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:gap-7">
@@ -174,42 +388,65 @@ export default function InvoiceWorkspace({
 				    STEP 5 — DOWNLOAD
 				===================================================== */}
 				{currentStep === 5 && (
-					<div className="rounded-xl border border-[#041E50] bg-[#041f5049] p-6 sm:p-8">
-						<div className="mx-auto max-w-md text-center">
-							{/* Success Icon */}
-							<div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.07] text-emerald-400">
-								<svg
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round">
-									<path d="M20 6 9 17l-5-5" />
-								</svg>
-							</div>
+					<div
+						ref={successContainerRef}
+						className="rounded-xl border border-[#041E50] bg-[#041f5049] p-6 sm:p-8">
+						<div
+							ref={successContentRef}
+							className="mx-auto max-w-md text-center">
+							{/* =====================================================
+			    SUCCESS EMOJI
+			===================================================== */}
 
-							<h3 className="mt-5 text-lg font-bold text-white">
+							<Image
+								ref={successRef}
+								src={success}
+								alt="Success Image"
+								priority
+								className="mx-auto mt-1 w-10/12 object-contain will-change-transform"
+							/>
+
+							{/* =====================================================
+			    TITLE
+			===================================================== */}
+
+							<h3
+								ref={successTitleRef}
+								className="mt-5 text-lg font-bold text-white">
 								Your invoice is ready
 							</h3>
 
-							<p className="mx-auto mt-2 max-w-sm leading-6 text-slate-500">
+							{/* =====================================================
+			    DESCRIPTION
+			===================================================== */}
+
+							<p
+								ref={successDescriptionRef}
+								className="mx-auto mt-2 max-w-sm leading-6 text-slate-500">
 								Your invoice has been completed. Download it as a PDF or PNG
 								file.
 							</p>
 
-							{/* Download Buttons */}
-							<div className="mt-6 flex justify-center">
+							{/* =====================================================
+			    DOWNLOAD BUTTON
+			===================================================== */}
+
+							<div
+								ref={downloadRef}
+								className="mt-6 flex justify-center">
 								<InvoiceDownload
 									invoice={invoice}
 									fileName={`invoice-${invoice.invoiceNumber || "draft"}`}
 								/>
 							</div>
 
-							{/* Divider */}
-							<div className="my-6 flex items-center gap-3">
+							{/* =====================================================
+			    DIVIDER
+			===================================================== */}
+
+							<div
+								ref={dividerRef}
+								className="my-6 flex items-center gap-3">
 								<div className="h-px flex-1 bg-white/[0.06]" />
 
 								<span className="text-sm font-medium uppercase tracking-[0.15em] text-slate-600">
@@ -219,8 +456,12 @@ export default function InvoiceWorkspace({
 								<div className="h-px flex-1 bg-white/[0.06]" />
 							</div>
 
-							{/* Create Another Invoice */}
+							{/* =====================================================
+			    CREATE ANOTHER INVOICE
+			===================================================== */}
+
 							<button
+								ref={createAnotherRef}
 								type="button"
 								onClick={onCreateAnother}
 								className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.10] hover:text-blue-300">
@@ -239,7 +480,13 @@ export default function InvoiceWorkspace({
 								Create Another Invoice
 							</button>
 
-							<p className="mt-3 text-slate-600">
+							{/* =====================================================
+			    BOTTOM TEXT
+			===================================================== */}
+
+							<p
+								ref={bottomTextRef}
+								className="mt-3 text-slate-600">
 								Start fresh with a new invoice
 							</p>
 						</div>

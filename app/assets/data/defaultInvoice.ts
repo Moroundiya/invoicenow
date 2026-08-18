@@ -5,7 +5,9 @@ export const defaultInvoice: InvoiceData = {
 
 	invoiceNumber: "INV-001",
 
-	issueDate: new Date().toISOString().split("T")[0],
+	// Do not use new Date() here.
+	// This object can be rendered on both server and client.
+	issueDate: "",
 
 	dueDate: "",
 
@@ -58,5 +60,6 @@ export const defaultInvoice: InvoiceData = {
 		logo: "",
 		primaryColor: "#2563EB",
 	},
+
 	sortCode: "",
 };
