@@ -76,9 +76,7 @@ export default function InvoiceWorkspace({
 	onCreateAnother,
 }: InvoiceWorkspaceProps) {
 	const current = content[currentStep];
-
 	const successRef = useRef<HTMLImageElement>(null);
-
 	const successContainerRef = useRef<HTMLDivElement>(null);
 	const successContentRef = useRef<HTMLDivElement>(null);
 	const successTitleRef = useRef<HTMLHeadingElement>(null);
