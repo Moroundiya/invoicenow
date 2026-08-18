@@ -397,15 +397,18 @@ export default function InvoiceDetailsForm({
 									<input
 										type="number"
 										min="0"
-										step="0.01"
-										value={item.rate}
-										onChange={(event) =>
-											updateItem(
-												item.id,
-												"rate",
-												Math.max(0, Number(event.target.value)),
-											)
-										}
+										value={item.rate === 0 ? "" : item.rate}
+										placeholder="0"
+										onChange={(event) => {
+											const value = event.target.value;
+
+											if (value === "") {
+												updateItem(item.id, "rate", 0);
+												return;
+											}
+
+											updateItem(item.id, "rate", Math.max(0, Number(value)));
+										}}
 										className={inputClass}
 									/>
 								</FormField>
@@ -469,15 +472,24 @@ export default function InvoiceDetailsForm({
 							min="0"
 							max="100"
 							step="0.01"
-							value={invoice.discount}
-							onChange={(event) =>
+							value={invoice.discount === 0 ? "" : invoice.discount}
+							placeholder="0"
+							onChange={(event) => {
+								const value = event.target.value;
+
+								if (value === "") {
+									onInvoiceChange({
+										discount: 0,
+									});
+									return;
+								}
+
+								const numberValue = Number(value);
+
 								onInvoiceChange({
-									discount: Math.min(
-										100,
-										Math.max(0, Number(event.target.value)),
-									),
-								})
-							}
+									discount: Math.min(100, Math.max(0, numberValue)),
+								});
+							}}
 							className={inputClass}
 						/>
 					</FormField>
@@ -488,12 +500,24 @@ export default function InvoiceDetailsForm({
 							min="0"
 							max="100"
 							step="0.01"
-							value={invoice.tax}
-							onChange={(event) =>
+							value={invoice.tax === 0 ? "" : invoice.tax}
+							placeholder="0"
+							onChange={(event) => {
+								const value = event.target.value;
+
+								if (value === "") {
+									onInvoiceChange({
+										tax: 0,
+									});
+									return;
+								}
+
+								const numberValue = Number(value);
+
 								onInvoiceChange({
-									tax: Math.min(100, Math.max(0, Number(event.target.value))),
-								})
-							}
+									tax: Math.min(100, Math.max(0, numberValue)),
+								});
+							}}
 							className={inputClass}
 						/>
 					</FormField>
@@ -564,7 +588,7 @@ function FormSection({
 				<div>
 					<h3 className=" font-semibold text-white">{title}</h3>
 
-					<p className="text-sm leading-5 text-slate-600">{description}</p>
+					<p className="mt-1 text-sm leading-5 text-slate-600">{description}</p>
 				</div>
 			</div>
 
