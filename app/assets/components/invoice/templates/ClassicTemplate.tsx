@@ -4,21 +4,217 @@ interface ClassicTemplateProps {
 	invoice: InvoiceData;
 }
 
+/* =========================================================
+   TYPES
+========================================================= */
+
+type FooterIconType = "email" | "website" | "location";
+
+/* =========================================================
+   FOOTER ICON
+========================================================= */
+
+function FooterIcon({ type }: { type: FooterIconType }) {
+	if (type === "email") {
+		return (
+			<svg
+				width="15"
+				height="15"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true">
+				<circle
+					cx="12"
+					cy="12"
+					r="8"
+					stroke="currentColor"
+					strokeWidth="2.2"
+				/>
+
+				<path
+					d="M8.5 10.5L12 13L15.5 10.5"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+
+				<path
+					d="M8.5 10.5V15H15.5V10.5"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				/>
+			</svg>
+		);
+	}
+
+	if (type === "website") {
+		return (
+			<svg
+				width="15"
+				height="15"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true">
+				<circle
+					cx="12"
+					cy="12"
+					r="8"
+					stroke="currentColor"
+					strokeWidth="2.2"
+				/>
+
+				<path
+					d="M4 12H20"
+					stroke="currentColor"
+					strokeWidth="2"
+				/>
+
+				<path
+					d="M12 4C14.2 6.2 15.2 8.8 15.2 12C15.2 15.2 14.2 17.8 12 20"
+					stroke="currentColor"
+					strokeWidth="2"
+				/>
+
+				<path
+					d="M12 4C9.8 6.2 8.8 8.8 8.8 12C8.8 15.2 9.8 17.8 12 20"
+					stroke="currentColor"
+					strokeWidth="2"
+				/>
+			</svg>
+		);
+	}
+
+	return (
+		<svg
+			width="15"
+			height="15"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			aria-hidden="true">
+			<path
+				d="M12 21C12 21 18 15.2 18 10.5C18 7.46 15.31 5 12 5C8.69 5 6 7.46 6 10.5C6 15.2 12 21 12 21Z"
+				stroke="currentColor"
+				strokeWidth="2.2"
+			/>
+
+			<circle
+				cx="12"
+				cy="10.5"
+				r="2"
+				stroke="currentColor"
+				strokeWidth="2"
+			/>
+		</svg>
+	);
+}
+
+/* =========================================================
+   BRAND MARK
+========================================================= */
+
+function BrandMark({
+	logo,
+	businessName,
+	primaryColor,
+}: {
+	logo?: string;
+	businessName?: string;
+	primaryColor: string;
+}) {
+	const brandName = businessName?.trim() || "Brand Name";
+
+	const firstCharacter = brandName.charAt(0).toUpperCase() || "B";
+
+	/* -------------------------------------------------------
+	   UPLOADED LOGO
+	------------------------------------------------------- */
+
+	if (logo) {
+		return (
+			<div className="flex flex-col items-end">
+				<img
+					src={logo}
+					alt={`${brandName} logo`}
+					className="h-[54px] max-w-[155px] object-contain object-right"
+				/>
+
+				<div className="mt-[5px] text-right">
+					<div className="text-[18px] font-medium uppercase leading-none tracking-[0.01em] text-[#222]">
+						{brandName}
+					</div>
+
+					<div
+						className="mt-[3px] text-[6px] font-bold uppercase leading-none tracking-[0.26em]"
+						style={{
+							color: primaryColor,
+						}}>
+						YOUR BRAND SLOGAN HERE
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	/* -------------------------------------------------------
+	   DEFAULT LETTER LOGO
+	------------------------------------------------------- */
+
+	return (
+		<div className="flex flex-col items-end">
+			<div
+				className="flex h-[42px] w-[42px] items-center justify-center text-[23px] font-bold uppercase leading-none text-white"
+				style={{
+					backgroundColor: primaryColor,
+				}}>
+				{firstCharacter}
+			</div>
+
+			<div className="mt-[5px] text-right">
+				<div className="text-[18px] font-medium uppercase leading-none tracking-[0.01em] text-[#222]">
+					{brandName}
+				</div>
+
+				<div
+					className="mt-[3px] text-[6px] font-bold uppercase leading-none tracking-[0.26em]"
+					style={{
+						color: primaryColor,
+					}}>
+					YOUR BRAND SLOGAN HERE
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* =========================================================
+   CLASSIC TEMPLATE
+========================================================= */
+
 export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 	/* -------------------------------------------------------
 	 * CALCULATIONS
 	 * ----------------------------------------------------- */
 
 	const subtotal = invoice.items.reduce(
-		(total, item) => total + item.quantity * item.rate,
+		(total, item) => total + Number(item.quantity) * Number(item.rate),
 		0,
 	);
 
-	const discountAmount = subtotal * ((invoice.discount || 0) / 100);
+	const discountRate = Number(invoice.discount || 0);
 
-	const taxBase = subtotal - discountAmount;
+	const discountAmount = subtotal * (discountRate / 100);
 
-	const taxAmount = taxBase * ((invoice.tax || 0) / 100);
+	const taxBase = Math.max(subtotal - discountAmount, 0);
+
+	const taxRate = Number(invoice.tax || 0);
+
+	const taxAmount = taxBase * (taxRate / 100);
 
 	const total = taxBase + taxAmount;
 
@@ -34,342 +230,425 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 			maximumFractionDigits: 2,
 		}).format(amount);
 
-	/*
-	 * Keep the template connected to the user's selected
-	 * branding color.
-	 *
-	 * The reference uses yellow, but using the branding color
-	 * means the template still works with InvoiceNow's
-	 * customization system.
-	 */
+	/* -------------------------------------------------------
+	 * COLORS
+	 * ----------------------------------------------------- */
+
 	const primary = invoice.branding.primaryColor || "#FBC400";
 
-	const dark = "#292A34";
-
-	const muted = "#666666";
+	// const dark = "#171717";
+	const rowGray = "#E5E5E5";
+	const border = "#202020";
+	const lightBorder = "#BDBDBD";
+	const muted = "#555555";
 
 	/* -------------------------------------------------------
-	 * HELPER
+	 * HELPERS
 	 * ----------------------------------------------------- */
 
 	const joinLocation = (city?: string, country?: string) => {
 		return [city, country].filter(Boolean).join(", ");
 	};
 
-	const fromLocation = joinLocation(invoice.from.city, invoice.from.country);
-
 	const clientLocation = joinLocation(
 		invoice.billTo.city,
 		invoice.billTo.country,
 	);
 
+	const fromLocation = joinLocation(invoice.from.city, invoice.from.country);
+
+	/*
+	 * InvoiceData does not necessarily have a website
+	 * property, so access it safely.
+	 */
+
+	const fromWithWebsite = invoice.from as typeof invoice.from & {
+		website?: string;
+	};
+
+	const footerWebsite = fromWithWebsite.website || "www.yourdomain.com";
+
+	const businessName = invoice.from.name?.trim() || "Brand Name";
+
+	/* -------------------------------------------------------
+	 * RENDER
+	 * ----------------------------------------------------- */
+
 	return (
-		<div
-			className="w-full bg-white text-[#171717]"
-			style={{
-				fontFamily: "Arial, Helvetica, sans-serif",
-			}}>
-			<div className="mx-auto w-full bg-white px-[42px] pb-[24px] pt-[30px]">
-				{/* =====================================================
-				    HEADER
-				===================================================== */}
+		<div className="w-full bg-white text-[#171717]">
+			{/* =================================================
+			    INVOICE PAGE
 
-				<div className="relative">
-					{/* Logo */}
+			    IMPORTANT:
+			    No fixed A4 height.
+			    Height grows naturally with content.
+			================================================= */}
 
-					<div className="flex h-[48px] items-center">
-						{invoice.branding.logo ? (
-							<img
-								src={invoice.branding.logo}
-								alt={invoice.from.name || "Business logo"}
-								className="h-[42px] max-w-[155px] object-contain object-left"
-							/>
-						) : (
-							<div className="flex flex-col">
-								<div className="text-[17px] font-bold tracking-[0.08em] text-[#202020]">
-									{invoice.from.name || "Brand Name"}
-								</div>
+			<div
+				id="classic-invoice"
+				className="
+					relative
+					mx-auto
+					box-border
+					w-full
+					overflow-hidden
+					bg-white
+					border-l-[5px]
+					pb-[22px]
+					pt-[48px]
+				"
+				style={{
+					borderLeftColor: primary,
+				}}>
+				{/* =================================================
+				    MAIN CONTENT WRAPPER
+				================================================= */}
 
-								<div className="mt-[1px] text-[5px] font-medium uppercase tracking-[0.22em] text-[#777]">
-									YOUR BRAND SLOGAN HERE
-								</div>
-							</div>
-						)}
-					</div>
+				<div className="px-[50px]">
+					{/* =============================================
+					    HEADER
+					============================================= */}
 
-					{/* =================================================
-					    TITLE BAR
-					================================================= */}
+					<div className="relative">
+						<div className="grid grid-cols-[1fr_1fr] gap-[35px]">
+							{/* -----------------------------------------
+							    LEFT HEADER
+							----------------------------------------- */}
 
-					<div className="relative mt-[20px] h-[27px]">
-						{/* Left yellow bar */}
+							<div>
+								{/* INVOICE TITLE */}
 
-						<div
-							className="absolute left-[-42px] top-0 h-[27px] w-[245px]"
-							style={{
-								backgroundColor: primary,
-							}}
-						/>
+								<h1
+									className="
+										m-0
+										text-[34px]
+										font-bold
+										leading-none
+										tracking-[-1.2px]
+										text-[#111]
+									">
+									INVOICE
+								</h1>
 
-						{/* Right yellow bar */}
+								{/* INVOICE DETAILS */}
 
-						<div
-							className="absolute right-[-42px] top-0 h-[27px] w-[44px]"
-							style={{
-								backgroundColor: primary,
-							}}
-						/>
+								<div className="mt-[11px]">
+									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+										<span className="font-bold">Invoice No</span>
 
-						{/* Invoice title */}
+										<span>:</span>
 
-						<div className="absolute inset-0 flex items-center justify-end">
-							<div
-								className="bg-white px-[13px] text-[31px] font-light leading-none tracking-[-0.04em] text-[#202020]"
-								style={{
-									fontFamily: "Arial, Helvetica, sans-serif",
-								}}>
-								INVOICE
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{/* =====================================================
-				    INVOICE / CLIENT INFORMATION
-				===================================================== */}
-
-				<div className="mt-[13px] grid grid-cols-[1fr_1fr] gap-[45px]">
-					{/* BILL TO */}
-
-					<div>
-						<div className="text-[11px] font-bold uppercase tracking-[0.04em] text-[#222]">
-							Invoice to:
-						</div>
-
-						<div className="mt-[2px] text-[12px] font-bold text-[#222]">
-							{invoice.billTo.name || "Client Name"}
-						</div>
-
-						<div className="mt-[2px] max-w-[220px] text-[8px] leading-[1.45] text-[#555]">
-							{invoice.billTo.address && <div>{invoice.billTo.address}</div>}
-
-							{clientLocation && <div>{clientLocation}</div>}
-
-							{invoice.billTo.email && <div>{invoice.billTo.email}</div>}
-
-							{invoice.billTo.phone && <div>{invoice.billTo.phone}</div>}
-						</div>
-					</div>
-
-					{/* INVOICE DETAILS */}
-
-					<div className="flex justify-end">
-						<div className="w-[145px]">
-							<div className="grid grid-cols-[1fr_auto] gap-x-[18px] text-[8px] leading-[1.8] text-[#333]">
-								<span className="font-bold">Invoice#</span>
-
-								<span className="text-right">
-									{invoice.invoiceNumber || "—"}
-								</span>
-
-								<span className="font-bold">Date</span>
-
-								<span className="text-right">{invoice.issueDate || "—"}</span>
-
-								<span className="font-bold">Due Date</span>
-
-								<span className="text-right">{invoice.dueDate || "—"}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{/* =====================================================
-				    ITEMS TABLE
-				===================================================== */}
-
-				<div className="mt-[20px] overflow-hidden border border-[#bfc1c5]">
-					{/* TABLE HEADER */}
-
-					<div
-						className="grid grid-cols-[40px_minmax(0,1fr)_80px_55px_75px] items-center px-[9px] py-[7px] text-[7.5px] font-bold uppercase tracking-[0.02em] text-white"
-						style={{
-							backgroundColor: dark,
-						}}>
-						<span>SL.</span>
-
-						<span>Item Description</span>
-
-						<span className="text-right">Price</span>
-
-						<span className="text-right">Qty.</span>
-
-						<span className="text-right">Total</span>
-					</div>
-
-					{/* TABLE BODY */}
-
-					<div
-						className="min-h-[220px]"
-						style={{
-							backgroundColor: "#ffffff",
-						}}>
-						{invoice.items.length > 0 ? (
-							invoice.items.map((item, index) => (
-								<div
-									key={item.id || index}
-									className="grid min-h-[35px] grid-cols-[40px_minmax(0,1fr)_80px_55px_75px] items-center px-[9px] text-[8px] text-[#222]"
-									style={{
-										backgroundColor: index % 2 === 1 ? "#f1f1f1" : "#ffffff",
-										borderBottom: "1px solid #dedede",
-									}}>
-									<span>{String(index + 1).padStart(2, "0")}</span>
-
-									<div className="min-w-0 pr-3">
-										<div className="truncate font-medium">
-											{item.description || "Item description"}
-										</div>
-
-										{item.details && (
-											<div className="mt-[1px] truncate text-[6.5px] text-[#777]">
-												{item.details}
-											</div>
-										)}
+										<span>{invoice.invoiceNumber || "123 45698"}</span>
 									</div>
 
-									<span className="text-right">{formatMoney(item.rate)}</span>
+									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+										<span className="font-bold">Date</span>
 
-									<span className="text-right">{item.quantity}</span>
+										<span>:</span>
 
-									<span className="text-right font-medium">
-										{formatMoney(item.quantity * item.rate)}
-									</span>
+										<span>{invoice.issueDate || "01 / 10 / 2020"}</span>
+									</div>
+
+									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+										<span className="font-bold">Due Date</span>
+
+										<span>:</span>
+
+										<span>{invoice.dueDate || "25 / 05 / 2021"}</span>
+									</div>
+
+									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+										<span className="font-bold">Account No</span>
+
+										<span>:</span>
+
+										<span>{invoice.payment.accountNumber || "242548 85"}</span>
+									</div>
 								</div>
-							))
-						) : (
-							<div className="flex min-h-[220px] items-start justify-center pt-[18px] text-[8px] text-[#999]">
-								No invoice items
+
+								{/* BILL TO */}
+
+								<div className="mt-[24px]">
+									<div className="text-[7px] font-bold uppercase leading-none text-[#222]">
+										BILL TO:
+									</div>
+
+									<div className="mt-[3px] text-[7.5px] font-bold uppercase leading-[1.15] text-[#222]">
+										{invoice.billTo.name || "COMPANY NAME"}
+									</div>
+
+									<div className="mt-[2px] max-w-[180px] text-[7px] leading-[1.45] text-[#333]">
+										{invoice.billTo.address && (
+											<div>{invoice.billTo.address}</div>
+										)}
+
+										{clientLocation && <div>{clientLocation}</div>}
+
+										{invoice.billTo.email && <div>{invoice.billTo.email}</div>}
+
+										{invoice.billTo.phone && <div>{invoice.billTo.phone}</div>}
+									</div>
+								</div>
 							</div>
-						)}
+
+							{/* -----------------------------------------
+							    RIGHT HEADER
+							----------------------------------------- */}
+
+							<div className="flex flex-col items-end">
+								<BrandMark
+									logo={invoice.branding.logo}
+									businessName={businessName}
+									primaryColor={primary}
+								/>
+
+								{/* PAYMENT INFO */}
+
+								<div className="mt-[18px] w-[150px] self-end">
+									<div className="text-[8px] font-bold uppercase leading-none text-[#222]">
+										PAYMENT INFO
+									</div>
+
+									<div className="mt-[6px] text-[7px] leading-[1.7] text-[#333]">
+										{invoice.payment.accountNumber && (
+											<div className="grid grid-cols-[45px_8px_1fr]">
+												<span>Account</span>
+
+												<span>:</span>
+
+												<span>{invoice.payment.accountNumber}</span>
+											</div>
+										)}
+
+										{invoice.payment.accountName && (
+											<div className="grid grid-cols-[45px_8px_1fr]">
+												<span>A/C Name</span>
+
+												<span>:</span>
+
+												<span>{invoice.payment.accountName}</span>
+											</div>
+										)}
+
+										{invoice.payment.bankName && (
+											<div className="mt-[1px]">
+												Bank Details : {invoice.payment.bankName}
+											</div>
+										)}
+
+										{invoice.payment.method && (
+											<div>Method : {invoice.payment.method}</div>
+										)}
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
 
-				{/* =====================================================
-				    LOWER CONTENT
-				===================================================== */}
+					{/* =============================================
+					    ITEMS TABLE
+					============================================= */}
 
-				<div className="mt-[11px] grid grid-cols-[1fr_172px] gap-[35px]">
-					{/* LEFT SIDE */}
+					<div className="mt-[25px] w-full overflow-hidden">
+						{/* TABLE HEADER */}
 
-					<div>
-						{/* Thank you */}
+						{/* TABLE HEADER */}
 
-						<div className="text-[8px] font-medium text-[#222]">
-							{invoice.notes || "Thank you for your business!"}
+						<div
+							className="
+		grid
+		grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
+		items-center
+		border
+		px-[10px]
+		py-[9px]
+		text-[7.5px]
+		font-bold
+		uppercase
+		leading-none
+		text-white
+	"
+							style={{
+								backgroundColor: primary,
+								borderColor: primary,
+							}}>
+							<span className="border-r border-white/30 text-center">NO</span>
+
+							<span className="border-r border-white/30 pl-[10px] text-left">
+								PRODUCT DESCRIPTION
+							</span>
+
+							<span className="border-r border-white/30 text-center">
+								UNIT PRICE
+							</span>
+
+							<span className="border-r border-white/30 text-center">QTY</span>
+
+							<span className="text-center">TOTAL</span>
 						</div>
 
-						{/* Terms */}
+						{/* TABLE BODY */}
 
-						<div className="mt-[12px]">
-							<div className="text-[8px] font-bold uppercase tracking-[0.03em] text-[#222]">
-								Terms & Conditions
-							</div>
+						<div>
+							{invoice.items.length > 0 ? (
+								invoice.items.map((item, index) => {
+									const lineTotal = Number(item.quantity) * Number(item.rate);
 
-							<div className="mt-[3px] max-w-[225px] text-[6.5px] leading-[1.45] text-[#555]">
-								{invoice.terms ||
-									"Payment is due according to the terms stated on this invoice. Thank you for your business."}
-							</div>
-						</div>
+									return (
+										<div
+											key={item.id || index}
+											className="
+													grid
+													grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
+													min-h-[35px]
+													items-center
+													border-x
+													border-b
+													px-[10px]
+													text-[8px]
+													text-[#222]
+												"
+											style={{
+												backgroundColor: index % 2 === 1 ? rowGray : "#ffffff",
+												borderColor: lightBorder,
+											}}>
+											{/* NO */}
 
-						{/* Payment */}
+											<span className="border-r border-[#BDBDBD] py-[10px] text-center">
+												{String(index + 1).padStart(2, "0")}
+											</span>
 
-						<div className="mt-[12px]">
-							<div className="text-[8px] font-bold text-[#222]">
-								Payment Info:
-							</div>
+											{/* DESCRIPTION */}
 
-							<div className="mt-[3px] text-[6.5px] leading-[1.5] text-[#555]">
-								{invoice.payment.accountNumber && (
-									<div>Account #: {invoice.payment.accountNumber}</div>
-								)}
+											<div className="min-w-0 border-r border-[#BDBDBD] py-[10px] pl-[10px] pr-[8px]">
+												<div className="truncate">
+													{item.description || "Item description"}
+												</div>
 
-								{invoice.payment.accountName && (
-									<div>A/C Name: {invoice.payment.accountName}</div>
-								)}
+												{item.details && (
+													<div className="mt-[1px] truncate text-[6px] text-[#777]">
+														{item.details}
+													</div>
+												)}
+											</div>
 
-								{invoice.payment.bankName && (
-									<div>Bank Details: {invoice.payment.bankName}</div>
-								)}
+											{/* UNIT PRICE */}
 
-								{invoice.payment.method && (
-									<div>Method: {invoice.payment.method}</div>
-								)}
-							</div>
-						</div>
-					</div>
+											<span className="border-r border-[#BDBDBD] py-[10px] text-center">
+												{formatMoney(Number(item.rate))}
+											</span>
 
-					{/* RIGHT SIDE - TOTALS */}
+											{/* QTY */}
 
-					<div>
-						<div className="space-y-[3px] text-[8px] text-[#222]">
-							<div className="flex justify-between">
-								<span>Sub Total:</span>
+											<span className="border-r border-[#BDBDBD] py-[10px] text-center">
+												{item.quantity}
+											</span>
 
-								<span>{formatMoney(subtotal)}</span>
-							</div>
+											{/* TOTAL */}
 
-							{invoice.discount > 0 && (
-								<div className="flex justify-between">
-									<span>Discount:</span>
-
-									<span>-{formatMoney(discountAmount)}</span>
+											<span className="py-[10px] text-center">
+												{formatMoney(lineTotal)}
+											</span>
+										</div>
+									);
+								})
+							) : (
+								<div
+									className="flex min-h-[120px] items-start justify-center border-x border-b pt-[15px] text-[8px] text-[#999]"
+									style={{
+										borderColor: lightBorder,
+									}}>
+									No invoice items
 								</div>
 							)}
+						</div>
+					</div>
 
-							<div className="flex justify-between">
-								<span>Tax:</span>
+					{/* =============================================
+					    LOWER CONTENT
+					============================================= */}
 
-								<span>{invoice.tax || 0}%</span>
+					<div className="grid grid-cols-[1fr_170px] gap-[38px]">
+						{/* -----------------------------------------
+						    LEFT LOWER SECTION
+						----------------------------------------- */}
+
+						<div className="relative min-h-[160px] pt-[30px]">
+							{/* TERMS */}
+
+							<div>
+								<div className="text-[8px] font-bold uppercase leading-none text-[#222]">
+									TERMS & CONDITION
+								</div>
+
+								<div className="mt-[6px] max-w-[225px] text-[6.5px] leading-[1.7] text-[#444]">
+									{invoice.terms ||
+										"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt."}
+								</div>
 							</div>
 
-							{invoice.tax > 0 && (
-								<div className="flex justify-between">
-									<span>Tax Amount:</span>
+							{/* THANK YOU */}
+
+							<div className="absolute bottom-[12px] left-0 text-[8px] font-bold uppercase leading-none text-[#222]">
+								{invoice.notes || "THANK YOU FOR YOUR BUSINESS"}
+							</div>
+						</div>
+
+						{/* -----------------------------------------
+						    RIGHT LOWER SECTION
+						----------------------------------------- */}
+
+						<div className="relative min-h-[160px]">
+							{/* TOTALS */}
+
+							<div className="mt-[4px] border border-[#D0D0D0] bg-[#E5E5E5] px-[13px] py-[8px]">
+								<div className="flex items-center justify-between text-[7px] leading-[1.65] text-[#222]">
+									<span>Sub Total</span>
+
+									<span>{formatMoney(subtotal)}</span>
+								</div>
+
+								{discountRate > 0 && (
+									<div className="flex items-center justify-between text-[7px] leading-[1.65] text-[#222]">
+										<span>Discount {discountRate}%</span>
+
+										<span>-{formatMoney(discountAmount)}</span>
+									</div>
+								)}
+
+								<div className="flex items-center justify-between text-[7px] leading-[1.65] text-[#222]">
+									<span>Tax {taxRate}%</span>
 
 									<span>{formatMoney(taxAmount)}</span>
 								</div>
-							)}
-						</div>
 
-						{/* TOTAL BAR */}
+								<div className="flex items-center justify-between text-[7.5px] font-bold leading-[1.65] text-[#222]">
+									<span>Grand Total</span>
 
-						<div
-							className="mt-[7px] flex h-[24px] items-center justify-between px-[18px] text-[10px] font-medium"
-							style={{
-								backgroundColor: primary,
-								color: "#171717",
-							}}>
-							<span>Total:</span>
+									<span>{formatMoney(total)}</span>
+								</div>
+							</div>
 
-							<span>{formatMoney(total)}</span>
-						</div>
+							{/* SIGNATURE */}
 
-						{/* SIGNATURE */}
-
-						{invoice.signature.name && (
-							<div className="mt-[24px] flex justify-end">
-								<div className="w-[95px] text-center">
+							{invoice.signature.name ? (
+								<div className="absolute bottom-[11px] right-[2px] w-[96px] text-center">
 									{invoice.signature.image && (
 										<img
 											src={invoice.signature.image}
 											alt="Signature"
-											className="mx-auto mb-[3px] h-[28px] max-w-[90px] object-contain"
+											className="mx-auto mb-[3px] h-[22px] max-w-[90px] object-contain"
 										/>
 									)}
 
-									<div className="border-b border-[#777]" />
+									<div
+										className="border-b"
+										style={{
+											borderColor: muted,
+										}}
+									/>
 
-									<div className="mt-[4px] text-[7px] font-bold text-[#222]">
+									<div className="mt-[5px] text-[8px] font-normal text-[#222]">
 										{invoice.signature.name}
 									</div>
 
@@ -379,48 +658,112 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										</div>
 									)}
 								</div>
+							) : (
+								<div className="absolute bottom-[13px] right-[2px] w-[96px] text-center">
+									<div
+										className="border-b"
+										style={{
+											borderColor: muted,
+										}}
+									/>
+
+									<div className="mt-[5px] text-[8px] text-[#222]">
+										Signature
+									</div>
+								</div>
+							)}
+						</div>
+					</div>
+
+					{/* =============================================
+					    FOOTER
+					============================================= */}
+
+					<div className="mt-[4px]">
+						{/* TOP FOOTER LINE */}
+
+						<div
+							className="h-[2px] w-full"
+							style={{
+								backgroundColor: primary,
+							}}
+						/>
+
+						{/* CONTACT INFORMATION */}
+
+						<div className="grid grid-cols-3 items-start pt-[10px]">
+							{/* EMAIL */}
+
+							<div className="flex flex-col items-center text-center">
+								<div className="text-[#111]">
+									<FooterIcon type="email" />
+								</div>
+
+								<div className="mt-[4px] max-w-[135px] break-words text-[6px] leading-[1.2] text-[#222]">
+									{invoice.from.email || "yourcompanyemail.com"}
+								</div>
 							</div>
-						)}
+
+							{/* WEBSITE */}
+
+							<div className="flex flex-col items-center text-center">
+								<div className="text-[#111]">
+									<FooterIcon type="website" />
+								</div>
+
+								<div className="mt-[4px] max-w-[135px] break-words text-[6px] leading-[1.2] text-[#222]">
+									{footerWebsite}
+								</div>
+							</div>
+
+							{/* ADDRESS */}
+
+							<div className="flex flex-col items-center text-center">
+								<div className="text-[#111]">
+									<FooterIcon type="location" />
+								</div>
+
+								<div className="mt-[4px] max-w-[145px] break-words text-[6px] leading-[1.25] text-[#222]">
+									{invoice.from.address ||
+										fromLocation ||
+										"123, Lorem Ipsum, Business Address"}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
-				{/* =====================================================
-				    FOOTER
-				===================================================== */}
+				{/* =============================================
+				    BOTTOM ACCENT
+				    
+				    Normal-flow element instead of absolute
+				    positioning, so PDF height remains dynamic.
+				============================================= */}
 
-				<div className="mt-[22px]">
-					{/* Footer yellow line */}
-
-					<div className="relative h-[2px] w-full">
-						<div
-							className="absolute left-0 top-0 h-[2px] w-[67%]"
-							style={{
-								backgroundColor: primary,
-							}}
-						/>
-
-						<div
-							className="absolute right-0 top-0 h-[2px] w-[10%]"
-							style={{
-								backgroundColor: primary,
-							}}
-						/>
-					</div>
-
-					{/* Footer contact */}
-
-					<div className="mt-[7px] flex items-center justify-center gap-[13px] text-[7px] font-medium text-[#222]">
-						<span>{invoice.from.phone || "Phone #"}</span>
-
-						<span className="text-[#555]">|</span>
-
-						<span>{invoice.from.address || "Address"}</span>
-
-						<span className="text-[#555]">|</span>
-
-						<span>{invoice.from.email || "Website"}</span>
-					</div>
-				</div>
+				{/* <div
+					className="
+						absolute
+                        bottom-0
+						mt-[18px]
+						h-[10px]
+						w-full
+						overflow-hidden
+					"
+					style={{
+						backgroundColor: dark,
+					}}>
+					<div
+						className="
+							absolute
+							left-[49%]
+							top-[-9px]
+							h-[40px]
+							w-[13px]
+							rotate-[31deg]
+							bg-white
+						"
+					/>
+				</div> */}
 			</div>
 		</div>
 	);
