@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
 	return (
-		<footer className="bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat px-5 pt-16 text-white md:px-10">
+		<footer className="px-3 pt-4 bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat lg:pt-5 lg:px-5 text-white">
 			<div className="mx-auto max-w-7xl">
 				<div className="flex flex-col items-center border-b border-white/10 pb-12 text-center">
 					<Link

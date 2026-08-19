@@ -14,7 +14,7 @@ export default function Faq() {
 				<p className="text-white text-center font-regular leading-none lg:text-lg ">
 					Frequently asked questions
 				</p>
-				<section className="w-full h-133 md:h-90 lg:px-6 mt-7 lg:mt-12 pb-5">
+				<section className="w-full h-135 md:h-90 lg:px-6 mt-7 lg:mt-12">
 					<Questions />
 				</section>
 			</div>

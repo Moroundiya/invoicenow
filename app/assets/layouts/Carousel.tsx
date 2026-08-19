@@ -29,7 +29,7 @@ export default function ImageCarousel() {
 	const [activeIndex, setActiveIndex] = useState(1);
 
 	return (
-		<section className="relative h-168 w-full overflow-hidden">
+		<section className="relative h-153 md:h-130 lg:h-168 w-full overflow-hidden">
 			<div className="mx-auto h-full w-full max-w-7xl">
 				<Swiper
 					slidesPerView={1}
@@ -55,8 +55,8 @@ export default function ImageCarousel() {
 								<div
 									className={`relative flex w-full flex-col items-center overflow-hidden transition-all duration-700 ease-out ${
 										isActive
-											? "h-155 scale-100 opacity-100"
-											: "top-15 h-105 scale-[0.88] opacity-50"
+											? "h-140 lg:h-155 scale-100 opacity-100"
+											: "top-20 h-105 md:h-90 lg:h-105 scale-[0.88] opacity-50"
 									}`}>
 									<div className="relative h-full w-full overflow-hidden rounded-3xl">
 										<Image
@@ -64,12 +64,12 @@ export default function ImageCarousel() {
 											alt={slide.name}
 											fill
 											sizes="(max-width: 767px) 100vw, 33vw"
-											className="object-cover lg:object-contain rounded-3xl"
+											className="object-contain rounded-3xl"
 										/>
 									</div>
 
 									<div
-										className={`mt-2 transition-all duration-500 ${
+										className={`mt-1 transition-all duration-500 ${
 											isActive
 												? "translate-y-0 opacity-100"
 												: "translate-y-2 opacity-0"

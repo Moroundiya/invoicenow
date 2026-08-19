@@ -1,6 +1,6 @@
 "use client";
 
-import { features } from "@/data/featuresData";
+import { features } from "@/app/assets/data/featuresData";
 
 export default function Features() {
 	return (

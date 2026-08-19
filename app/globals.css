@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 body {
-        font-family: var(--font-jakarta), sans-serif;
-    }
+    font-family: var(--font-jakarta), sans-serif;
+}
 
 @theme {
-            --font-jakarta: var(--font-jakarta);
-            --font-italianno: var(--font-italianno);
-    }
+    --font-jakarta: var(--font-jakarta);
+    --font-italianno: var(--font-italianno);
+}
 
 ::-webkit-scrollbar {
     display: none;

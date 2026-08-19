@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { faqs } from "@/data/faqs";
+import { faqs } from "@/app/assets/data/faqs";
 
 export default function Questions() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);

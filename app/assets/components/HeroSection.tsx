@@ -1,33 +1,31 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
+import Navbar from "../layouts/Navbar";
+import invoice from "@/app/assets/images/invoice.png";
 import FlashIcon from "@iconify-react/fontisto/flash";
 import DotFilledIcon from "@iconify-react/radix-icons/dot-filled";
-import Link from "next/link";
-import invoice from "@/app/assets/images/invoice.png";
-import { RoughNotation } from "react-rough-notation";
 import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
 import { Check } from "lucide-react";
-import Navbar from "../layouts/Navbar";
+import { RoughNotation } from "react-rough-notation";
 
 export default function HeroSection() {
 	return (
 		<div className="min-h-dvh w-full overflow-hidden bg-[url('/background-mobile.png')] bg-cover bg-center bg-no-repeat px-3 py-5 lg:py-7 lg:px-6 lg:bg-[url('/background.png')] xl:px-10">
 			<Navbar />
-
 			<div className="mx-auto mt-18 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
 				<div className="flex w-full flex-col items-start justify-center">
-					<div className="mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 text-sm font-semibold text-[#041636] sm:mb-6 lg:px-3">
-						<FlashIcon className="h-3.5 text-[#041636]" />
-						<div className="flex items-center justify-center space-x-0.5 text-xs lg:text-sm">
+					<div className="mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 text-sm font-semibold text-[#041636] lg:px-3">
+						<FlashIcon className="h-2.5 md:h-3.5 text-[#041636]" />
+						<div className="flex items-center justify-center space-x-0.5 text-[9px] md:text-xs lg:text-sm">
 							<p>Create</p>
-							<DotFilledIcon className="h-3.5 lg:h-4" />
+							<DotFilledIcon className="h-2.5 md:h-3.5 lg:h-4" />
 							<p>Send</p>
-							<DotFilledIcon className="h-3.5 lg:h-4" />
+							<DotFilledIcon className="h-2.5 md:h-3.5 lg:h-4" />
 							<p>Get paid</p>
 						</div>
 					</div>
-
 					<p
 						className="max-w-3xl text-[2.8rem] font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]"
 						style={{
@@ -35,7 +33,7 @@ export default function HeroSection() {
 						}}>
 						Create Professional Invoices in
 						<span
-							className="ms-2 text-[2.8rem] text-[#00B7FF] font-italianno sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
+							className="ms-4 text-[2.8rem] text-[#00B7FF] font-italianno sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
 							style={{
 								textShadow: "1.5px 1.5px 0 #fff",
 							}}>
@@ -112,7 +110,7 @@ export default function HeroSection() {
 						src={invoice}
 						alt="Invoice"
 						priority
-						className="h-auto w-[85%] max-w-105 object-contain sm:w-[70%] lg:w-[530px] lg:max-w-none"
+						className="h-auto w-[90%] max-w-105 object-contain sm:w-[70%] lg:w-132 lg:max-w-none"
 					/>
 				</div>
 			</div>
