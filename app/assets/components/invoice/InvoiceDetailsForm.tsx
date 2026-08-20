@@ -438,7 +438,7 @@ export default function InvoiceDetailsForm({
 					<button
 						type="button"
 						onClick={addItem}
-						className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-blue-400/15 bg-blue-500/[0.025] text-xs font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]">
+						className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#041E50] bg-[#041f5049] text-xs font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]">
 						<svg
 							width="16"
 							height="16"
@@ -499,7 +499,7 @@ export default function InvoiceDetailsForm({
 					</FormField>
 				</div>
 
-				<div className="mt-5 rounded-xl border border-blue-400/[0.08] bg-[#020817]/60 p-4">
+				<div className="mt-5 rounded-xl border border-[#041E50] bg-[#041f5049] p-4">
 					<div className="space-y-2.5 text-xs">
 						<TotalRow
 							label="Subtotal"
@@ -541,7 +541,7 @@ export default function InvoiceDetailsForm({
 /* -------------------------------------------------------------------------- */
 
 const inputClass =
-	"mt-1.5 h-11 w-full rounded-xl border border-white/[0.08] bg-[#020817]/70 px-3.5 text-sm text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:bg-[#020817] focus:ring-2 focus:ring-blue-500/10";
+	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
 
 function FormSection({
 	number,

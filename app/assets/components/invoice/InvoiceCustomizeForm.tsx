@@ -138,7 +138,7 @@ export default function InvoiceCustomizeForm({
 
 						<div className="flex flex-col gap-4 sm:flex-row sm:items-center">
 							{/* Logo Preview */}
-							<div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-[#030c1c]">
+							<div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#041E50] bg-[#041f5049]">
 								{invoice.branding?.logo ? (
 									<img
 										src={invoice.branding.logo}
@@ -160,7 +160,7 @@ export default function InvoiceCustomizeForm({
 							</div>
 
 							<div>
-								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/10 bg-white/[0.03] px-4 text-sm font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
+								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/[0.06] bg-[#030c1c]/35 px-4 text-sm font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
 									Upload Logo
 									<input
 										type="file"
@@ -199,7 +199,7 @@ export default function InvoiceCustomizeForm({
 								onChange={(event) =>
 									updateBranding("primaryColor", event.target.value)
 								}
-								className="h-11 w-14 cursor-pointer rounded-lg border border-white/10 bg-transparent p-1"
+								className="h-11 w-14 cursor-pointer rounded-lg border border-white/[0.06] bg-[#030c1c]/35 p-1"
 							/>
 
 							<input
@@ -209,11 +209,11 @@ export default function InvoiceCustomizeForm({
 									updateBranding("primaryColor", event.target.value)
 								}
 								placeholder="#2563EB"
-								className="h-11 w-36 rounded-xl border border-white/10 bg-[#030c1c] px-3.5 text-sm text-white outline-none placeholder:text-slate-700 focus:border-blue-500/50"
+								className="h-11 w-36 rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-white outline-none placeholder:text-slate-700 focus:border-blue-500/50"
 							/>
 
 							<div
-								className="h-9 w-9 rounded-lg border border-white/10"
+								className="h-9 w-9 rounded-lg border border-[#041E50]"
 								style={{
 									backgroundColor: invoice.branding?.primaryColor || "#2563EB",
 								}}
@@ -289,7 +289,7 @@ export default function InvoiceCustomizeForm({
 
 				<div className="space-y-4">
 					<TextareaField
-						label="Notes"
+						label=""
 						value={invoice.notes ?? ""}
 						onChange={(value) => onInvoiceChange({ notes: value })}
 						placeholder="Thank you for your business."
@@ -311,30 +311,10 @@ export default function InvoiceCustomizeForm({
 				</div>
 
 				<div className="space-y-5">
-					<div className="grid gap-4 sm:grid-cols-2">
-						<FormField
-							label="Name"
-							value={invoice.signature?.name ?? ""}
-							onChange={(value) => updateSignature("name", value)}
-							placeholder="John Doe"
-						/>
-
-						<FormField
-							label="Title"
-							value={invoice.signature?.title ?? ""}
-							onChange={(value) => updateSignature("title", value)}
-							placeholder="Managing Director"
-						/>
-					</div>
-
 					{/* Signature Image */}
 					<div>
-						<label className="mb-2 block text-xs font-medium text-slate-400">
-							Signature Image
-						</label>
-
 						<div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-							<div className="flex h-20 w-48 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-[#030c1c]">
+							<div className="flex h-20 w-48 items-center justify-center overflow-hidden rounded-xl border border-[#041E50] bg-[#041f5049]">
 								{invoice.signature?.image ? (
 									<img
 										src={invoice.signature.image}
@@ -347,7 +327,7 @@ export default function InvoiceCustomizeForm({
 							</div>
 
 							<div>
-								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/10 bg-white/[0.03] px-4 text-sm font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
+								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/[0.06] bg-[#030c1c]/35 px-4 text-sm font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
 									Upload Signature
 									<input
 										type="file"
@@ -404,7 +384,7 @@ function FormField({
 				value={value ?? ""}
 				onChange={(event) => onChange(event.target.value)}
 				placeholder={placeholder}
-				className="h-11 w-full rounded-xl border border-white/10 bg-[#030c1c] px-3.5 text-sm text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041127]"
+				className="h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041f5049]"
 			/>
 		</div>
 	);
@@ -438,7 +418,7 @@ function TextareaField({
 				onChange={(event) => onChange(event.target.value)}
 				placeholder={placeholder}
 				rows={4}
-				className="w-full resize-none rounded-xl border border-white/10 bg-[#030c1c] px-3.5 py-3 text-sm leading-6 text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041127]"
+				className="w-full resize-none rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 py-3 text-sm leading-6 text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041f5049]"
 			/>
 		</div>
 	);

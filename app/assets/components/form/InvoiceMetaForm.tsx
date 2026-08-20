@@ -95,7 +95,7 @@ export default function InvoiceMetaForm({
 								currency: event.target.value,
 							})
 						}
-						className="h-11 w-full appearance-none rounded-xl border border-white/[0.07] bg-[#061329] px-3.5 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10">
+						className="h-11 w-full appearance-none rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10">
 						{currencies.map((currency) => (
 							<option
 								key={currency.code}

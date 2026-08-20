@@ -74,7 +74,7 @@ export default function InvoiceWorkspace({
 			{/* =========================================================
 			    EDITOR
 			========================================================= */}
-			<div className="min-w-0 rounded-2xl border border-blue-400/10 bg-[#061329]/60 p-6 shadow-[0_0_50px_rgba(0,60,150,0.05)] backdrop-blur-xl">
+			<div className="min-w-0 rounded-2xl border border-[#041E50] bg-[#041f5049] p-6">
 				{/* Section Header */}
 				<div className="mb-8">
 					<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400">
@@ -123,7 +123,7 @@ export default function InvoiceWorkspace({
 				===================================================== */}
 				{/* Step 4 — Preview */}
 				{currentStep === 4 && (
-					<div className="rounded-xl border border-blue-400/10 bg-[#030c1c]/50 p-4 sm:p-6">
+					<div className="rounded-xl border border-[#041E50] bg-[#041f5049] p-4 sm:p-6">
 						<div className="mb-5">
 							<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400">
 								Final Review
@@ -139,7 +139,7 @@ export default function InvoiceWorkspace({
 						</div>
 
 						{/* Invoice preview */}
-						<div className="flex justify-center overflow-x-auto rounded-xl border border-white/[0.06] bg-[#020817] p-3 sm:p-5">
+						<div className="flex justify-center overflow-x-auto rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-3 sm:p-5">
 							<div
 								id="invoice-preview"
 								className="w-full max-w-[560px] shrink-0 overflow-hidden bg-white shadow-2xl">
@@ -148,7 +148,7 @@ export default function InvoiceWorkspace({
 						</div>
 
 						{/* Review note */}
-						<div className="mt-5 flex items-start gap-3 rounded-xl border border-blue-400/10 bg-blue-500/[0.04] p-4">
+						<div className="mt-5 flex items-start gap-3 rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-4">
 							<div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
 								<svg
 									width="15"
@@ -186,7 +186,7 @@ export default function InvoiceWorkspace({
 				    STEP 5 — DOWNLOAD
 				===================================================== */}
 				{currentStep === 5 && (
-					<div className="rounded-xl border border-blue-400/10 bg-[#030c1c]/50 p-6 sm:p-8">
+					<div className="rounded-xl border border-[#041E50] bg-[#041f5049] p-6 sm:p-8">
 						<div className="mx-auto max-w-md text-center">
 							{/* Success Icon */}
 							<div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.07] text-emerald-400">
@@ -317,7 +317,7 @@ export default function InvoiceWorkspace({
 			    LIVE PREVIEW
 			========================================================= */}
 			<aside className="hidden min-w-0 lg:block">
-				<div className="sticky top-5 rounded-2xl border border-blue-400/10 bg-[#030d20]/70 p-5 shadow-[0_0_50px_rgba(0,60,150,0.05)] backdrop-blur-xl xl:p-6">
+				<div className="sticky top-5 rounded-2xl border border-[#041E50] bg-[#041f5049] p-5 xl:p-6">
 					{/* Preview Header */}
 					<div className="mb-5 flex items-start justify-between gap-4">
 						<div>
@@ -335,16 +335,10 @@ export default function InvoiceWorkspace({
 								Your invoice updates automatically as you edit it.
 							</p>
 						</div>
-
-						{/* Live Indicator */}
-						<div className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-emerald-400/10 bg-emerald-400/[0.05] px-3 py-1.5 text-[11px] font-medium text-emerald-400">
-							<span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-							Live
-						</div>
 					</div>
 
 					{/* Invoice Preview */}
-					<div className="invoice-preview-container flex min-h-[650px] items-start justify-center overflow-auto rounded-xl border border-white/[0.06] bg-[#020817] p-5">
+					<div className="invoice-preview-container flex min-h-[650px] items-start justify-center overflow-auto rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-5">
 						<div
 							id="invoice-preview"
 							className="invoice-print-area w-full max-w-[560px] overflow-hidden shadow-2xl">

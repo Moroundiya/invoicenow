@@ -43,7 +43,7 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 		<nav
 			aria-label="Invoice creation steps"
 			className="w-full">
-			<div className="rounded-2xl border border-blue-400/10 bg-[#061329]/60 px-3 py-4 shadow-[0_0_50px_rgba(0,60,150,0.04)] backdrop-blur-xl sm:px-5 sm:py-5">
+			<div className="rounded-2xl border border-[#041E50] bg-[#041f5049] px-3 py-4 sm:px-5 sm:py-5">
 				{/* =====================================================
 				    DESKTOP
 				===================================================== */}
@@ -101,8 +101,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 											}`}>
 											{step.shortTitle}
 										</p>
-
-										
 									</div>
 								</div>
 
