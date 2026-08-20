@@ -1,6 +1,12 @@
 "use client";
 
-import type { ChangeEvent } from "react";
+import {
+	useEffect,
+	useRef,
+	useState,
+	type ChangeEvent,
+	type PointerEvent,
+} from "react";
 import type { InvoiceData } from "@/app/assets/types/invoiceType";
 
 interface InvoiceCustomizeFormProps {
@@ -87,32 +93,169 @@ export default function InvoiceCustomizeForm({
 	};
 
 	/* --------------------------------
-	 * SIGNATURE UPLOAD
+	 * SIGNATURE CANVAS
 	 * -------------------------------- */
-	const handleSignatureUpload = (event: ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0];
+	const signatureCanvasRef = useRef<HTMLCanvasElement | null>(null);
+	const isDrawingRef = useRef(false);
+	const hasDrawnRef = useRef(false);
 
-		if (!file) return;
+	const [isDrawing, setIsDrawing] = useState(false);
 
-		if (!file.type.startsWith("image/")) {
-			event.target.value = "";
-			return;
-		}
+	/* --------------------------------
+	 * SETUP CANVAS
+	 * -------------------------------- */
+	useEffect(() => {
+		const canvas = signatureCanvasRef.current;
 
-		const reader = new FileReader();
+		if (!canvas) return;
 
-		reader.onload = () => {
-			const result = reader.result;
+		const setupCanvas = () => {
+			const rect = canvas.getBoundingClientRect();
+			const dpr = window.devicePixelRatio || 1;
 
-			if (typeof result === "string") {
-				updateSignature("image", result);
-			}
+			canvas.width = Math.round(rect.width * dpr);
+			canvas.height = Math.round(rect.height * dpr);
+
+			const context = canvas.getContext("2d");
+
+			if (!context) return;
+
+			context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+			context.lineWidth = 2;
+			context.lineCap = "round";
+			context.lineJoin = "round";
+			context.strokeStyle = "#000000";
 		};
 
-		reader.readAsDataURL(file);
+		setupCanvas();
+	}, []);
 
-		// Allow selecting the same file again later
-		event.target.value = "";
+	/* --------------------------------
+	 * DRAWING POSITION
+	 * -------------------------------- */
+	const getPointerPosition = (event: PointerEvent<HTMLCanvasElement>) => {
+		const canvas = signatureCanvasRef.current;
+
+		if (!canvas) {
+			return {
+				x: 0,
+				y: 0,
+			};
+		}
+
+		const rect = canvas.getBoundingClientRect();
+
+		return {
+			x: event.clientX - rect.left,
+			y: event.clientY - rect.top,
+		};
+	};
+
+	/* --------------------------------
+	 * START DRAWING
+	 * -------------------------------- */
+	const startDrawing = (event: PointerEvent<HTMLCanvasElement>) => {
+		const canvas = signatureCanvasRef.current;
+
+		if (!canvas) return;
+
+		event.preventDefault();
+
+		canvas.setPointerCapture(event.pointerId);
+
+		const context = canvas.getContext("2d");
+
+		if (!context) return;
+
+		const { x, y } = getPointerPosition(event);
+
+		isDrawingRef.current = true;
+		hasDrawnRef.current = true;
+
+		setIsDrawing(true);
+
+		context.beginPath();
+		context.moveTo(x, y);
+	};
+
+	/* --------------------------------
+	 * DRAW
+	 * -------------------------------- */
+	const draw = (event: PointerEvent<HTMLCanvasElement>) => {
+		if (!isDrawingRef.current) return;
+
+		const canvas = signatureCanvasRef.current;
+
+		if (!canvas) return;
+
+		event.preventDefault();
+
+		const context = canvas.getContext("2d");
+
+		if (!context) return;
+
+		const { x, y } = getPointerPosition(event);
+
+		context.lineTo(x, y);
+		context.stroke();
+	};
+
+	/* --------------------------------
+	 * STOP DRAWING
+	 * -------------------------------- */
+	const stopDrawing = () => {
+		if (!isDrawingRef.current) return;
+
+		isDrawingRef.current = false;
+		setIsDrawing(false);
+
+		const canvas = signatureCanvasRef.current;
+
+		if (!canvas) return;
+
+		const context = canvas.getContext("2d");
+
+		if (!context) return;
+
+		context.closePath();
+
+		saveSignature();
+	};
+
+	/* --------------------------------
+	 * SAVE SIGNATURE
+	 * -------------------------------- */
+	const saveSignature = () => {
+		const canvas = signatureCanvasRef.current;
+
+		if (!canvas || !hasDrawnRef.current) return;
+
+		const signatureImage = canvas.toDataURL("image/png");
+
+		updateSignature("image", signatureImage);
+	};
+
+	/* --------------------------------
+	 * CLEAR SIGNATURE
+	 * -------------------------------- */
+	const clearSignature = () => {
+		const canvas = signatureCanvasRef.current;
+
+		if (!canvas) return;
+
+		const context = canvas.getContext("2d");
+
+		if (!context) return;
+
+		context.clearRect(0, 0, canvas.width, canvas.height);
+
+		hasDrawnRef.current = false;
+		isDrawingRef.current = false;
+
+		setIsDrawing(false);
+
+		updateSignature("image", "");
 	};
 
 	return (
@@ -305,47 +448,50 @@ export default function InvoiceCustomizeForm({
 					<h3 className="text-base font-semibold text-white">Signature</h3>
 
 					<p className="mt-1 text-sm text-slate-500">
-						Add a signature to make your invoice feel more personal and
-						professional.
+						Draw your signature below to add it to your invoice.
 					</p>
 				</div>
 
-				<div className="space-y-5">
-					{/* Signature Image */}
+				<div className="space-y-4">
+					{/* Signature Canvas */}
 					<div>
-						<div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-							<div className="flex h-20 w-48 items-center justify-center overflow-hidden rounded-xl border border-[#041E50] bg-[#041f5049]">
-								{invoice.signature?.image ? (
-									<img
-										src={invoice.signature.image}
-										alt="Signature"
-										className="max-h-16 max-w-[180px] object-contain"
-									/>
-								) : (
-									<span className="text-xs text-slate-700">No signature</span>
-								)}
-							</div>
+						<div className="relative h-36 w-full overflow-hidden rounded-xl border border-[#041E50] bg-[#041f5049]">
+							<canvas
+								ref={signatureCanvasRef}
+								onPointerDown={startDrawing}
+								onPointerMove={draw}
+								onPointerUp={stopDrawing}
+								onPointerCancel={stopDrawing}
+								onPointerLeave={stopDrawing}
+								className="absolute inset-0 h-full w-full cursor-crosshair touch-none"
+							/>
 
-							<div>
-								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/[0.06] bg-[#030c1c]/35 px-4 text-sm font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
-									Upload Signature
-									<input
-										type="file"
-										accept="image/png,image/jpeg,image/webp"
-										onChange={handleSignatureUpload}
-										className="hidden"
-									/>
-								</label>
+							{/* Placeholder */}
+							{!invoice.signature?.image && !isDrawing && (
+								<div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+									<span className="text-xs text-slate-700">
+										Draw your signature here
+									</span>
+								</div>
+							)}
 
-								{invoice.signature?.image && (
-									<button
-										type="button"
-										onClick={() => updateSignature("image", "")}
-										className="ml-2 text-xs text-slate-500 transition hover:text-red-400">
-										Remove
-									</button>
-								)}
-							</div>
+							{/* Signature line */}
+							<div className="pointer-events-none absolute bottom-5 left-6 right-6 border-b border-slate-700/60" />
+						</div>
+
+						<div className="mt-3 flex items-center justify-between">
+							<p className="text-xs text-slate-600">
+								Use your mouse, trackpad, or touchscreen.
+							</p>
+
+							{invoice.signature?.image && (
+								<button
+									type="button"
+									onClick={clearSignature}
+									className="text-xs font-medium text-slate-500 transition hover:text-red-400">
+									Clear
+								</button>
+							)}
 						</div>
 					</div>
 				</div>

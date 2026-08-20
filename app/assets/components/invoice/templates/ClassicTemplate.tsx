@@ -236,7 +236,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 	const primary = invoice.branding.primaryColor || "#FBC400";
 
-	// const dark = "#171717";
 	const rowGray = "#E5E5E5";
 	const border = "#202020";
 	const lightBorder = "#BDBDBD";
@@ -269,6 +268,14 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 	const footerWebsite = fromWithWebsite.website || "www.yourdomain.com";
 
 	const businessName = invoice.from.name?.trim() || "Brand Name";
+
+	/*
+	 * Manual signature
+	 *
+	 * The signature pad stores the drawn signature as an image
+	 * inside invoice.signature.image.
+	 */
+	const hasSignature = !!invoice.signature?.image;
 
 	/* -------------------------------------------------------
 	 * RENDER
@@ -335,33 +342,25 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								<div className="mt-[11px]">
 									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Invoice No</span>
-
 										<span>:</span>
-
 										<span>{invoice.invoiceNumber || "123 45698"}</span>
 									</div>
 
 									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Date</span>
-
 										<span>:</span>
-
 										<span>{invoice.issueDate || "01 / 10 / 2020"}</span>
 									</div>
 
 									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Due Date</span>
-
 										<span>:</span>
-
 										<span>{invoice.dueDate || "25 / 05 / 2021"}</span>
 									</div>
 
 									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Account No</span>
-
 										<span>:</span>
-
 										<span>{invoice.payment.accountNumber || "242548 85"}</span>
 									</div>
 								</div>
@@ -413,9 +412,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										{invoice.payment.accountNumber && (
 											<div className="grid grid-cols-[45px_8px_1fr]">
 												<span>Account</span>
-
 												<span>:</span>
-
 												<span>{invoice.payment.accountNumber}</span>
 											</div>
 										)}
@@ -423,9 +420,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										{invoice.payment.accountName && (
 											<div className="grid grid-cols-[45px_8px_1fr]">
 												<span>A/C Name</span>
-
 												<span>:</span>
-
 												<span>{invoice.payment.accountName}</span>
 											</div>
 										)}
@@ -452,22 +447,20 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 					<div className="mt-[25px] w-full overflow-hidden">
 						{/* TABLE HEADER */}
 
-						{/* TABLE HEADER */}
-
 						<div
 							className="
-		grid
-		grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
-		items-center
-		border
-		px-[10px]
-		py-[9px]
-		text-[7.5px]
-		font-bold
-		uppercase
-		leading-none
-		text-white
-	"
+								grid
+								grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
+								items-center
+								border
+								px-[10px]
+								py-[9px]
+								text-[7.5px]
+								font-bold
+								uppercase
+								leading-none
+								text-white
+							"
 							style={{
 								backgroundColor: primary,
 								borderColor: primary,
@@ -498,16 +491,16 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										<div
 											key={item.id || index}
 											className="
-													grid
-													grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
-													min-h-[35px]
-													items-center
-													border-x
-													border-b
-													px-[10px]
-													text-[8px]
-													text-[#222]
-												"
+												grid
+												grid-cols-[43px_minmax(0,1fr)_86px_55px_80px]
+												min-h-[35px]
+												items-center
+												border-x
+												border-b
+												px-[10px]
+												text-[8px]
+												text-[#222]
+											"
 											style={{
 												backgroundColor: index % 2 === 1 ? rowGray : "#ffffff",
 												borderColor: lightBorder,
@@ -629,41 +622,60 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								</div>
 							</div>
 
-							{/* SIGNATURE */}
+							{/* =================================================
+							    MANUAL SIGNATURE
+							================================================= */}
 
-							{invoice.signature.name ? (
+							{hasSignature ? (
 								<div className="absolute bottom-[11px] right-[2px] w-[96px] text-center">
-									{invoice.signature.image && (
+									{/* Signature image */}
+
+									<div className="flex h-[25px] items-end justify-center overflow-hidden">
 										<img
-											src={invoice.signature.image}
-											alt="Signature"
-											className="mx-auto mb-[3px] h-[22px] max-w-[90px] object-contain"
+											src={invoice.signature!.image}
+											alt="Authorized signature"
+											className="mx-auto mb-[2px] max-h-[24px] max-w-[92px] object-contain"
+											style={{
+												/*
+												 * Force manually drawn signature to black.
+												 *
+												 * This makes the signature clearly visible
+												 * regardless of the drawing-pad color.
+												 */
+												filter: "brightness(0)",
+											}}
 										/>
-									)}
+									</div>
+
+									{/* Signature line */}
 
 									<div
-										className="border-b"
+										className="h-px w-full"
 										style={{
-											borderColor: muted,
+											backgroundColor: muted,
 										}}
 									/>
 
-									<div className="mt-[5px] text-[8px] font-normal text-[#222]">
-										{invoice.signature.name}
-									</div>
+									{/* Signatory name */}
 
-									{invoice.signature.title && (
-										<div className="mt-[1px] text-[6px] text-[#666]">
+									<p className="mt-[5px] text-[8px] font-normal text-[#222]">
+										{invoice.signature?.name || "Authorized Signature"}
+									</p>
+
+									{/* Signatory title */}
+
+									{invoice.signature?.title && (
+										<p className="mt-[1px] text-[6px] text-[#666]">
 											{invoice.signature.title}
-										</div>
+										</p>
 									)}
 								</div>
 							) : (
 								<div className="absolute bottom-[13px] right-[2px] w-[96px] text-center">
 									<div
-										className="border-b"
+										className="h-px w-full"
 										style={{
-											borderColor: muted,
+											backgroundColor: muted,
 										}}
 									/>
 
@@ -735,15 +747,12 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 				{/* =============================================
 				    BOTTOM ACCENT
-				    
-				    Normal-flow element instead of absolute
-				    positioning, so PDF height remains dynamic.
 				============================================= */}
 
 				{/* <div
 					className="
 						absolute
-                        bottom-0
+						bottom-0
 						mt-[18px]
 						h-[10px]
 						w-full

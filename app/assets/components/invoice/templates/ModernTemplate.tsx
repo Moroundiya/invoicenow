@@ -70,19 +70,12 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 		!!swiftCode ||
 		!!payment.method;
 
+	/*
+	 * Signature
+	 */
+	const hasSignature = !!invoice.signature?.image;
+
 	return (
-		/*
-		 * IMPORTANT:
-		 * This is the actual invoice sheet.
-		 *
-		 * 700px gives the invoice a compact professional width
-		 * without making it look like a wide landscape document.
-		 *
-		 * max-width: 100% makes it responsive on mobile.
-		 *
-		 * margin: 0 and padding: 0 prevent white edges from
-		 * becoming part of the exported PDF/PNG.
-		 */
 		<div
 			id="modern-invoice"
 			className="relative m-0 w-[700px] max-w-full overflow-hidden bg-white p-0 text-[#172033]"
@@ -122,7 +115,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 				<div className="relative z-10 flex items-start justify-between gap-8">
 					{/* Invoice information */}
-
 					<div className="min-w-0 flex-1">
 						<h1 className="text-[30px] font-bold leading-none tracking-tight">
 							INVOICE
@@ -171,7 +163,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					</div>
 
 					{/* Brand */}
-
 					<div className="flex w-[175px] shrink-0 flex-col items-end text-right">
 						{invoice.branding.logo ? (
 							<img
@@ -207,7 +198,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 			<div className="px-7 py-6">
 				<div className="grid grid-cols-[1fr_1fr] gap-8">
 					{/* Bill To */}
-
 					<div className="min-w-0">
 						<div className="mb-3 flex items-center gap-2">
 							<div
@@ -223,7 +213,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									stroke="currentColor"
 									strokeWidth="2">
 									<path d="M20 21a8 8 0 0 0-16 0" />
-
 									<circle
 										cx="12"
 										cy="7"
@@ -274,7 +263,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					</div>
 
 					{/* Payment Info */}
-
 					<div
 						className="min-w-0 rounded-xl border px-4 py-3.5"
 						style={{
@@ -377,7 +365,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 			<div className="px-7">
 				<div className="overflow-hidden rounded-lg border border-slate-300">
 					{/* Header */}
-
 					<div
 						className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-center text-[8px] font-bold uppercase tracking-wide text-white"
 						style={{
@@ -403,7 +390,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					</div>
 
 					{/* Rows */}
-
 					{invoice.items.length > 0 ? (
 						invoice.items.map((item, index) => (
 							<div
@@ -453,7 +439,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 			<div className="px-7 py-6">
 				<div className="grid grid-cols-[1fr_1fr] gap-9">
 					{/* Notes / Contact */}
-
 					<div className="min-w-0">
 						<h3
 							className="text-[10px] font-bold uppercase tracking-wide"
@@ -493,7 +478,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						/>
 
 						{/* Contact */}
-
 						<div className="mt-4 flex gap-3">
 							<div
 								className="flex w-7 shrink-0 flex-col items-center justify-center gap-2 rounded-lg py-2 text-white"
@@ -501,7 +485,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									backgroundColor: "#172033",
 								}}>
 								{/* Phone */}
-
 								<svg
 									width="11"
 									height="11"
@@ -513,7 +496,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								</svg>
 
 								{/* Email */}
-
 								<svg
 									width="11"
 									height="11"
@@ -548,8 +530,8 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					</div>
 
 					{/* Totals + Signature */}
-
 					<div className="min-w-0">
+						{/* Totals */}
 						<div
 							className="rounded-lg border px-4 py-3.5"
 							style={{
@@ -566,8 +548,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								{invoice.discount > 0 && (
 									<div className="flex items-center justify-between gap-4">
 										<span className="text-slate-600">
-											Discount ({invoice.discount}
-											%)
+											Discount ({invoice.discount}%)
 										</span>
 
 										<span>-{formatMoney(discountAmount)}</span>
@@ -576,10 +557,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 								{invoice.tax > 0 && (
 									<div className="flex items-center justify-between gap-4">
-										<span className="text-slate-600">
-											Tax ({invoice.tax}
-											%)
-										</span>
+										<span className="text-slate-600">Tax ({invoice.tax}%)</span>
 
 										<span>{formatMoney(taxAmount)}</span>
 									</div>
@@ -612,36 +590,33 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							</div>
 						</div>
 
-						{/* Signature */}
+						{/* =====================================================
+						    SIGNATURE
+						===================================================== */}
 
-						<div className="mt-8 ml-auto w-full max-w-[220px] text-center">
-							{invoice.signature?.image ? (
-								<img
-									src={invoice.signature.image}
-									alt="Signature"
-									className="mx-auto mb-1 h-10 max-w-[150px] object-contain"
-								/>
-							) : (
-								<div className="h-10" />
-							)}
+						{hasSignature && (
+							<div className="mt-8 ml-auto w-full max-w-[220px] text-center">
+								<div className="flex h-14 items-end justify-center">
+									<img
+										src={invoice.signature.image}
+										alt="Authorized signature"
+										className="mx-auto max-h-12 max-w-[180px] object-contain"
+									/>
+								</div>
 
-							<div
-								className="h-px w-full"
-								style={{
-									backgroundColor: "#cbd5e1",
-								}}
-							/>
+								<div className="h-px w-full bg-slate-300" />
 
-							<p className="mt-2 text-[10px] font-medium text-slate-700">
-								{invoice.signature?.name || "Authorized Signature"}
-							</p>
-
-							{invoice.signature?.title && (
-								<p className="mt-0.5 text-[8px] text-slate-400">
-									{invoice.signature.title}
+								<p className="mt-2 text-[10px] font-medium text-slate-700">
+									{invoice.signature.name || "Authorized Signature"}
 								</p>
-							)}
-						</div>
+
+								{invoice.signature.title && (
+									<p className="mt-0.5 text-[8px] text-slate-400">
+										{invoice.signature.title}
+									</p>
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
