@@ -50,7 +50,7 @@ export default function Navbar() {
 
 				<Link
 					href="/create"
-					className="hidden lg:flex rounded-lg bg-[#00B7FF] px-4 py-1.5 text-sm font-semibold text-[#041636] transition hover:bg-white">
+					className="hidden lg:flex rounded-sm bg-[#00B7FF] px-4 py-1.5 text-sm font-semibold text-[#041636] transition hover:bg-white">
 					Get Started
 				</Link>
 

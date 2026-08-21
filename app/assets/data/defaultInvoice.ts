@@ -36,12 +36,13 @@ export const defaultInvoice: InvoiceData = {
 	tax: 0,
 
 	payment: {
-        method: "",
-        accountName: "",
-        bankName: "",
-        accountNumber: "",
-        swiftCode: ""
-    },
+		method: "",
+		accountName: "",
+		bankName: "",
+		accountNumber: "",
+		swiftCode: "",
+		sortCode: "",
+	},
 
 	notes: "",
 
@@ -57,4 +58,5 @@ export const defaultInvoice: InvoiceData = {
 		logo: "",
 		primaryColor: "#2563EB",
 	},
+	sortCode: "",
 };

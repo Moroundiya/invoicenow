@@ -13,6 +13,7 @@ import type {
 import { defaultInvoice } from "@/app/assets/data/defaultInvoice";
 import Link from "next/link";
 import Image from "next/image";
+import Footer from "../../components/Footer";
 
 export type InvoiceStep = 1 | 2 | 3 | 4 | 5;
 
@@ -67,7 +68,7 @@ export default function CreateInvoiceLayout() {
 
 	return (
 		<div className="min-h-dvh bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat text-white">
-			<div className="mx-auto w-full max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
+			<div className="mx-auto w-full max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8 mb-12">
 				<header className="mb-8 flex items-center">
 					<Link href="/">
 						<Image
@@ -98,6 +99,8 @@ export default function CreateInvoiceLayout() {
 					onCreateAnother={handleCreateAnother}
 				/>
 			</div>
+
+			<Footer />
 		</div>
 	);
 }

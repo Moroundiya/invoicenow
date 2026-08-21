@@ -27,7 +27,7 @@ export interface InvoiceItem {
 }
 
 export interface PaymentDetails {
-    swiftCode: import("react").JSX.Element;
+	swiftCode: string;
 	method: string;
 	accountName: string;
 	bankName: string;
