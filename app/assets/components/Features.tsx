@@ -4,7 +4,9 @@ import { features } from "@/app/assets/data/featuresData";
 
 export default function Features() {
 	return (
-		<div className='w-full px-3 pt-3 pb-4 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat lg:px-6 xl:px-10'>
+		<div
+			className='w-full px-3 pt-3 pb-4 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat lg:px-6 xl:px-10'
+			id="features">
 			<div className="max-w-7xl mx-auto h-full">
 				<p
 					className="text-[#00B7FF] text-5xl font-italianno text-center lg:text-6xl"

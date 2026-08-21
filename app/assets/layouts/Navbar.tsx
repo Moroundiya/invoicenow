@@ -59,7 +59,7 @@ export default function Navbar() {
 					onClick={() => setIsOpen((prev) => !prev)}
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
-					className="flex h-10 w-10 items-center justify-center rounded-full bg-[#041f5049] border-2 border-[#00B7FF] text-white transition hover:bg-white/10 lg:hidden">
+					className="flex h-10 w-10 items-center justify-center rounded-full cursor-pointer bg-[#041f5049] border-2 border-[#00B7FF] text-white transition hover:bg-white/10 lg:hidden">
 					{isOpen ? (
 						<X className="h-5 w-5 text-[#00B7FF]" />
 					) : (

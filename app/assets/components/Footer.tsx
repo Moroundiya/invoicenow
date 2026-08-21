@@ -2,11 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 export default function Footer() {
 	const pathname = usePathname();
+
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	};
+
 	return (
 		<footer className="px-3 pt-4 bg-[url('/background-mobile.png')] lg:bg-[url('/background.png')] bg-cover bg-center bg-no-repeat lg:pt-5 lg:px-5 text-white">
 			<div className="mx-auto max-w-7xl">
@@ -19,7 +27,7 @@ export default function Footer() {
 							alt="InvoiceNow"
 							width={240}
 							height={70}
-							className="h-auto w-48 lg:w-70 object-contain"
+							className="h-auto w-48 object-contain lg:w-70"
 						/>
 					</Link>
 
@@ -27,6 +35,7 @@ export default function Footer() {
 						Create professional invoices in seconds. Simple, fast, and built for
 						freelancers and businesses.
 					</p>
+
 					{pathname === "/" && (
 						<Link
 							href="#create"
@@ -37,10 +46,22 @@ export default function Footer() {
 					)}
 				</div>
 
-				<div className="flex flex-col items-center gap-3 py-6 text-center">
+				<div className="flex flex-col items-center gap-4 py-6 text-center sm:relative">
 					<p className="font-inter text-sm text-white/40">
 						© {new Date().getFullYear()} InvoiceNow
 					</p>
+
+					<button
+						type="button"
+						onClick={scrollToTop}
+						aria-label="Scroll to top"
+						className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-[#00B7FF]/40 hover:bg-[#00B7FF]/10 hover:shadow-[0_0_25px_rgba(0,183,255,0.2)] sm:absolute sm:right-0 sm:top-1/2 sm:-translate-y-1/2">
+						<span className="font-inter text-xs font-medium text-white/50 transition-colors duration-300 group-hover:text-[#00B7FF]">
+							Back to top
+						</span>
+
+						<ArrowUp className="h-4 w-4 animate-bounce text-white/60 transition-colors duration-300 group-hover:text-[#00B7FF]" />
+					</button>
 				</div>
 			</div>
 		</footer>

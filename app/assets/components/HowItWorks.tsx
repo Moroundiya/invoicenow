@@ -6,7 +6,9 @@ import { steps } from "@/app/assets/data/steps";
 
 export default function HowItWorks() {
 	return (
-		<div className='w-full px-3 pt-5 md:py-10 lg:pt-14 lg:pb-0 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'>
+		<div
+			className='w-full px-3 pt-5 md:py-10 lg:pt-14 lg:pb-0 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat'
+			id="how-it-works">
 			<div className="lg:w-10/12 mx-auto h-full">
 				<p
 					className="text-[#00B7FF] text-5xl font-italianno text-center lg:text-6xl"

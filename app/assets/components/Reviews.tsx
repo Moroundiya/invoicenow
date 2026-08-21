@@ -2,7 +2,9 @@ import Testimonials from "../layouts/Marquee";
 
 export default function Reviews() {
 	return (
-		<div className='w-full pt-7 pb-5 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat lg:pb-3 lg:pt-0'>
+		<div
+			className='w-full pt-7 pb-5 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat lg:pb-3 lg:pt-0'
+			id="testimonials">
 			<div className="w-full mx-auto h-full sm:py-5">
 				<p
 					className="text-[#00B7FF] text-5xl font-italianno text-center lg:text-6xl"
