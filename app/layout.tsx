@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Italianno, Plus_Jakarta_Sans } from "next/font/google";
+
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -80,6 +81,20 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
+			<head>
+				<link
+					rel="preload"
+					as="image"
+					href="/background.webp"
+					type="image/webp"
+				/>
+				<link
+					rel="preload"
+					as="image"
+					href="/background-mobile.webp"
+					type="image/webp"
+				/>
+			</head>
 			<body className={`${italianno.variable} ${jakarta.variable} antialiased`}>
 				{children}
 			</body>

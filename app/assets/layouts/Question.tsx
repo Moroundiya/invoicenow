@@ -1,28 +1,79 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { faqs } from "@/app/assets/data/faqs";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Questions() {
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+	const questionsRef = useRef<HTMLDivElement>(null);
 
 	const toggleFAQ = (index: number) => {
 		setOpenIndex(openIndex === index ? null : index);
 	};
 
+	useGSAP(
+		() => {
+			const reduceMotion = window.matchMedia(
+				"(prefers-reduced-motion: reduce)",
+			).matches;
+
+			if (reduceMotion) return;
+
+			/* ========================================
+			 * INDIVIDUAL QUESTION ANIMATION
+			 * ======================================== */
+
+			const questionItems = gsap.utils.toArray<HTMLElement>(".faq-question");
+
+			questionItems.forEach((question) => {
+				gsap.fromTo(
+					question,
+					{
+						opacity: 0,
+						y: 35,
+					},
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.55,
+						ease: "power3.out",
+						scrollTrigger: {
+							trigger: question,
+							start: "top 88%",
+							toggleActions: "play none none none",
+							once: true,
+						},
+					},
+				);
+			});
+		},
+		{
+			scope: questionsRef,
+		},
+	);
+
 	return (
-		<div className="grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-x-8">
+		<div
+			ref={questionsRef}
+			className="grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-x-8">
 			{faqs.map((faq, index) => {
 				const isOpen = openIndex === index;
+
 				return (
 					<div
 						key={faq.question}
-						className="overflow-hidden rounded-2xl border-2 border-[#041E50] bg-[#041f5049]">
+						className="faq-question overflow-hidden rounded-2xl border-2 border-[#041E50] bg-[#041f5049]">
 						<button
 							type="button"
 							onClick={() => toggleFAQ(index)}
-							className="flex w-full items-center justify-between px-4 py-4 text-left cursor-pointer"
+							className="flex w-full cursor-pointer items-center justify-between px-4 py-4 text-left"
 							aria-expanded={isOpen}>
 							<span className="font-inter text-sm text-white/90">
 								{faq.question}

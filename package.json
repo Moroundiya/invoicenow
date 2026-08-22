@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
+    "@gsap/react": "^2.1.2",
     "@iconify-react/fluent-mdl2": "^1.0.2",
     "@iconify-react/fontisto": "^1.0.2",
     "@iconify-react/ic": "^1.0.2",

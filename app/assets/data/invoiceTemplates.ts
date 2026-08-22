@@ -10,16 +10,17 @@ export const invoiceTemplates: InvoiceTemplateInfo[] = [
 	{
 		id: "simple",
 		name: "Simple",
-		description: "Clean, professional and easy to read.",
+		description: "Clean, minimal, and perfect for everyday invoices.",
 	},
 	{
 		id: "modern",
 		name: "Modern",
-		description: "Bold, branded and contemporary.",
+		description:
+			"Bold, polished, and make your brand stand out.",
 	},
 	{
 		id: "classic",
 		name: "Classic",
-		description: "Traditional and professional.",
+		description: "Professional, timeless, and built for a traditional look.",
 	},
 ];

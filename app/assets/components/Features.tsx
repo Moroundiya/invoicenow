@@ -1,41 +1,157 @@
 "use client";
 
+import { useRef } from "react";
 import { features } from "@/app/assets/data/featuresData";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Features() {
+	const sectionRef = useRef<HTMLDivElement>(null);
+	const cardsRef = useRef<HTMLDivElement>(null);
+
+	useGSAP(
+		() => {
+			const reduceMotion = window.matchMedia(
+				"(prefers-reduced-motion: reduce)",
+			).matches;
+
+			if (reduceMotion) return;
+
+			/* ========================================
+			 * SECTION TITLE ANIMATION
+			 * ======================================== */
+
+			const titleTimeline = gsap.timeline({
+				scrollTrigger: {
+					trigger: sectionRef.current,
+					start: "top 80%",
+					toggleActions: "play none none none",
+				},
+			});
+
+			gsap.set(".features-title", {
+				opacity: 0,
+				y: 25,
+			});
+
+			gsap.set(".features-subtitle", {
+				opacity: 0,
+				y: 15,
+			});
+
+			titleTimeline
+				.to(".features-title", {
+					opacity: 1,
+					y: 0,
+					duration: 0.7,
+					ease: "power3.out",
+				})
+				.to(
+					".features-subtitle",
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.5,
+						ease: "power3.out",
+					},
+					"-=0.4",
+				);
+
+			/* ========================================
+			 * FEATURE CARDS ANIMATION
+			 * ======================================== */
+			const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
+
+			cards.forEach((card, index) => {
+				gsap.fromTo(
+					card,
+					{
+						opacity: 0,
+						y: 50,
+						scale: 0.96,
+					},
+					{
+						opacity: 1,
+						y: 0,
+						scale: 1,
+						duration: 0.7,
+						delay: index * 0.15,
+						ease: "power3.out",
+
+						scrollTrigger: {
+							trigger: card,
+							start: "top 88%",
+							toggleActions: "play none none none",
+						},
+					},
+				);
+			});
+		},
+		{
+			scope: sectionRef,
+		},
+	);
+
 	return (
 		<div
-			className='w-full px-3 pt-3 pb-4 bg-[url("/background-mobile.png")] lg:bg-[url("/background.png")] bg-cover bg-center bg-no-repeat lg:px-6 xl:px-10'
+			ref={sectionRef}
+			className='w-full bg-[url("/background-mobile.webp")] bg-cover bg-center bg-no-repeat px-3 py-8 lg:bg-[url("/background.webp")] lg:px-6 xl:px-10'
 			id="features">
-			<div className="max-w-7xl mx-auto h-full">
+			<div className="mx-auto h-full max-w-7xl">
+				{/* ========================================
+				 * SECTION TITLE
+				 * ======================================== */}
+
 				<p
-					className="text-[#00B7FF] text-5xl font-italianno text-center lg:text-6xl"
+					className="features-title text-center font-italianno text-5xl text-[#00B7FF] lg:text-6xl"
 					style={{
 						textShadow: "1px 1px 0 #fff",
 					}}>
 					Features
 				</p>
-				<p className="text-white text-center font-regular leading-none lg:text-lg">
+
+				{/* ========================================
+				 * SECTION SUBTITLE
+				 * ======================================== */}
+
+				<p className="features-subtitle text-center font-regular leading-none text-white lg:text-lg">
 					Everything You Need to Get Paid Faster
 				</p>
-				<div className="mt-12 grid md:grid-cols-2 xl:grid-cols-3 gap-6 ">
+
+				{/* ========================================
+				 * FEATURE CARDS
+				 * ======================================== */}
+
+				<div
+					ref={cardsRef}
+					className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 					{features.map((feature) => (
 						<div
 							key={feature.title}
-							className="w-full lg:h-33 rounded-2xl bg-[#041f5049] border-2 border-[#041E50] p-3 justify-center items-center flex space-x-3">
-							<div className="w-1/5 h-full flex justify-center">
-								<div className="relative w-11 h-11 lg:w-12 lg:h-12">
-									<div className="absolute inset-0 translate-y-px translate-x-px rounded-full bg-[#00B7FF]" />
-									<div className="relative w-full h-full rounded-full  flex justify-center items-center bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50]">
+							className="feature-card flex w-full items-center justify-center space-x-3 rounded-2xl border-2 border-[#041E50] bg-[#041f5049] p-3 lg:h-33">
+							{/* ICON */}
+
+							<div className="flex h-full w-1/5 justify-center">
+								<div className="feature-icon relative h-11 w-11 lg:h-12 lg:w-12">
+									<div className="absolute inset-0 translate-x-px translate-y-px rounded-full bg-[#00B7FF]" />
+
+									<div className="relative flex h-full w-full items-center justify-center rounded-full bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50]">
 										{feature.icon}
 									</div>
 								</div>
 							</div>
-							<div className="w-4/5 h-full">
-								<p className="text-3xl text-white font-italianno font-regular lg:text-4xl">
+
+							{/* CONTENT */}
+
+							<div className="h-full w-4/5">
+								<p className="font-regular font-italianno text-3xl text-white lg:text-4xl">
 									{feature.title}
 								</p>
-								<p className="text-[#eeeeee9e] text-sm mt-0 w-full leading-snug font-light">
+
+								<p className="mt-0 w-full text-sm font-light leading-snug text-[#eeeeee9e]">
 									{feature.description}
 								</p>
 							</div>

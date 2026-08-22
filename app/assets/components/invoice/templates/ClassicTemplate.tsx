@@ -145,16 +145,8 @@ function BrandMark({
 				/>
 
 				<div className="mt-[5px] text-right">
-					<div className="text-[18px] font-medium uppercase leading-none tracking-[0.01em] text-[#222]">
+					<div className="text-[20px] font-medium uppercase leading-none tracking-[0.01em] text-[#222]">
 						{brandName}
-					</div>
-
-					<div
-						className="mt-[3px] text-[6px] font-bold uppercase leading-none tracking-[0.26em]"
-						style={{
-							color: primaryColor,
-						}}>
-						YOUR BRAND SLOGAN HERE
 					</div>
 				</div>
 			</div>
@@ -168,7 +160,7 @@ function BrandMark({
 	return (
 		<div className="flex flex-col items-end">
 			<div
-				className="flex h-[42px] w-[42px] items-center justify-center text-[23px] font-bold uppercase leading-none text-white"
+				className="flex h-[42px] w-[42px] items-center justify-center text-[25px] font-bold uppercase leading-none text-white"
 				style={{
 					backgroundColor: primaryColor,
 				}}>
@@ -176,17 +168,11 @@ function BrandMark({
 			</div>
 
 			<div className="mt-[5px] text-right">
-				<div className="text-[18px] font-medium uppercase leading-none tracking-[0.01em] text-[#222]">
+				<div className="text-[20px] font-medium uppercase leading-none tracking-[0.01em] text-[#222]">
 					{brandName}
 				</div>
 
-				<div
-					className="mt-[3px] text-[6px] font-bold uppercase leading-none tracking-[0.26em]"
-					style={{
-						color: primaryColor,
-					}}>
-					YOUR BRAND SLOGAN HERE
-				</div>
+				
 			</div>
 		</div>
 	);
@@ -237,7 +223,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 	const primary = invoice.branding.primaryColor || "#FBC400";
 
 	const rowGray = "#E5E5E5";
-	const border = "#202020";
 	const lightBorder = "#BDBDBD";
 	const muted = "#555555";
 
@@ -256,11 +241,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 	const fromLocation = joinLocation(invoice.from.city, invoice.from.country);
 
-	/*
-	 * InvoiceData does not necessarily have a website
-	 * property, so access it safely.
-	 */
-
 	const fromWithWebsite = invoice.from as typeof invoice.from & {
 		website?: string;
 	};
@@ -269,12 +249,10 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 	const businessName = invoice.from.name?.trim() || "Brand Name";
 
-	/*
-	 * Manual signature
-	 *
-	 * The signature pad stores the drawn signature as an image
-	 * inside invoice.signature.image.
-	 */
+	/* -------------------------------------------------------
+	 * MANUAL SIGNATURE
+	 * ----------------------------------------------------- */
+
 	const hasSignature = !!invoice.signature?.image;
 
 	/* -------------------------------------------------------
@@ -283,14 +261,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 	return (
 		<div className="w-full bg-white text-[#171717]">
-			{/* =================================================
-			    INVOICE PAGE
-
-			    IMPORTANT:
-			    No fixed A4 height.
-			    Height grows naturally with content.
-			================================================= */}
-
 			<div
 				id="classic-invoice"
 				className="
@@ -307,10 +277,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 				style={{
 					borderLeftColor: primary,
 				}}>
-				{/* =================================================
-				    MAIN CONTENT WRAPPER
-				================================================= */}
-
 				<div className="px-[50px]">
 					{/* =============================================
 					    HEADER
@@ -323,12 +289,10 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 							----------------------------------------- */}
 
 							<div>
-								{/* INVOICE TITLE */}
-
 								<h1
 									className="
 										m-0
-										text-[34px]
+										text-[36px]
 										font-bold
 										leading-none
 										tracking-[-1.2px]
@@ -340,43 +304,43 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								{/* INVOICE DETAILS */}
 
 								<div className="mt-[11px]">
-									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+									<div className="grid grid-cols-[55px_8px_1fr] text-[9px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Invoice No</span>
 										<span>:</span>
 										<span>{invoice.invoiceNumber || "123 45698"}</span>
 									</div>
 
-									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+									<div className="grid grid-cols-[55px_8px_1fr] text-[9px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Date</span>
 										<span>:</span>
 										<span>{invoice.issueDate || "01 / 10 / 2020"}</span>
 									</div>
 
-									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+									<div className="grid grid-cols-[55px_8px_1fr] text-[9px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Due Date</span>
 										<span>:</span>
 										<span>{invoice.dueDate || "25 / 05 / 2021"}</span>
 									</div>
 
-									<div className="grid grid-cols-[55px_8px_1fr] text-[7px] leading-[1.8] text-[#222]">
+									{/* <div className="grid grid-cols-[55px_8px_1fr] text-[9px] leading-[1.8] text-[#222]">
 										<span className="font-bold">Account No</span>
 										<span>:</span>
 										<span>{invoice.payment.accountNumber || "242548 85"}</span>
-									</div>
+									</div> */}
 								</div>
 
 								{/* BILL TO */}
 
 								<div className="mt-[24px]">
-									<div className="text-[7px] font-bold uppercase leading-none text-[#222]">
+									<div className="text-[9px] font-bold uppercase leading-none text-[#222]">
 										BILL TO:
 									</div>
 
-									<div className="mt-[3px] text-[7.5px] font-bold uppercase leading-[1.15] text-[#222]">
+									<div className="mt-[3px] text-[9.5px] font-bold uppercase leading-[1.15] text-[#222]">
 										{invoice.billTo.name || "COMPANY NAME"}
 									</div>
 
-									<div className="mt-[2px] max-w-[180px] text-[7px] leading-[1.45] text-[#333]">
+									<div className="mt-[2px] max-w-[180px] text-[9px] leading-[1.45] text-[#333]">
 										{invoice.billTo.address && (
 											<div>{invoice.billTo.address}</div>
 										)}
@@ -404,11 +368,11 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								{/* PAYMENT INFO */}
 
 								<div className="mt-[18px] w-[150px] self-end">
-									<div className="text-[8px] font-bold uppercase leading-none text-[#222]">
+									<div className="text-[10px] font-bold uppercase leading-[1] text-[#222]">
 										PAYMENT INFO
 									</div>
 
-									<div className="mt-[6px] text-[7px] leading-[1.7] text-[#333]">
+									<div className="mt-[6px] text-[9px] leading-[1.7] text-[#333]">
 										{invoice.payment.accountNumber && (
 											<div className="grid grid-cols-[45px_8px_1fr]">
 												<span>Account</span>
@@ -434,6 +398,10 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										{invoice.payment.method && (
 											<div>Method : {invoice.payment.method}</div>
 										)}
+
+										{invoice.payment.sortCode && (
+											<div>SWIFT Code : {invoice.payment.sortCode}</div>
+										)}
 									</div>
 								</div>
 							</div>
@@ -455,7 +423,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								border
 								px-[10px]
 								py-[9px]
-								text-[7.5px]
+								text-[9.5px]
 								font-bold
 								uppercase
 								leading-none
@@ -498,7 +466,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 												border-x
 												border-b
 												px-[10px]
-												text-[8px]
+												text-[10px]
 												text-[#222]
 											"
 											style={{
@@ -519,7 +487,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 												</div>
 
 												{item.details && (
-													<div className="mt-[1px] truncate text-[6px] text-[#777]">
+													<div className="mt-[1px] truncate text-[8px] text-[#777]">
 														{item.details}
 													</div>
 												)}
@@ -547,7 +515,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								})
 							) : (
 								<div
-									className="flex min-h-[120px] items-start justify-center border-x border-b pt-[15px] text-[8px] text-[#999]"
+									className="flex min-h-[120px] items-start justify-center border-x border-b pt-[15px] text-[10px] text-[#999]"
 									style={{
 										borderColor: lightBorder,
 									}}>
@@ -562,86 +530,68 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 					============================================= */}
 
 					<div className="grid grid-cols-[1fr_170px] gap-[38px]">
-						{/* -----------------------------------------
-						    LEFT LOWER SECTION
-						----------------------------------------- */}
+						{/* LEFT LOWER SECTION */}
 
 						<div className="relative min-h-[160px] pt-[30px]">
 							{/* TERMS */}
 
 							<div>
-								<div className="text-[8px] font-bold uppercase leading-none text-[#222]">
-									TERMS & CONDITION
+								<div className="text-[10px] font-bold uppercase leading-none text-[#222]">
+									NOTE:
 								</div>
 
-								<div className="mt-[6px] max-w-[225px] text-[6.5px] leading-[1.7] text-[#444]">
-									{invoice.terms ||
+								<div className="mt-[6px] max-w-[225px] text-[8.5px] leading-[1.7] text-[#444] wrap-break-word">
+									{invoice.notes ||
 										"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt."}
 								</div>
 							</div>
-
-							{/* THANK YOU */}
-
-							<div className="absolute bottom-[12px] left-0 text-[8px] font-bold uppercase leading-none text-[#222]">
-								{invoice.notes || "THANK YOU FOR YOUR BUSINESS"}
-							</div>
 						</div>
 
-						{/* -----------------------------------------
-						    RIGHT LOWER SECTION
-						----------------------------------------- */}
+						{/* RIGHT LOWER SECTION */}
 
 						<div className="relative min-h-[160px]">
 							{/* TOTALS */}
 
 							<div className="mt-[4px] border border-[#D0D0D0] bg-[#E5E5E5] px-[13px] py-[8px]">
-								<div className="flex items-center justify-between text-[7px] leading-[1.65] text-[#222]">
+								<div className="flex items-center justify-between text-[9px] leading-[1.65] text-[#222]">
 									<span>Sub Total</span>
 
 									<span>{formatMoney(subtotal)}</span>
 								</div>
 
 								{discountRate > 0 && (
-									<div className="flex items-center justify-between text-[7px] leading-[1.65] text-[#222]">
+									<div className="flex items-center justify-between text-[9px] leading-[1.65] text-[#222]">
 										<span>Discount {discountRate}%</span>
 
 										<span>-{formatMoney(discountAmount)}</span>
 									</div>
 								)}
 
-								<div className="flex items-center justify-between text-[7px] leading-[1.65] text-[#222]">
+								<div className="flex items-center justify-between text-[9px] leading-[1.65] text-[#222]">
 									<span>Tax {taxRate}%</span>
 
 									<span>{formatMoney(taxAmount)}</span>
 								</div>
 
-								<div className="flex items-center justify-between text-[7.5px] font-bold leading-[1.65] text-[#222]">
+								<div className="flex items-center justify-between text-[9.5px] font-bold leading-[1.65] text-[#222]">
 									<span>Grand Total</span>
 
 									<span>{formatMoney(total)}</span>
 								</div>
 							</div>
 
-							{/* =================================================
-							    MANUAL SIGNATURE
-							================================================= */}
+							{/* MANUAL SIGNATURE */}
 
 							{hasSignature ? (
 								<div className="absolute bottom-[11px] right-[2px] w-[96px] text-center">
 									{/* Signature image */}
 
-									<div className="flex h-[25px] items-end justify-center overflow-hidden">
+									<div className="flex h-[34px] items-end justify-center overflow-hidden">
 										<img
 											src={invoice.signature!.image}
 											alt="Authorized signature"
-											className="mx-auto mb-[2px] max-h-[24px] max-w-[92px] object-contain"
+											className="mx-auto mb-[2px] w-full h-full object-cover"
 											style={{
-												/*
-												 * Force manually drawn signature to black.
-												 *
-												 * This makes the signature clearly visible
-												 * regardless of the drawing-pad color.
-												 */
 												filter: "brightness(0)",
 											}}
 										/>
@@ -658,14 +608,14 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 									{/* Signatory name */}
 
-									<p className="mt-[5px] text-[8px] font-normal text-[#222]">
+									<p className="mt-[5px] text-[10px] font-normal text-[#222]">
 										{invoice.signature?.name || "Authorized Signature"}
 									</p>
 
 									{/* Signatory title */}
 
 									{invoice.signature?.title && (
-										<p className="mt-[1px] text-[6px] text-[#666]">
+										<p className="mt-[1px] text-[8px] text-[#666]">
 											{invoice.signature.title}
 										</p>
 									)}
@@ -679,7 +629,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										}}
 									/>
 
-									<div className="mt-[5px] text-[8px] text-[#222]">
+									<div className="mt-[5px] text-[10px] text-[#222]">
 										Signature
 									</div>
 								</div>
@@ -711,7 +661,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 									<FooterIcon type="email" />
 								</div>
 
-								<div className="mt-[4px] max-w-[135px] break-words text-[6px] leading-[1.2] text-[#222]">
+								<div className="mt-[4px] max-w-[135px] break-words text-[8px] leading-[1.2] text-[#222]">
 									{invoice.from.email || "yourcompanyemail.com"}
 								</div>
 							</div>
@@ -723,7 +673,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 									<FooterIcon type="website" />
 								</div>
 
-								<div className="mt-[4px] max-w-[135px] break-words text-[6px] leading-[1.2] text-[#222]">
+								<div className="mt-[4px] max-w-[135px] break-words text-[8px] leading-[1.2] text-[#222]">
 									{footerWebsite}
 								</div>
 							</div>
@@ -735,7 +685,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 									<FooterIcon type="location" />
 								</div>
 
-								<div className="mt-[4px] max-w-[145px] break-words text-[6px] leading-[1.25] text-[#222]">
+								<div className="mt-[4px] max-w-[145px] break-words text-[8px] leading-[1.25] text-[#222]">
 									{invoice.from.address ||
 										fromLocation ||
 										"123, Lorem Ipsum, Business Address"}
@@ -744,35 +694,6 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 						</div>
 					</div>
 				</div>
-
-				{/* =============================================
-				    BOTTOM ACCENT
-				============================================= */}
-
-				{/* <div
-					className="
-						absolute
-						bottom-0
-						mt-[18px]
-						h-[10px]
-						w-full
-						overflow-hidden
-					"
-					style={{
-						backgroundColor: dark,
-					}}>
-					<div
-						className="
-							absolute
-							left-[49%]
-							top-[-9px]
-							h-[40px]
-							w-[13px]
-							rotate-[31deg]
-							bg-white
-						"
-					/>
-				</div> */}
 			</div>
 		</div>
 	);

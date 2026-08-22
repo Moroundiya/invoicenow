@@ -116,7 +116,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				<div className="relative z-10 flex items-start justify-between gap-8">
 					{/* Invoice information */}
 					<div className="min-w-0 flex-1">
-						<h1 className="text-[30px] font-bold leading-none tracking-tight">
+						<h1 className="text-[32px] font-bold leading-none tracking-tight">
 							INVOICE
 						</h1>
 
@@ -127,7 +127,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							}}
 						/>
 
-						<div className="mt-4 grid grid-cols-[108px_10px_minmax(0,1fr)] gap-x-2 gap-y-1.5 text-[10px] leading-tight">
+						<div className="mt-4 grid grid-cols-[108px_10px_minmax(0,1fr)] gap-x-2 gap-y-1.5 text-[12px] leading-tight">
 							<span className="font-medium text-white/65">Invoice Number</span>
 
 							<span className="text-white/35">:</span>
@@ -173,7 +173,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						) : (
 							<>
 								<div
-									className="flex h-12 w-12 items-center justify-center rounded-xl text-lg font-bold text-white"
+									className="flex h-12 w-12 items-center justify-center rounded-xl text-[20px] font-bold text-white"
 									style={{
 										backgroundColor: primaryColor,
 									}}>
@@ -182,7 +182,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 										: "I"}
 								</div>
 
-								<p className="mt-2 max-w-[175px] break-words text-[18px] font-bold leading-tight">
+								<p className="mt-2 max-w-[175px] break-words text-[20px] font-bold leading-tight">
 									{invoice.from.name || "Your Business"}
 								</p>
 							</>
@@ -222,7 +222,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							</div>
 
 							<span
-								className="text-[9px] font-bold uppercase tracking-wider"
+								className="text-[11px] font-bold uppercase tracking-wider"
 								style={{
 									color: primaryColor,
 								}}>
@@ -230,11 +230,11 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							</span>
 						</div>
 
-						<h2 className="break-words text-[14px] font-bold leading-tight">
+						<h2 className="break-words text-[16px] font-bold leading-tight">
 							{invoice.billTo.name || "Client Name"}
 						</h2>
 
-						<div className="mt-2 space-y-0.5 text-[9px] leading-[1.5] text-slate-500">
+						<div className="mt-2 space-y-0.5 text-[11px] leading-[1.5] text-slate-500">
 							{invoice.billTo.address && (
 								<p className="break-words">{invoice.billTo.address}</p>
 							)}
@@ -295,7 +295,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							</div>
 
 							<span
-								className="text-[9px] font-bold uppercase tracking-wider"
+								className="text-[11px] font-bold uppercase tracking-wider"
 								style={{
 									color: primaryColor,
 								}}>
@@ -304,7 +304,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						</div>
 
 						{hasPaymentInformation ? (
-							<div className="space-y-1 text-[9px]">
+							<div className="space-y-1 text-[11px]">
 								{payment.accountNumber && (
 									<div className="grid grid-cols-[72px_8px_minmax(0,1fr)] gap-1">
 										<span className="text-slate-500">Account</span>
@@ -341,18 +341,19 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									</div>
 								)}
 
-								{swiftCode && (
+								{payment.sortCode && (
 									<div className="grid grid-cols-[72px_8px_minmax(0,1fr)] gap-1">
 										<span className="text-slate-500">SWIFT Code</span>
-
 										<span>:</span>
 
-										<span className="break-words font-medium">{swiftCode}</span>
+										<span className="break-words font-medium">
+											{payment.sortCode}
+										</span>
 									</div>
 								)}
 							</div>
 						) : (
-							<p className="text-[9px] text-slate-400">Payment information</p>
+							<p className="text-[11px] text-slate-400">Payment information</p>
 						)}
 					</div>
 				</div>
@@ -366,7 +367,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				<div className="overflow-hidden rounded-lg border border-slate-300">
 					{/* Header */}
 					<div
-						className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-center text-[8px] font-bold uppercase tracking-wide text-white"
+						className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-center text-[10px] font-bold uppercase tracking-wide text-white"
 						style={{
 							backgroundColor: "#172033",
 						}}>
@@ -394,7 +395,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						invoice.items.map((item, index) => (
 							<div
 								key={item.id}
-								className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-stretch border-t border-slate-200 text-[9px]">
+								className="grid grid-cols-[42px_minmax(0,1fr)_95px_55px_95px] items-stretch border-t border-slate-200 text-[11px]">
 								<div className="flex items-center justify-center border-r border-slate-200 px-2 py-3">
 									{String(index + 1).padStart(2, "0")}
 								</div>
@@ -405,7 +406,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									</p>
 
 									{item.details && (
-										<p className="mt-0.5 break-words text-[8px] leading-3 text-slate-500">
+										<p className="mt-0.5 break-words text-[10px] leading-3 text-slate-500">
 											{item.details}
 										</p>
 									)}
@@ -425,7 +426,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							</div>
 						))
 					) : (
-						<div className="px-4 py-7 text-center text-[9px] text-slate-400">
+						<div className="px-4 py-7 text-center text-[11px] text-slate-400">
 							No invoice items
 						</div>
 					)}
@@ -437,18 +438,18 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 			========================================================= */}
 
 			<div className="px-7 py-6">
-				<div className="grid grid-cols-[1fr_1fr] gap-9">
+				<div className="grid grid-cols-[1fr_1fr] gap-4">
 					{/* Notes / Contact */}
 					<div className="min-w-0">
 						<h3
-							className="text-[10px] font-bold uppercase tracking-wide"
+							className="text-[12px] font-bold uppercase tracking-wide"
 							style={{
 								color: primaryColor,
 							}}>
 							Note:
 						</h3>
 
-						<div className="mt-2 space-y-1 text-[9px] leading-[1.55] text-slate-600">
+						<div className="mt-2 space-y-1 text-[11px] leading-[1.55] text-slate-600">
 							{invoice.notes ? (
 								<p className="whitespace-pre-line break-words">
 									{invoice.notes}
@@ -513,9 +514,26 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 									<path d="m3 7 9 6 9-6" />
 								</svg>
+
+								<svg
+									width="11"
+									height="11"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round">
+									<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+									<circle
+										cx="12"
+										cy="10"
+										r="2.5"
+									/>
+								</svg>
 							</div>
 
-							<div className="min-w-0 space-y-1 text-[9px] leading-[1.5] text-slate-600">
+							<div className="min-w-0 space-y-1 text-[11px] leading-[1.5] text-slate-600">
 								{invoice.from.phone && (
 									<p className="break-words">{invoice.from.phone}</p>
 								)}
@@ -533,12 +551,12 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					<div className="min-w-0">
 						{/* Totals */}
 						<div
-							className="rounded-lg border px-4 py-3.5"
+							className="rounded-lg border px-2 py-3.5"
 							style={{
 								borderColor: "#dbe2ea",
 								backgroundColor: "#fafbfc",
 							}}>
-							<div className="space-y-2 text-[9px]">
+							<div className="space-y-2 text-[11px]">
 								<div className="flex items-center justify-between gap-4">
 									<span className="text-slate-600">Subtotal</span>
 
@@ -573,7 +591,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 							<div className="flex items-center justify-between gap-3">
 								<span
-									className="text-[12px] font-bold uppercase"
+									className="text-[14px] font-bold uppercase"
 									style={{
 										color: primaryColor,
 									}}>
@@ -581,7 +599,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								</span>
 
 								<span
-									className="text-[17px] font-bold"
+									className="text-[19px] font-bold"
 									style={{
 										color: primaryColor,
 									}}>
@@ -596,22 +614,22 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 						{hasSignature && (
 							<div className="mt-8 ml-auto w-full max-w-[220px] text-center">
-								<div className="flex h-14 items-end justify-center">
+								<div className="flex h-20 items-end justify-center">
 									<img
 										src={invoice.signature.image}
 										alt="Authorized signature"
-										className="mx-auto max-h-12 max-w-[180px] object-contain"
+										className="mx-auto h-full w-full object-cover"
 									/>
 								</div>
 
 								<div className="h-px w-full bg-slate-300" />
 
-								<p className="mt-2 text-[10px] font-medium text-slate-700">
+								<p className="mt-2 text-[12px] font-medium text-slate-700">
 									{invoice.signature.name || "Authorized Signature"}
 								</p>
 
 								{invoice.signature.title && (
-									<p className="mt-0.5 text-[8px] text-slate-400">
+									<p className="mt-0.5 text-[10px] text-slate-400">
 										{invoice.signature.title}
 									</p>
 								)}
@@ -638,7 +656,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						}}
 					/>
 
-					<p className="text-[7px] font-medium uppercase tracking-[0.28em] text-white/80">
+					<p className="text-[9px] font-medium uppercase tracking-[0.28em] text-white/80">
 						Thank You!
 					</p>
 
