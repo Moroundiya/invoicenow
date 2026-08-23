@@ -87,12 +87,14 @@ export default function RootLayout({
 					as="image"
 					href="/background.webp"
 					type="image/webp"
+					fetchPriority="high"
 				/>
 				<link
 					rel="preload"
 					as="image"
 					href="/background-mobile.webp"
 					type="image/webp"
+					fetchPriority="high"
 				/>
 			</head>
 			<body className={`${italianno.variable} ${jakarta.variable} antialiased`}>
