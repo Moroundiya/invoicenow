@@ -23,13 +23,6 @@ export default function HowItWorks() {
 
 			const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
-			/* ========================================
-			 * SECTION HEADING
-			 *
-			 * Title + description animate when the
-			 * How It Works section enters the viewport.
-			 * ======================================== */
-
 			const headingTimeline = gsap.timeline({
 				scrollTrigger: {
 					trigger: sectionRef.current,
@@ -68,26 +61,12 @@ export default function HowItWorks() {
 					"-=0.35",
 				);
 
-			/* ========================================
-			 * DESKTOP ANIMATION
-			 *
-			 * Step 1
-			 * Connector 1
-			 * Step 2
-			 * Connector 2
-			 * Step 3
-			 * ======================================== */
-
 			if (isDesktop) {
 				const desktopSteps = gsap.utils.toArray<HTMLElement>(".how-step");
 
 				const desktopConnectors = gsap.utils.toArray<HTMLElement>(
 					".how-desktop-connector",
 				);
-
-				/* ----------------------------------------
-				 * Initial states
-				 * ---------------------------------------- */
 
 				gsap.set(desktopSteps, {
 					opacity: 0,
@@ -99,10 +78,6 @@ export default function HowItWorks() {
 					scaleX: 0,
 					transformOrigin: "left center",
 				});
-
-				/* ----------------------------------------
-				 * Desktop timeline
-				 * ---------------------------------------- */
 
 				const tl = gsap.timeline({
 					scrollTrigger: {
@@ -116,15 +91,11 @@ export default function HowItWorks() {
 					},
 				});
 
-				/* Step 1 */
-
 				tl.to(desktopSteps[0], {
 					opacity: 1,
 					y: 0,
 					duration: 0.45,
 				});
-
-				/* Connector 1 */
 
 				if (desktopConnectors[0]) {
 					tl.to(desktopConnectors[0], {
@@ -135,8 +106,6 @@ export default function HowItWorks() {
 					});
 				}
 
-				/* Step 2 */
-
 				if (desktopSteps[1]) {
 					tl.to(desktopSteps[1], {
 						opacity: 1,
@@ -144,8 +113,6 @@ export default function HowItWorks() {
 						duration: 0.45,
 					});
 				}
-
-				/* Connector 2 */
 
 				if (desktopConnectors[1]) {
 					tl.to(desktopConnectors[1], {
@@ -155,8 +122,6 @@ export default function HowItWorks() {
 						ease: "power2.out",
 					});
 				}
-
-				/* Step 3 */
 
 				if (desktopSteps[2]) {
 					tl.to(desktopSteps[2], {
@@ -168,13 +133,6 @@ export default function HowItWorks() {
 
 				return;
 			}
-
-			/* ========================================
-			 * MOBILE STEPS
-			 *
-			 * Each step appears when it enters
-			 * the viewport.
-			 * ======================================== */
 
 			gsap.utils.toArray<HTMLElement>(".how-step").forEach((step) => {
 				gsap.fromTo(
@@ -197,13 +155,6 @@ export default function HowItWorks() {
 					},
 				);
 			});
-
-			/* ========================================
-			 * MOBILE CONNECTORS
-			 *
-			 * Top → Bottom
-			 * Fade In
-			 * ======================================== */
 
 			gsap.utils
 				.toArray<HTMLElement>(".how-mobile-connector")
@@ -241,10 +192,6 @@ export default function HowItWorks() {
 			className='w-full bg-[url("/background-mobile.webp")] bg-cover bg-center bg-no-repeat px-3 py-8 lg:bg-[url("/background.webp")]'
 			id="how-it-works">
 			<div className="mx-auto h-full lg:w-10/12">
-				{/* ========================================
-				 * SECTION HEADING
-				 * ======================================== */}
-
 				<p
 					className="how-title text-center font-italianno text-5xl text-[#00B7FF] lg:text-6xl"
 					style={{
@@ -257,10 +204,6 @@ export default function HowItWorks() {
 					3 simple steps to get paid
 				</p>
 
-				{/* ========================================
-				 * STEPS
-				 * ======================================== */}
-
 				<section className="w-full px-6 pt-10 lg:pt-20">
 					<div className="mx-auto flex max-w-6xl flex-col md:flex-row md:space-x-5">
 						{steps.map((step, index) => (
@@ -268,10 +211,6 @@ export default function HowItWorks() {
 								key={step.number}
 								className="how-step relative flex min-w-0 flex-1 flex-col items-center">
 								<div className="flex flex-col items-center">
-									{/* ========================================
-									 * STEP IMAGE
-									 * ======================================== */}
-
 									<div className="relative">
 										<div className="flex h-36 w-36 items-center justify-center rounded-full border-2 border-[#041E50] bg-[#041f5049]">
 											<Image
@@ -280,10 +219,6 @@ export default function HowItWorks() {
 												className="h-3/5 w-3/5 object-contain"
 											/>
 										</div>
-
-										{/* ========================================
-										 * STEP NUMBER
-										 * ======================================== */}
 
 										<div className="absolute bottom-0 right-3 flex h-8 w-8 items-center justify-center">
 											<div className="h-full w-full">
@@ -296,10 +231,6 @@ export default function HowItWorks() {
 										</div>
 									</div>
 
-									{/* ========================================
-									 * STEP CONTENT
-									 * ======================================== */}
-
 									<div className="mt-5 max-w-70 text-center lg:mt-7">
 										<h3 className="font-italianno text-4xl text-white">
 											{step.title}
@@ -310,14 +241,6 @@ export default function HowItWorks() {
 										</p>
 									</div>
 								</div>
-
-								{/* ========================================
-								 * DESKTOP CONNECTOR
-								 *
-								 * md:flex = desktop only
-								 * md:hidden is NOT applied here because
-								 * this connector itself is desktop-only.
-								 * ======================================== */}
 
 								{index < steps.length - 1 && (
 									<div
@@ -331,13 +254,6 @@ export default function HowItWorks() {
 										<ArrowRightIcon className="h-7 w-7 shrink-0 text-[#00B7FF]" />
 									</div>
 								)}
-
-								{/* ========================================
-								 * MOBILE CONNECTOR
-								 *
-								 * IMPORTANT:
-								 * hidden on desktop with md:hidden.
-								 * ======================================== */}
 
 								{index < steps.length - 1 && (
 									<div className="how-mobile-connector my-5 flex h-20 flex-col items-center md:hidden">

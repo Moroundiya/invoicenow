@@ -222,10 +222,9 @@ export default function Footer() {
 							max-w-md
 							px-2
 							font-inter
-							text-xs
+							text-sm
 							leading-relaxed
 							text-white/50
-							sm:text-sm
 							lg:my-5
 						">
 						Create professional invoices in seconds. Simple, fast, and built for
@@ -250,14 +249,13 @@ export default function Footer() {
 								px-5
 								py-3
 								font-inter
-								text-xs
+								text-sm
 								font-medium
 								text-[#041636]
 								transition-all
 								duration-300
 								hover:bg-[#00a5e6]
 								hover:shadow-[0_0_20px_rgba(0,183,255,0.25)]
-								sm:text-sm
 								lg:mb-12
 							">
 							Create your first invoice
@@ -285,7 +283,7 @@ export default function Footer() {
 					">
 					{/* COPYRIGHT */}
 
-					<p className="font-inter text-xs text-white/40 sm:text-sm">
+					<p className="font-inter text-sm text-white/40">
 						© {new Date().getFullYear()} InvoiceNow
 					</p>
 
@@ -324,7 +322,7 @@ export default function Footer() {
 						<span
 							className="
 								font-inter
-								text-xs
+								text-sm
 								font-medium
 								text-white/50
 								transition-colors

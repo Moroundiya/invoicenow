@@ -1,19 +1,16 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-
 import Navbar from "../layouts/Navbar";
 import invoice from "@/app/assets/images/invoice.png";
-
 import FlashIcon from "@iconify-react/fontisto/flash";
 import DotFilledIcon from "@iconify-react/radix-icons/dot-filled";
 import ArrowRightLineIcon from "@iconify-react/majesticons/arrow-right-line";
-
+import { gsap } from "gsap";
 import { Check } from "lucide-react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { RoughNotation } from "react-rough-notation";
 
 gsap.registerPlugin(useGSAP);
@@ -34,10 +31,6 @@ export default function HeroSection() {
 					ease: "power3.out",
 				},
 			});
-
-			/* ================================
-			 * INITIAL STATES
-			 * ================================ */
 
 			gsap.set(".hero-badge", {
 				opacity: 0,
@@ -73,11 +66,6 @@ export default function HeroSection() {
 				y: 15,
 			});
 
-			/* ================================
-			 * HERO TIMELINE
-			 * ================================ */
-
-			// Badge
 			tl.to(".hero-badge", {
 				opacity: 1,
 				y: 0,
@@ -85,7 +73,6 @@ export default function HeroSection() {
 				duration: 0.55,
 			})
 
-				// TITLE — CHARACTER BY CHARACTER
 				.to(
 					".hero-char",
 					{
@@ -99,7 +86,6 @@ export default function HeroSection() {
 					"-=0.15",
 				)
 
-				// DESCRIPTION — WORD BY WORD
 				.to(
 					".hero-description-word",
 					{
@@ -113,7 +99,6 @@ export default function HeroSection() {
 					"-=0.25",
 				)
 
-				// BENEFITS — STAGGER FROM LEFT
 				.to(
 					".hero-benefit",
 					{
@@ -126,7 +111,6 @@ export default function HeroSection() {
 					"-=0.5",
 				)
 
-				// CTA
 				.to(
 					".hero-cta",
 					{
@@ -138,7 +122,6 @@ export default function HeroSection() {
 					"-=0.25",
 				)
 
-				// INVOICE — ZOOM OUT
 				.to(
 					".hero-invoice",
 					{
@@ -152,10 +135,6 @@ export default function HeroSection() {
 					"-=0.65",
 				);
 
-			/* ================================
-			 * INVOICE FLOAT
-			 * ================================ */
-
 			gsap.to(".hero-invoice", {
 				y: -7,
 				duration: 3.5,
@@ -167,10 +146,6 @@ export default function HeroSection() {
 		},
 		{ scope: heroRef },
 	);
-
-	/* ================================
-	 * CTA HOVER
-	 * ================================ */
 
 	const handleButtonEnter = (element: HTMLElement) => {
 		gsap.to(element, {
@@ -200,10 +175,6 @@ export default function HeroSection() {
 		});
 	};
 
-	/* ================================
-	 * TITLE
-	 * ================================ */
-
 	const title = "Create Professional\nInvoices in";
 
 	return (
@@ -213,13 +184,7 @@ export default function HeroSection() {
 			<Navbar />
 
 			<div className="mx-auto mt-18 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
-				{/* ================================
-				 * LEFT CONTENT
-				 * ================================ */}
-
 				<div className="flex w-full flex-col items-start justify-center">
-					{/* BADGE */}
-
 					<div className="hero-badge mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 font-semibold text-[#041636] lg:px-3">
 						<FlashIcon className="h-2.5 text-[#041636] md:h-3.5" />
 
@@ -235,8 +200,6 @@ export default function HeroSection() {
 							<p>Get paid</p>
 						</div>
 					</div>
-
-					{/* TITLE */}
 
 					<p
 						className="max-w-3xl text-[2.5rem] font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]"
@@ -255,10 +218,9 @@ export default function HeroSection() {
 									</span>
 								))}
 
-								{/* SECONDS — ONLY ON SECOND LINE */}
 								{lineIndex === 1 && (
 									<span
-										className="hero-char ms-2 inline-block font-italianno text-[2.8rem] text-[#00B7FF] sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
+										className="hero-char ms-4 inline-block font-italianno text-[2.8rem] text-[#00B7FF] sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
 										style={{
 											textShadow: "1px .5px 0 #fff",
 										}}>
@@ -278,8 +240,6 @@ export default function HeroSection() {
 						))}
 					</p>
 
-					{/* DESCRIPTION */}
-
 					<p className="mt-5 w-full max-w-2xl font-light text-white/70 sm:text-base lg:w-10/12 lg:leading-6">
 						{"InvoiceNow helps freelancers and businesses create, customize, download professional invoices effortlessly and get paid faster, without the stress or hassle."
 							.split(" ")
@@ -291,8 +251,6 @@ export default function HeroSection() {
 								</span>
 							))}
 					</p>
-
-					{/* BENEFITS */}
 
 					<div className="mt-5 flex w-full flex-col gap-x-3 gap-y-2 text-white/70 lg:flex-row lg:items-center">
 						<div className="hero-benefit flex items-center gap-2">
@@ -333,8 +291,6 @@ export default function HeroSection() {
 						</div>
 					</div>
 
-					{/* CTA */}
-
 					<div className="hero-cta mt-8 w-full sm:mt-10">
 						<Link
 							href="/create"
@@ -345,18 +301,8 @@ export default function HeroSection() {
 
 							<ArrowRightLineIcon className="hero-arrow h-5 text-white" />
 						</Link>
-
-						{/* <Link
-							href="#features"
-							className="font-semibold text-[#00B7FF] transition-colors duration-300 hover:text-white lg:text-base">
-							Explore Features
-						</Link> */}
 					</div>
 				</div>
-
-				{/* ================================
-				 * INVOICE
-				 * ================================ */}
 
 				<div className="flex w-full items-center justify-center">
 					<div className="hero-invoice">

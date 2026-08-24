@@ -19,10 +19,6 @@ export default function Templates() {
 
 			if (reduceMotion) return;
 
-			/* ========================================
-			 * INITIAL STATES
-			 * ======================================== */
-
 			gsap.set(".templates-title", {
 				opacity: 0,
 				y: 30,
@@ -39,10 +35,6 @@ export default function Templates() {
 				scale: 0.97,
 			});
 
-			/* ========================================
-			 * MAIN ANIMATION
-			 * ======================================== */
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: sectionRef.current,
@@ -55,19 +47,11 @@ export default function Templates() {
 				},
 			});
 
-			/* ========================================
-			 * TITLE
-			 * ======================================== */
-
 			tl.to(".templates-title", {
 				opacity: 1,
 				y: 0,
 				duration: 0.65,
 			});
-
-			/* ========================================
-			 * DESCRIPTION
-			 * ======================================== */
 
 			tl.to(
 				".templates-description",
@@ -78,10 +62,6 @@ export default function Templates() {
 				},
 				"-=0.35",
 			);
-
-			/* ========================================
-			 * CAROUSEL
-			 * ======================================== */
 
 			tl.to(
 				".templates-carousel",
@@ -105,10 +85,6 @@ export default function Templates() {
 			ref={sectionRef}
 			className='w-full bg-[url("/background-mobile.webp")] bg-cover bg-center bg-no-repeat px-3 py-8 lg:bg-[url("/background.webp")]'>
 			<div className="mx-auto h-full max-w-7xl">
-				{/* ========================================
-				 * TITLE
-				 * ======================================== */}
-
 				<p
 					className="templates-title text-center font-italianno text-5xl text-[#00B7FF] lg:text-6xl"
 					style={{
@@ -117,17 +93,9 @@ export default function Templates() {
 					Custom Templates
 				</p>
 
-				{/* ========================================
-				 * DESCRIPTION
-				 * ======================================== */}
-
 				<p className="templates-description mx-auto mt-1 mb-4 w-10/12 text-center font-regular leading-tight text-white md:w-2/5 lg:text-lg">
 					Choose from our collections of professional invoice templates.
 				</p>
-
-				{/* ========================================
-				 * CAROUSEL
-				 * ======================================== */}
 
 				<section className="templates-carousel mt-7 h-auto w-full xl:pt-10">
 					<Carousel />

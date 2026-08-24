@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { features } from "@/app/assets/data/featuresData";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { features } from "@/app/assets/data/featuresData";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -19,10 +19,6 @@ export default function Features() {
 			).matches;
 
 			if (reduceMotion) return;
-
-			/* ========================================
-			 * SECTION TITLE ANIMATION
-			 * ======================================== */
 
 			const titleTimeline = gsap.timeline({
 				scrollTrigger: {
@@ -60,9 +56,6 @@ export default function Features() {
 					"-=0.4",
 				);
 
-			/* ========================================
-			 * FEATURE CARDS ANIMATION
-			 * ======================================== */
 			const cards = gsap.utils.toArray<HTMLElement>(".feature-card");
 
 			cards.forEach((card, index) => {
@@ -101,10 +94,6 @@ export default function Features() {
 			className='w-full bg-[url("/background-mobile.webp")] bg-cover bg-center bg-no-repeat px-3 py-8 lg:bg-[url("/background.webp")] lg:px-6 xl:px-10'
 			id="features">
 			<div className="mx-auto h-full max-w-7xl">
-				{/* ========================================
-				 * SECTION TITLE
-				 * ======================================== */}
-
 				<p
 					className="features-title text-center font-italianno text-5xl text-[#00B7FF] lg:text-6xl"
 					style={{
@@ -113,17 +102,9 @@ export default function Features() {
 					Features
 				</p>
 
-				{/* ========================================
-				 * SECTION SUBTITLE
-				 * ======================================== */}
-
 				<p className="features-subtitle text-center font-regular leading-none text-white lg:text-lg">
 					Everything You Need to Get Paid Faster
 				</p>
-
-				{/* ========================================
-				 * FEATURE CARDS
-				 * ======================================== */}
 
 				<div
 					ref={cardsRef}
@@ -132,8 +113,6 @@ export default function Features() {
 						<div
 							key={feature.title}
 							className="feature-card flex w-full items-center justify-center space-x-3 rounded-2xl border-2 border-[#041E50] bg-[#041f5049] py-5 px-3 lg:p-3 lg:h-33">
-							{/* ICON */}
-
 							<div className="flex h-full w-1/5 justify-center">
 								<div className="feature-icon relative h-11 w-11 lg:h-12 lg:w-12">
 									<div className="absolute inset-0 translate-x-px translate-y-px rounded-full bg-[#00B7FF]" />
@@ -143,8 +122,6 @@ export default function Features() {
 									</div>
 								</div>
 							</div>
-
-							{/* CONTENT */}
 
 							<div className="h-full w-4/5">
 								<p className="font-regular font-italianno text-3xl text-white lg:text-4xl">

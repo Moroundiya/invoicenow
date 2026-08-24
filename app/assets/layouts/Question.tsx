@@ -75,7 +75,7 @@ export default function Questions() {
 							onClick={() => toggleFAQ(index)}
 							className="flex w-full cursor-pointer items-center justify-between px-4 py-4 text-left"
 							aria-expanded={isOpen}>
-							<span className="font-inter text-sm text-white/90">
+							<span className="font-inter  text-white/90">
 								{faq.question}
 							</span>
 
@@ -93,7 +93,7 @@ export default function Questions() {
 									: "grid-rows-[0fr] opacity-0"
 							}`}>
 							<div className="overflow-hidden">
-								<p className="px-4 pb-4 text-sm leading-snug text-white/50">
+								<p className="px-4 pb-4 leading-snug text-white/50">
 									{faq.answer}
 								</p>
 							</div>

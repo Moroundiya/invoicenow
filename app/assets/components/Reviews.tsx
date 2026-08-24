@@ -19,10 +19,6 @@ export default function Reviews() {
 
 			if (reduceMotion) return;
 
-			/* ========================================
-			 * INITIAL STATES
-			 * ======================================== */
-
 			gsap.set(".reviews-title", {
 				opacity: 0,
 				y: 30,
@@ -39,10 +35,6 @@ export default function Reviews() {
 				scale: 0.97,
 			});
 
-			/* ========================================
-			 * MAIN TIMELINE
-			 * ======================================== */
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: sectionRef.current,
@@ -55,19 +47,11 @@ export default function Reviews() {
 				},
 			});
 
-			/* ========================================
-			 * TITLE
-			 * ======================================== */
-
 			tl.to(".reviews-title", {
 				opacity: 1,
 				y: 0,
 				duration: 0.65,
 			});
-
-			/* ========================================
-			 * DESCRIPTION
-			 * ======================================== */
 
 			tl.to(
 				".reviews-description",
@@ -78,10 +62,6 @@ export default function Reviews() {
 				},
 				"-=0.35",
 			);
-
-			/* ========================================
-			 * TESTIMONIALS
-			 * ======================================== */
 
 			tl.to(
 				".reviews-testimonials",
@@ -106,10 +86,6 @@ export default function Reviews() {
 			className='w-full bg-[url("/background-mobile.webp")] bg-cover bg-center bg-no-repeat py-8 lg:bg-[url("/background.webp")]'
 			id="testimonials">
 			<div className="mx-auto h-full w-full sm:py-5">
-				{/* ========================================
-				 * TITLE
-				 * ======================================== */}
-
 				<p
 					className="reviews-title text-center font-italianno text-5xl text-[#00B7FF] lg:text-6xl"
 					style={{
@@ -118,17 +94,9 @@ export default function Reviews() {
 					Reviews
 				</p>
 
-				{/* ========================================
-				 * DESCRIPTION
-				 * ======================================== */}
-
 				<p className="reviews-description mx-auto w-10/12 text-center font-regular leading-none text-white lg:w-full lg:text-lg">
 					Loved by thousands of freelancers and professionals
 				</p>
-
-				{/* ========================================
-				 * TESTIMONIALS
-				 * ======================================== */}
 
 				<section className="reviews-testimonials mt-5 w-full py-3 lg:mt-7">
 					<Testimonials />

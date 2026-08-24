@@ -97,7 +97,7 @@ export default function Faq() {
 				 * Each question handles its own animation.
 				 * ======================================== */}
 
-				<section className="mt-7 h-135 w-full md:h-90 lg:mt-12 lg:px-6">
+				<section className="mt-7 h-150 w-full md:h-90 lg:mt-12 lg:px-6">
 					<Questions />
 				</section>
 			</div>
