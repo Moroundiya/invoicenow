@@ -113,8 +113,6 @@ export default function HeroSection() {
 					"-=0.25",
 				)
 
-				// INVOICE — ZOOM OUT
-
 				// BENEFITS — STAGGER FROM LEFT
 				.to(
 					".hero-benefit",
@@ -140,6 +138,7 @@ export default function HeroSection() {
 					"-=0.25",
 				)
 
+				// INVOICE — ZOOM OUT
 				.to(
 					".hero-invoice",
 					{
@@ -152,7 +151,6 @@ export default function HeroSection() {
 					},
 					"-=0.65",
 				);
-				
 
 			/* ================================
 			 * INVOICE FLOAT
@@ -203,10 +201,10 @@ export default function HeroSection() {
 	};
 
 	/* ================================
-	 * TITLE CHARACTERS
+	 * TITLE
 	 * ================================ */
 
-	const title = "Create Professional Invoices in";
+	const title = "Create Professional\nInvoices in";
 
 	return (
 		<div
@@ -222,10 +220,10 @@ export default function HeroSection() {
 				<div className="flex w-full flex-col items-start justify-center">
 					{/* BADGE */}
 
-					<div className="hero-badge mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 text-sm font-semibold text-[#041636] lg:px-3">
+					<div className="hero-badge mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 font-semibold text-[#041636] lg:px-3">
 						<FlashIcon className="h-2.5 text-[#041636] md:h-3.5" />
 
-						<div className="flex items-center justify-center space-x-0.5 text-[9px] md:text-xs lg:text-sm">
+						<div className="flex items-center justify-center space-x-0.5 text-[11px] md:text-xs lg:text-sm">
 							<p>Create</p>
 
 							<DotFilledIcon className="h-2.5 md:h-3.5 lg:h-4" />
@@ -241,38 +239,48 @@ export default function HeroSection() {
 					{/* TITLE */}
 
 					<p
-						className="max-w-3xl text-[2.8rem] font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]"
+						className="max-w-3xl text-[2.5rem] font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]"
 						style={{
 							textShadow: "1.5px 1.5px 0 #00B7FF",
 						}}>
-						{title.split("").map((char, index) => (
+						{title.split("\n").map((line, lineIndex) => (
 							<span
-								key={`${char}-${index}`}
-								className="hero-char inline-block">
-								{char === " " ? "\u00A0" : char}
+								key={lineIndex}
+								className="block">
+								{line.split("").map((char, charIndex) => (
+									<span
+										key={`${lineIndex}-${char}-${charIndex}`}
+										className="hero-char inline-block">
+										{char === " " ? "\u00A0" : char}
+									</span>
+								))}
+
+								{/* SECONDS — ONLY ON SECOND LINE */}
+								{lineIndex === 1 && (
+									<span
+										className="hero-char ms-2 inline-block font-italianno text-[2.8rem] text-[#00B7FF] sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
+										style={{
+											textShadow: "1px .5px 0 #fff",
+										}}>
+										<RoughNotation
+											type="circle"
+											animationDelay={2300}
+											color="#00B7FF"
+											strokeWidth={2}
+											padding={5}
+											animate
+											show>
+											Seconds
+										</RoughNotation>
+									</span>
+								)}
 							</span>
-						))}{" "}
-						<span
-							className="hero-char ms-2 inline-block font-italianno text-[2.8rem] text-[#00B7FF] sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
-							style={{
-								textShadow: "1.5px 1.5px 0 #fff",
-							}}>
-							<RoughNotation
-								type="circle"
-								animationDelay={2300}
-								color="#00B7FF"
-								strokeWidth={2}
-								padding={5}
-								animate
-								show>
-								Seconds
-							</RoughNotation>
-						</span>
+						))}
 					</p>
 
 					{/* DESCRIPTION */}
 
-					<p className="mt-5 w-full max-w-2xl text-sm font-light text-white/70 sm:text-base lg:w-10/12 lg:leading-6">
+					<p className="mt-5 w-full max-w-2xl font-light text-white/70 sm:text-base lg:w-10/12 lg:leading-6">
 						{"InvoiceNow helps freelancers and businesses create, customize, download professional invoices effortlessly and get paid faster, without the stress or hassle."
 							.split(" ")
 							.map((word, index) => (
@@ -286,7 +294,7 @@ export default function HeroSection() {
 
 					{/* BENEFITS */}
 
-					<div className="mt-5 flex w-full flex-col gap-x-3 gap-y-2 text-sm text-white/70 lg:flex-row lg:items-center">
+					<div className="mt-5 flex w-full flex-col gap-x-3 gap-y-2 text-white/70 lg:flex-row lg:items-center">
 						<div className="hero-benefit flex items-center gap-2">
 							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
@@ -327,22 +335,22 @@ export default function HeroSection() {
 
 					{/* CTA */}
 
-					<div className="hero-cta mt-8 flex w-full flex-row items-center gap-5 sm:mt-10 sm:gap-8">
+					<div className="hero-cta mt-8 w-full sm:mt-10">
 						<Link
 							href="/create"
 							onMouseEnter={(e) => handleButtonEnter(e.currentTarget)}
 							onMouseLeave={(e) => handleButtonLeave(e.currentTarget)}
-							className="group flex items-center justify-center space-x-1 rounded-xl bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-3 py-3 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(0,183,255,0.08)] transition-shadow duration-300 hover:shadow-[0_10px_35px_rgba(0,183,255,0.2)] sm:w-auto lg:space-x-2 lg:px-5 lg:text-base">
+							className="group max-w-fit flex items-center justify-center space-x-1 rounded-xl bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-3 py-3 font-semibold text-white shadow-[0_8px_30px_rgba(0,183,255,0.08)] transition-shadow duration-300 hover:shadow-[0_10px_35px_rgba(0,183,255,0.2)] sm:w-auto lg:space-x-2 lg:px-5 lg:text-base">
 							<span>Create your first invoice</span>
 
 							<ArrowRightLineIcon className="hero-arrow h-5 text-white" />
 						</Link>
 
-						<Link
+						{/* <Link
 							href="#features"
-							className="text-sm font-semibold text-[#00B7FF] transition-colors duration-300 hover:text-white lg:text-base">
+							className="font-semibold text-[#00B7FF] transition-colors duration-300 hover:text-white lg:text-base">
 							Explore Features
-						</Link>
+						</Link> */}
 					</div>
 				</div>
 
@@ -356,7 +364,7 @@ export default function HeroSection() {
 							src={invoice}
 							alt="InvoiceNow invoice preview"
 							priority
-							className="h-auto w-[85%] object-contain mx-auto sm:w-[80%] lg:w-132 lg:max-w-none"
+							className="mx-auto h-auto w-[95%] object-contain sm:w-[80%] lg:w-132 lg:max-w-none"
 						/>
 					</div>
 				</div>
