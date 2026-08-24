@@ -1,19 +1,15 @@
 "use client";
 
-import { useState } from "react";
-
+import Image from "next/image";
+import Link from "next/link";
 import InvoiceStepper from "@/app/assets/components/invoice/InvoiceStepper";
 import InvoiceWorkspace from "@/app/assets/components/invoice/InvoiceWorkspace";
-
+import { useState } from "react";
 import type {
 	InvoiceData,
 	InvoiceTemplate,
 } from "@/app/assets/types/invoiceType";
-
 import { defaultInvoice } from "@/app/assets/data/defaultInvoice";
-import Link from "next/link";
-import Image from "next/image";
-import Footer from "../../components/Footer";
 
 export type InvoiceStep = 1 | 2 | 3 | 4 | 5;
 
@@ -58,9 +54,6 @@ export default function CreateInvoiceLayout() {
 		});
 	};
 
-	/*
-	 * Start a completely fresh invoice.
-	 */
 	const handleCreateAnother = () => {
 		setInvoice(createFreshInvoice());
 		setCurrentStep(1);
@@ -81,12 +74,10 @@ export default function CreateInvoiceLayout() {
 					</Link>
 				</header>
 
-				{/* Stepper */}
 				<div className="mb-6">
 					<InvoiceStepper currentStep={currentStep} />
 				</div>
 
-				{/* Workspace */}
 				<InvoiceWorkspace
 					currentStep={currentStep}
 					invoice={invoice}
@@ -97,8 +88,6 @@ export default function CreateInvoiceLayout() {
 					onCreateAnother={handleCreateAnother}
 				/>
 			</div>
-
-			{/* <Footer /> */}
 		</div>
 	);
 }

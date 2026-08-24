@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Menu, X } from "lucide-react";
+import { useRef, useState } from "react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -20,10 +20,6 @@ export default function Navbar() {
 		setIsOpen(false);
 	};
 
-	/* ========================================
-	 * NAVBAR ENTRANCE ANIMATION
-	 * ======================================== */
-
 	useGSAP(
 		() => {
 			const reduceMotion = window.matchMedia(
@@ -37,8 +33,6 @@ export default function Navbar() {
 					ease: "power3.out",
 				},
 			});
-
-			/* Initial states */
 
 			gsap.set(".navbar-logo", {
 				opacity: 0,
@@ -60,16 +54,12 @@ export default function Navbar() {
 				scale: 0.8,
 			});
 
-			/* Mobile button entrance */
-
 			gsap.from(menuIconRef.current, {
 				scale: 2,
 				opacity: 0,
 				duration: 1,
 				ease: "power3.out",
 			});
-
-			/* Animation sequence */
 
 			tl.to(".navbar-logo", {
 				opacity: 1,
@@ -112,10 +102,6 @@ export default function Navbar() {
 		{ scope: navRef },
 	);
 
-	/* ========================================
-	 * MOBILE MENU SLIDE ANIMATION
-	 * ======================================== */
-
 	useGSAP(
 		() => {
 			const menu = mobileMenuRef.current;
@@ -125,8 +111,6 @@ export default function Navbar() {
 			gsap.killTweensOf(menu);
 
 			if (isOpen) {
-				/* OPEN */
-
 				gsap.set(menu, {
 					visibility: "visible",
 					opacity: 1,
@@ -139,8 +123,6 @@ export default function Navbar() {
 					ease: "power3.out",
 				});
 			} else {
-				/* CLOSE */
-
 				gsap.to(menu, {
 					y: -20,
 					opacity: 0,
@@ -160,10 +142,6 @@ export default function Navbar() {
 		},
 	);
 
-	/* ========================================
-	 * MOBILE MENU BUTTON
-	 * ======================================== */
-
 	const toggleMenu = () => {
 		setIsOpen((previous) => !previous);
 	};
@@ -173,10 +151,6 @@ export default function Navbar() {
 			ref={navRef}
 			className="relative z-50 mx-auto w-full">
 			<div className="flex items-center justify-between">
-				{/* ========================================
-				 * LOGO
-				 * ======================================== */}
-
 				<Link
 					href="/"
 					onClick={closeMenu}
@@ -189,10 +163,6 @@ export default function Navbar() {
 						className="h-auto w-45 sm:w-53"
 					/>
 				</Link>
-
-				{/* ========================================
-				 * DESKTOP NAVIGATION
-				 * ======================================== */}
 
 				<div className="hidden items-center gap-8 lg:flex">
 					<Link
@@ -217,19 +187,11 @@ export default function Navbar() {
 					</Link>
 				</div>
 
-				{/* ========================================
-				 * DESKTOP CTA
-				 * ======================================== */}
-
 				<Link
 					href="/create"
 					className="navbar-cta hidden rounded-sm bg-[#00B7FF] px-4 py-1.5 text-sm font-semibold text-[#041636] transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(0,183,255,0.25)] lg:flex">
 					Get Started
 				</Link>
-
-				{/* ========================================
-				 * MOBILE MENU BUTTON
-				 * ======================================== */}
 
 				<button
 					ref={menuIconRef}
@@ -245,13 +207,6 @@ export default function Navbar() {
 					)}
 				</button>
 			</div>
-
-			{/* ========================================
-			 * MOBILE MENU
-			 *
-			 * Only the parent container is animated.
-			 * Children remain completely static.
-			 * ======================================== */}
 
 			<div
 				ref={mobileMenuRef}

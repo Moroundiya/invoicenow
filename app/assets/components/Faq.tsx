@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import Questions from "../layouts/Question";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Questions from "../layouts/Question";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -18,10 +18,6 @@ export default function Faq() {
 			).matches;
 
 			if (reduceMotion) return;
-
-			/* ========================================
-			 * TITLE + DESCRIPTION
-			 * ======================================== */
 
 			const tl = gsap.timeline({
 				scrollTrigger: {
@@ -70,10 +66,6 @@ export default function Faq() {
 			ref={sectionRef}
 			className='w-full bg-[url("/background-mobile.webp")] bg-cover bg-center bg-no-repeat px-3 py-8 lg:bg-[url("/background.webp")]'>
 			<div className="mx-auto h-full max-w-6xl">
-				{/* ========================================
-				 * TITLE
-				 * ======================================== */}
-
 				<p
 					className="faq-title text-center font-italianno text-5xl text-[#00B7FF] lg:text-6xl"
 					style={{
@@ -82,20 +74,9 @@ export default function Faq() {
 					FAQ
 				</p>
 
-				{/* ========================================
-				 * DESCRIPTION
-				 * ======================================== */}
-
 				<p className="faq-description text-center font-regular leading-none text-white lg:text-lg">
 					Frequently asked questions
 				</p>
-
-				{/* ========================================
-				 * QUESTIONS
-				 *
-				 * NO GSAP ANIMATION HERE.
-				 * Each question handles its own animation.
-				 * ======================================== */}
 
 				<section className="mt-7 h-150 w-full md:h-90 lg:mt-12 lg:px-6">
 					<Questions />

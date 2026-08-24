@@ -30,10 +30,6 @@ export default function Footer() {
 
 			if (reduceMotion) return;
 
-			/* ========================================
-			 * INITIAL STATES
-			 * ======================================== */
-
 			gsap.set(".footer-logo", {
 				opacity: 0,
 				y: 25,
@@ -60,10 +56,6 @@ export default function Footer() {
 				y: 20,
 			});
 
-			/* ========================================
-			 * FOOTER TIMELINE
-			 * ======================================== */
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: footerRef.current,
@@ -76,20 +68,12 @@ export default function Footer() {
 				},
 			});
 
-			/* ========================================
-			 * LOGO
-			 * ======================================== */
-
 			tl.to(".footer-logo", {
 				opacity: 1,
 				y: 0,
 				scale: 1,
 				duration: 0.7,
 			});
-
-			/* ========================================
-			 * DESCRIPTION
-			 * ======================================== */
 
 			tl.to(
 				".footer-description",
@@ -100,10 +84,6 @@ export default function Footer() {
 				},
 				"-=0.35",
 			);
-
-			/* ========================================
-			 * CTA
-			 * ======================================== */
 
 			if (pathname === "/") {
 				tl.to(
@@ -117,10 +97,6 @@ export default function Footer() {
 				);
 			}
 
-			/* ========================================
-			 * BOTTOM CONTENT
-			 * ======================================== */
-
 			tl.to(
 				".footer-divider-content",
 				{
@@ -130,10 +106,6 @@ export default function Footer() {
 				},
 				"-=0.15",
 			);
-
-			/* ========================================
-			 * BACK TO TOP
-			 * ======================================== */
 
 			tl.to(
 				".footer-top-button",
@@ -172,10 +144,6 @@ export default function Footer() {
 				lg:pt-5
 			">
 			<div className="mx-auto w-full max-w-7xl">
-				{/* ========================================
-				 * MAIN FOOTER CONTENT
-				 * ======================================== */}
-
 				<div
 					className="
 						flex
@@ -186,10 +154,6 @@ export default function Footer() {
 						border-white/10
 						text-center
 					">
-					{/* ========================================
-					 * LOGO
-					 * ======================================== */}
-
 					<Link
 						href="/"
 						className="footer-logo inline-block">
@@ -210,10 +174,6 @@ export default function Footer() {
 						/>
 					</Link>
 
-					{/* ========================================
-					 * DESCRIPTION
-					 * ======================================== */}
-
 					<p
 						className="
 							footer-description
@@ -230,10 +190,6 @@ export default function Footer() {
 						Create professional invoices in seconds. Simple, fast, and built for
 						freelancers and businesses.
 					</p>
-
-					{/* ========================================
-					 * CTA
-					 * ======================================== */}
 
 					{pathname === "/" && (
 						<Link
@@ -264,14 +220,9 @@ export default function Footer() {
 					)}
 				</div>
 
-				{/* ========================================
-				 * BOTTOM FOOTER
-				 * ======================================== */}
-
 				<div
 					className="
-						footer-divider-content
-						relative
+						footer-divider-content relative
 						flex
 						w-full
 						flex-col
@@ -281,15 +232,9 @@ export default function Footer() {
 						text-center
 						sm:py-6
 					">
-					{/* COPYRIGHT */}
-
 					<p className="font-inter text-sm text-white/40">
 						© {new Date().getFullYear()} InvoiceNow
 					</p>
-
-					{/* ========================================
-					 * BACK TO TOP
-					 * ======================================== */}
 
 					<button
 						type="button"

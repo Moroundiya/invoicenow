@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import Testimonials from "../layouts/Marquee";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Testimonials from "../layouts/Marquee";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 

@@ -26,10 +26,6 @@ export default function Questions() {
 
 			if (reduceMotion) return;
 
-			/* ========================================
-			 * INDIVIDUAL QUESTION ANIMATION
-			 * ======================================== */
-
 			const questionItems = gsap.utils.toArray<HTMLElement>(".faq-question");
 
 			questionItems.forEach((question) => {
@@ -75,9 +71,7 @@ export default function Questions() {
 							onClick={() => toggleFAQ(index)}
 							className="flex w-full cursor-pointer items-center justify-between px-4 py-4 text-left"
 							aria-expanded={isOpen}>
-							<span className="font-inter  text-white/90">
-								{faq.question}
-							</span>
+							<span className="font-inter  text-white/90">{faq.question}</span>
 
 							<ChevronDown
 								className={`h-4 w-4 shrink-0 text-white/70 transition-transform duration-300 ${

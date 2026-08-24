@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 import classic from "@/app/assets/images/classic.png";
 import modern from "@/app/assets/images/modern.png";
 import simple from "@/app/assets/images/simple.png";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 
 import "swiper/css";
 
