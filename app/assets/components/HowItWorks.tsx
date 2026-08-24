@@ -305,7 +305,7 @@ export default function HowItWorks() {
 											{step.title}
 										</h3>
 
-										<p className="text-sm leading-snug text-white/60">
+										<p className="leading-snug text-white/60">
 											{step.description}
 										</p>
 									</div>

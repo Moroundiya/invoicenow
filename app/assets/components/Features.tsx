@@ -131,7 +131,7 @@ export default function Features() {
 					{features.map((feature) => (
 						<div
 							key={feature.title}
-							className="feature-card flex w-full items-center justify-center space-x-3 rounded-2xl border-2 border-[#041E50] bg-[#041f5049] p-3 lg:h-33">
+							className="feature-card flex w-full items-center justify-center space-x-3 rounded-2xl border-2 border-[#041E50] bg-[#041f5049] py-5 px-3 lg:p-3 lg:h-33">
 							{/* ICON */}
 
 							<div className="flex h-full w-1/5 justify-center">

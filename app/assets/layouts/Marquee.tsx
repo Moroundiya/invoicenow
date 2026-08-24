@@ -88,13 +88,13 @@ function TestimonialCard({
 					<h3 className="font-italianno text-xl leading-[1] text-white sm:text-xl">
 						{testimonial.name}
 					</h3>
-					<p className="font-inter text-[10px] text-gray-500 sm:text-xs">
+					<p className="font-inter text-xs text-gray-500 sm:text-xs">
 						{testimonial.role}
 					</p>
 				</div>
 			</div>
 			<div className="my-3 h-px bg-[#062764]" />
-			<p className="line-clamp-2 text-xs text-[#eeeeee9e] sm:text-sm">
+			<p className="line-clamp-2 text-sm text-[#eeeeee9e]">
 				“{testimonial.message}”
 			</p>
 		</div>
