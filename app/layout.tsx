@@ -32,20 +32,20 @@ export const metadata: Metadata = {
 	authors: [
 		{
 			name: "Adewunmi Quadri Ayodele",
-			url: "https://linkedin.com/in/moroundiya",
+			url: "https://createinvoicenow.vercel.app",
 		},
 	],
 
 	openGraph: {
 		type: "website",
-		url: "https://invoicenow.vercel.app",
+		url: "https://createinvoicenow.vercel.app",
 		title: "InvoiceNow — Free Invoice Generator",
 		description:
 			"Create professional invoices in seconds. Simple, fast, and free.",
 		siteName: "InvoiceNow",
 		images: [
 			{
-				url: "@/",
+				url: "/logoblue.png",
 				width: 1200,
 				height: 630,
 				alt: "InvoiceNow — Free Invoice Generator",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 		title: "InvoiceNow — Free Invoice Generator",
 		description:
 			"Create professional invoices in seconds. Simple, fast, and free.",
-		images: ["/logo.png"],
+		images: ["/logoblue.png"],
 		creator: "@moroundiya08",
 	},
 

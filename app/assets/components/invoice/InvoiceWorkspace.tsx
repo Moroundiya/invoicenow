@@ -161,7 +161,7 @@ export default function InvoiceWorkspace({
 									Ready to download?
 								</p>
 
-								<p className="mt-1 leading-5 text-slate-500">
+								<p className="mt-1 text-sm leading-5 text-slate-500">
 									If everything looks correct, continue to download your invoice
 									as a PDF or PNG.
 								</p>
