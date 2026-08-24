@@ -70,22 +70,22 @@ export default function InvoiceWorkspace({
 	const current = content[currentStep];
 
 	return (
-		<section className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] xl:gap-7">
+		<section className="grid min-w-0 w-full gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:gap-7">
 			{/* =========================================================
 			    EDITOR
 			========================================================= */}
-			<div className="min-w-0 rounded-2xl border border-[#041E50] bg-[#041f5049] p-6">
+			<div className="min-w-0 w-full sm:rounded-2xl sm:border sm:border-[#041E50] sm:bg-[#041f5049] sm:p-6">
 				{/* Section Header */}
 				<div className="mb-8">
-					<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400">
+					{/* <p className="font-semibold uppercase tracking-[0.18em] text-blue-400">
 						{current.label}
-					</p>
+					</p> */}
 
 					<h2 className="mt-1 text-2xl font-bold tracking-tight text-white">
 						{current.title}
 					</h2>
 
-					<p className="mt-2 text-sm text-slate-500">{current.description}</p>
+					<p className="text-slate-500">{current.description}</p>
 				</div>
 
 				{/* =====================================================
@@ -121,34 +121,20 @@ export default function InvoiceWorkspace({
 				{/* =====================================================
 				    STEP 4 — PREVIEW
 				===================================================== */}
-				{/* Step 4 — Preview */}
 				{currentStep === 4 && (
-					<div className="rounded-xl border border-[#041E50] bg-[#041f5049] p-4 sm:p-6">
-						<div className="mb-5">
-							<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400">
-								Final Review
-							</p>
-
-							<h3 className="mt-1 text-lg font-bold text-white">
-								Review Your Invoice
-							</h3>
-
-							<p className="mt-1 text-sm leading-6 text-slate-500">
-								Check your invoice carefully before downloading it.
-							</p>
-						</div>
-
-						{/* Invoice preview */}
-						<div className="flex justify-center overflow-x-auto rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-3 sm:p-5">
-							<div
-								id="invoice-preview"
-								className="w-full max-w-[560px] shrink-0 overflow-hidden bg-white shadow-2xl">
-								<InvoiceTemplateRenderer invoice={invoice} />
+					<>
+						<div className="min-w-0 w-full max-w-full p-3 overflow-x-auto overflow-y-hidden rounded-xl border border-[#041E50] bg-[#041f5049] p-2 sm:p-6">
+							<div className="flex w-max min-w-full items-start justify-center">
+								<div
+									id="invoice-preview"
+									className="w-[560px] min-w-[560px] shrink-0 bg-white shadow-2xl">
+									<InvoiceTemplateRenderer invoice={invoice} />
+								</div>
 							</div>
 						</div>
 
 						{/* Review note */}
-						<div className="mt-5 flex items-start gap-3 rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-4">
+						<div className="mt-5 flex min-w-0 items-start gap-3 rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-4">
 							<div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
 								<svg
 									width="15"
@@ -164,24 +150,26 @@ export default function InvoiceWorkspace({
 										cy="12"
 										r="10"
 									/>
+
 									<path d="M12 16v-4" />
 									<path d="M12 8h.01" />
 								</svg>
 							</div>
 
-							<div>
-								<p className="text-xs font-semibold text-slate-300">
+							<div className="min-w-0">
+								<p className="font-semibold text-slate-300">
 									Ready to download?
 								</p>
 
-								<p className="mt-1 text-xs leading-5 text-slate-500">
+								<p className="mt-1 leading-5 text-slate-500">
 									If everything looks correct, continue to download your invoice
 									as a PDF or PNG.
 								</p>
 							</div>
 						</div>
-					</div>
+					</>
 				)}
+
 				{/* =====================================================
 				    STEP 5 — DOWNLOAD
 				===================================================== */}
@@ -207,7 +195,7 @@ export default function InvoiceWorkspace({
 								Your invoice is ready
 							</h3>
 
-							<p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
+							<p className="mx-auto mt-2 max-w-sm leading-6 text-slate-500">
 								Your invoice has been completed. Download it as a PDF or PNG
 								file.
 							</p>
@@ -224,7 +212,7 @@ export default function InvoiceWorkspace({
 							<div className="my-6 flex items-center gap-3">
 								<div className="h-px flex-1 bg-white/[0.06]" />
 
-								<span className="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-600">
+								<span className="text-sm font-medium uppercase tracking-[0.15em] text-slate-600">
 									or
 								</span>
 
@@ -235,7 +223,7 @@ export default function InvoiceWorkspace({
 							<button
 								type="button"
 								onClick={onCreateAnother}
-								className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 text-sm font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.10] hover:text-blue-300">
+								className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.10] hover:text-blue-300">
 								<svg
 									width="17"
 									height="17"
@@ -251,7 +239,7 @@ export default function InvoiceWorkspace({
 								Create Another Invoice
 							</button>
 
-							<p className="mt-3 text-xs text-slate-600">
+							<p className="mt-3 text-slate-600">
 								Start fresh with a new invoice
 							</p>
 						</div>
@@ -260,21 +248,19 @@ export default function InvoiceWorkspace({
 
 				{/* =====================================================
 				    NAVIGATION
-				    Hidden on Step 5 because Download has its own actions.
 				===================================================== */}
-				{/* Navigation */}
 				{currentStep !== 5 && (
 					<div
 						className={[
 							"mt-8 flex items-center gap-3 border-t border-white/[0.05] pt-5",
 							currentStep === 1 ? "justify-end" : "justify-between",
 						].join(" ")}>
-						{/* Back — hidden on Step 1 */}
+						{/* Back */}
 						{currentStep > 1 && (
 							<button
 								type="button"
 								onClick={onBack}
-								className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-5 text-sm font-medium text-slate-400 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
+								className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-5 font-medium text-slate-400 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
 								<svg
 									width="16"
 									height="16"
@@ -294,7 +280,7 @@ export default function InvoiceWorkspace({
 						<button
 							type="button"
 							onClick={onNext}
-							className="inline-flex h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500">
+							className="inline-flex h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500">
 							Continue
 							<svg
 								width="16"
@@ -317,11 +303,11 @@ export default function InvoiceWorkspace({
 			    LIVE PREVIEW
 			========================================================= */}
 			<aside className="hidden min-w-0 lg:block">
-				<div className="sticky top-5 rounded-2xl border border-[#041E50] bg-[#041f5049] p-5 xl:p-6">
+				<div className="sticky top-5 min-w-0 rounded-2xl border border-[#041E50] bg-[#041f5049] p-5 xl:p-6">
 					{/* Preview Header */}
 					<div className="mb-5 flex items-start justify-between gap-4">
-						<div>
-							<p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-400">
+						<div className="min-w-0">
+							<p className="font-semibold uppercase tracking-[0.18em] text-blue-400">
 								Live Preview
 							</p>
 
@@ -331,17 +317,17 @@ export default function InvoiceWorkspace({
 								Template
 							</h2>
 
-							<p className="mt-1 text-sm text-slate-500">
+							<p className="mt-1 text-slate-500">
 								Your invoice updates automatically as you edit it.
 							</p>
 						</div>
 					</div>
 
 					{/* Invoice Preview */}
-					<div className="invoice-preview-container flex min-h-[650px] items-start justify-center overflow-auto rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-5">
+					<div className="invoice-preview-container flex min-w-0 max-w-full items-start justify-center overflow-auto rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-5">
 						<div
 							id="invoice-preview"
-							className="invoice-print-area w-full max-w-[560px] overflow-hidden shadow-2xl">
+							className="invoice-print-area w-full max-w-[560px] shrink-0 overflow-hidden shadow-2xl">
 							<InvoiceTemplateRenderer invoice={invoice} />
 						</div>
 					</div>

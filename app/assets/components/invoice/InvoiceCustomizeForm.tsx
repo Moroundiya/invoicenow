@@ -267,7 +267,7 @@ export default function InvoiceCustomizeForm({
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">Branding</h3>
 
-					<p className="mt-1 text-sm text-slate-500">
+					<p className="mt-1  text-slate-500">
 						Customize your invoice with your logo and brand color.
 					</p>
 				</div>
@@ -275,7 +275,7 @@ export default function InvoiceCustomizeForm({
 				<div className="space-y-5">
 					{/* Logo */}
 					<div>
-						<label className="mb-2 block text-xs font-medium text-slate-400">
+						<label className="mb-2 block text-sm font-medium text-slate-400">
 							Business Logo
 						</label>
 
@@ -303,7 +303,7 @@ export default function InvoiceCustomizeForm({
 							</div>
 
 							<div>
-								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/[0.06] bg-[#030c1c]/35 px-4 text-sm font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
+								<label className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-white/[0.06] bg-[#030c1c]/35 px-4  font-medium text-slate-300 transition hover:border-blue-400/20 hover:bg-blue-500/[0.04] hover:text-white">
 									Upload Logo
 									<input
 										type="file"
@@ -317,12 +317,12 @@ export default function InvoiceCustomizeForm({
 									<button
 										type="button"
 										onClick={() => updateBranding("logo", "")}
-										className="ml-2 text-xs text-slate-500 transition hover:text-red-400">
+										className="ml-2 text-sm text-slate-500 transition hover:text-red-400">
 										Remove
 									</button>
 								)}
 
-								<p className="mt-2 text-xs text-slate-600">
+								<p className="mt-2 text-sm text-slate-600">
 									PNG, JPG, WEBP or SVG. Recommended: square logo.
 								</p>
 							</div>
@@ -331,7 +331,7 @@ export default function InvoiceCustomizeForm({
 
 					{/* Brand Color */}
 					<div>
-						<label className="mb-2 block text-xs font-medium text-slate-400">
+						<label className="mb-2 block text-sm font-medium text-slate-400">
 							Brand Color
 						</label>
 
@@ -352,7 +352,7 @@ export default function InvoiceCustomizeForm({
 									updateBranding("primaryColor", event.target.value)
 								}
 								placeholder="#2563EB"
-								className="h-11 w-36 rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-white outline-none placeholder:text-slate-700 focus:border-blue-500/50"
+								className="h-11 w-36 rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5  text-white outline-none placeholder:text-slate-700 focus:border-blue-500/50"
 							/>
 
 							<div
@@ -375,7 +375,7 @@ export default function InvoiceCustomizeForm({
 						Payment Information
 					</h3>
 
-					<p className="mt-1 text-sm text-slate-500">
+					<p className="mt-1  text-slate-500">
 						Add the payment details your client should use.
 					</p>
 				</div>
@@ -425,7 +425,7 @@ export default function InvoiceCustomizeForm({
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">Notes</h3>
 
-					<p className="mt-1 text-sm text-slate-500">
+					<p className="mt-1  text-slate-500">
 						Add a message or payment terms to your invoice.
 					</p>
 				</div>
@@ -447,7 +447,7 @@ export default function InvoiceCustomizeForm({
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">Signature</h3>
 
-					<p className="mt-1 text-sm text-slate-500">
+					<p className="mt-1  text-slate-500">
 						Draw your signature below to add it to your invoice.
 					</p>
 				</div>
@@ -469,7 +469,7 @@ export default function InvoiceCustomizeForm({
 							{/* Placeholder */}
 							{!invoice.signature?.image && !isDrawing && (
 								<div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-									<span className="text-xs text-slate-700">
+									<span className="text-sm text-slate-700">
 										Draw your signature here
 									</span>
 								</div>
@@ -480,7 +480,7 @@ export default function InvoiceCustomizeForm({
 						</div>
 
 						<div className="mt-3 flex items-center justify-between">
-							<p className="text-xs text-slate-600">
+							<p className="text-sm text-slate-600">
 								Use your mouse, trackpad, or touchscreen.
 							</p>
 
@@ -488,7 +488,7 @@ export default function InvoiceCustomizeForm({
 								<button
 									type="button"
 									onClick={clearSignature}
-									className="text-xs font-medium text-slate-500 transition hover:text-red-400">
+									className="text-sm font-medium text-slate-500 transition hover:text-red-400">
 									Clear
 								</button>
 							)}
@@ -521,7 +521,7 @@ function FormField({
 }: FormFieldProps) {
 	return (
 		<div>
-			<label className="mb-2 block text-xs font-medium text-slate-400">
+			<label className="mb-2 block text-sm font-medium text-slate-400">
 				{label}
 			</label>
 
@@ -530,7 +530,7 @@ function FormField({
 				value={value ?? ""}
 				onChange={(event) => onChange(event.target.value)}
 				placeholder={placeholder}
-				className="h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041f5049]"
+				className="h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5  text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041f5049]"
 			/>
 		</div>
 	);
@@ -555,7 +555,7 @@ function TextareaField({
 }: TextareaFieldProps) {
 	return (
 		<div>
-			<label className="mb-2 block text-xs font-medium text-slate-400">
+			<label className="mb-2 block text-sm font-medium text-slate-400">
 				{label}
 			</label>
 
@@ -564,7 +564,7 @@ function TextareaField({
 				onChange={(event) => onChange(event.target.value)}
 				placeholder={placeholder}
 				rows={4}
-				className="w-full resize-none rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 py-3 text-sm leading-6 text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041f5049]"
+				className="w-full resize-none rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 py-3  leading-6 text-white outline-none placeholder:text-slate-700 transition focus:border-blue-500/50 focus:bg-[#041f5049]"
 			/>
 		</div>
 	);

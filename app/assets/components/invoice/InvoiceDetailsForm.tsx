@@ -333,11 +333,11 @@ export default function InvoiceDetailsForm({
 							className="rounded-xl border border-white/[0.06] bg-[#030c1c]/50 p-4">
 							<div className="mb-4 flex items-center justify-between">
 								<div className="flex items-center gap-2">
-									<span className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-500/[0.08] text-[10px] font-bold text-blue-400">
+									<span className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-500/[0.08] text-sm font-bold text-blue-400">
 										{index + 1}
 									</span>
 
-									<span className="text-xs font-semibold text-slate-300">
+									<span className=" font-semibold text-slate-300">
 										Item {index + 1}
 									</span>
 								</div>
@@ -426,9 +426,9 @@ export default function InvoiceDetailsForm({
 							</div>
 
 							<div className="mt-4 flex items-center justify-between border-t border-white/[0.05] pt-3">
-								<span className="text-xs text-slate-600">Item amount</span>
+								<span className=" text-slate-600">Item amount</span>
 
-								<span className="text-sm font-semibold text-slate-200">
+								<span className=" font-semibold text-slate-200">
 									{formatMoney(item.quantity * item.rate)}
 								</span>
 							</div>
@@ -438,7 +438,7 @@ export default function InvoiceDetailsForm({
 					<button
 						type="button"
 						onClick={addItem}
-						className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#041E50] bg-[#041f5049] text-xs font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]">
+						className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#041E50] bg-[#041f5049]  font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]">
 						<svg
 							width="16"
 							height="16"
@@ -500,7 +500,7 @@ export default function InvoiceDetailsForm({
 				</div>
 
 				<div className="mt-5 rounded-xl border border-[#041E50] bg-[#041f5049] p-4">
-					<div className="space-y-2.5 text-xs">
+					<div className="space-y-2.5 ">
 						<TotalRow
 							label="Subtotal"
 							value={formatMoney(subtotal)}
@@ -541,7 +541,7 @@ export default function InvoiceDetailsForm({
 /* -------------------------------------------------------------------------- */
 
 const inputClass =
-	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-sm text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
+	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5  text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
 
 function FormSection({
 	number,
@@ -557,14 +557,14 @@ function FormSection({
 	return (
 		<section className="rounded-2xl border border-white/[0.06] bg-[#030c1c]/35 p-5 sm:p-6">
 			<div className="mb-5 flex items-start gap-3">
-				<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-blue-400/10 bg-blue-500/[0.06] text-[10px] font-bold text-blue-400">
+				<div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-blue-400/10 bg-blue-500/[0.06] text-sm font-bold text-blue-400">
 					{number}
 				</div>
 
 				<div>
-					<h3 className="text-sm font-semibold text-white">{title}</h3>
+					<h3 className=" font-semibold text-white">{title}</h3>
 
-					<p className="mt-1 text-xs leading-5 text-slate-600">{description}</p>
+					<p className="text-sm leading-5 text-slate-600">{description}</p>
 				</div>
 			</div>
 
@@ -584,7 +584,7 @@ function FormField({
 }) {
 	return (
 		<label className="block">
-			<span className="text-[11px] font-medium text-slate-500">
+			<span className="text-sm font-medium text-slate-500">
 				{label}
 
 				{required && <span className="ml-1 text-blue-400">*</span>}

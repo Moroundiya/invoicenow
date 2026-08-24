@@ -11,12 +11,12 @@ body {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
 }
 
 * {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    /* scrollbar-width: none; */
+    /* -ms-overflow-style: none; */
     scroll-behavior: smooth;
 }
 

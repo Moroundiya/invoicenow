@@ -16,15 +16,7 @@ export default function TemplateSelector({
 }: TemplateSelectorProps) {
 	return (
 		<section>
-			<div className="mb-5">
-				<h2 className="text-base font-semibold text-white sm:text-lg">
-					Choose your template
-				</h2>
-
-				<p className="mt-1 text-sm text-slate-500">
-					Select a design for your invoice. You can change it later.
-				</p>
-			</div>
+			
 
 			<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 				{invoiceTemplates.map((template) => (

@@ -189,7 +189,7 @@ export default function Navbar() {
 
 				<Link
 					href="/create"
-					className="navbar-cta hidden rounded-sm bg-[#00B7FF] px-4 py-1.5 text-sm font-semibold text-[#041636] transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(0,183,255,0.25)] lg:flex">
+					className="navbar-cta hidden rounded-sm bg-[#00B7FF] px-4 py-1.5  font-semibold text-[#041636] transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(0,183,255,0.25)] lg:flex">
 					Get Started
 				</Link>
 
@@ -220,28 +220,28 @@ export default function Navbar() {
 						<Link
 							href="#features"
 							onClick={closeMenu}
-							className="rounded-xl px-4 py-3 text-sm text-white/70 transition hover:bg-white/5 hover:text-white">
+							className="rounded-xl px-4 py-3  text-white/70 transition hover:bg-white/5 hover:text-white">
 							Features
 						</Link>
 
 						<Link
 							href="#how-it-works"
 							onClick={closeMenu}
-							className="rounded-xl px-4 py-3 text-sm text-white/70 transition hover:bg-white/5 hover:text-white">
+							className="rounded-xl px-4 py-3  text-white/70 transition hover:bg-white/5 hover:text-white">
 							How it works
 						</Link>
 
 						<Link
 							href="#testimonials"
 							onClick={closeMenu}
-							className="rounded-xl px-4 py-3 text-sm text-white/70 transition hover:bg-white/5 hover:text-white">
+							className="rounded-xl px-4 py-3  text-white/70 transition hover:bg-white/5 hover:text-white">
 							Testimonials
 						</Link>
 
 						<Link
 							href="/create"
 							onClick={closeMenu}
-							className="mt-2 flex items-center justify-center rounded-xl bg-[#00B7FF] px-4 py-3 text-sm font-semibold text-[#041636] transition-all duration-300 hover:bg-white">
+							className="mt-2 flex items-center justify-center rounded-xl bg-[#00B7FF] px-4 py-3  font-semibold text-[#041636] transition-all duration-300 hover:bg-white">
 							Create Invoice
 						</Link>
 					</div>

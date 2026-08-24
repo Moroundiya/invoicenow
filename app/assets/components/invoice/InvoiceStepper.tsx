@@ -66,7 +66,7 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 									}`}>
 									{/* Step Number / Check */}
 									<div
-										className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-xs font-bold transition ${
+										className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border font-bold transition ${
 											isActive
 												? "border-blue-400/30 bg-blue-500/10 text-blue-400 shadow-[0_0_20px_rgba(0,119,255,0.12)]"
 												: isCompleted
@@ -92,7 +92,7 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 
 									<div className="min-w-0">
 										<p
-											className={`truncate text-xs font-semibold ${
+											className={`truncate font-semibold ${
 												isActive
 													? "text-white"
 													: isCompleted
@@ -117,7 +117,7 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 				    MOBILE
 				===================================================== */}
 				<div className="md:hidden">
-					<div className="flex w-full items-start">
+					<div className="mx-auto flex w-full max-w-md items-center justify-center">
 						{steps.map((step, index) => {
 							const isActive = currentStep === step.number;
 							const isCompleted = currentStep > step.number;
@@ -125,11 +125,13 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 							return (
 								<div
 									key={step.number}
-									className="flex min-w-0 flex-1 items-start">
+									className={`flex items-center ${
+										index < steps.length - 1 ? "flex-1" : "shrink-0"
+									}`}>
 									{/* Step */}
-									<div className="flex min-w-0 flex-1 flex-col items-center">
+									<div className="flex shrink-0 items-center justify-center">
 										<div
-											className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-[10px] font-bold transition sm:h-9 sm:w-9 ${
+											className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-lg border font-bold transition ${
 												isActive
 													? "border-blue-400/30 bg-blue-500/10 text-blue-400 shadow-[0_0_18px_rgba(0,119,255,0.12)]"
 													: isCompleted
@@ -152,22 +154,11 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 												String(step.number).padStart(2, "0")
 											)}
 										</div>
-
-										<p
-											className={`mt-2 w-full truncate px-0.5 text-center text-[8px] font-semibold sm:text-[9px] ${
-												isActive
-													? "text-white"
-													: isCompleted
-														? "text-slate-300"
-														: "text-slate-500"
-											}`}>
-											{step.shortTitle}
-										</p>
 									</div>
 
 									{/* Connector */}
 									{index < steps.length - 1 && (
-										<div className="flex flex-1 items-center px-0.5 pt-4 sm:pt-4.5">
+										<div className="flex flex-1 items-center">
 											<div
 												className={`h-px w-full ${
 													isCompleted ? "bg-blue-400/30" : "bg-white/[0.09]"

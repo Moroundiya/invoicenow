@@ -59,7 +59,7 @@ export default function TemplateCard({
 			<div className="border-t border-white/[0.06] px-4 py-4 sm:px-5 sm:py-5">
 				<div className="flex items-center justify-between gap-3">
 					<h3
-						className={`text-base font-semibold ${
+						className={`text-lg font-semibold ${
 							selected ? "text-white" : "text-slate-200"
 						}`}>
 						{name}
@@ -68,7 +68,7 @@ export default function TemplateCard({
 					
 				</div>
 
-				<p className="mt-1.5 text-xs leading-5 text-slate-500">{description}</p>
+				<p className="mt-1.5 leading-5 text-slate-500">{description}</p>
 			</div>
 		</button>
 	);
