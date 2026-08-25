@@ -97,7 +97,8 @@ export default function RootLayout({
 					fetchPriority="high"
 				/>
 			</head>
-			<body className={`${italianno.variable} ${jakarta.variable} antialiased`}>
+			<body
+				className={`${italianno.variable} ${jakarta.variable} antialiased bg-[#081632]`}>
 				{children}
 			</body>
 		</html>

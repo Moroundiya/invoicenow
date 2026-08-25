@@ -193,7 +193,7 @@ export default function Footer() {
 
 					{pathname === "/" && (
 						<Link
-							href="#create"
+							href="/create"
 							className="
 								footer-cta
 								mb-8
