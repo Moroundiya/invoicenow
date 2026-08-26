@@ -7,16 +7,16 @@ import {
 	type ChangeEvent,
 	type PointerEvent,
 } from "react";
-import { InvoiceCustomizeFormProps, TextareaFieldProps } from "../../types/invoice";
+import {
+	InvoiceCustomizeFormProps,
+	TextareaFieldProps,
+} from "../../types/invoice";
 import { InvoiceData } from "../../types/invoiceType";
 
 export default function InvoiceCustomizeForm({
 	invoice,
 	onInvoiceChange,
 }: InvoiceCustomizeFormProps) {
-	/* --------------------------------
-	 * BRANDING
-	 * -------------------------------- */
 	const updateBranding = (
 		field: keyof InvoiceData["branding"],
 		value: string,
@@ -29,9 +29,6 @@ export default function InvoiceCustomizeForm({
 		});
 	};
 
-	/* --------------------------------
-	 * PAYMENT
-	 * -------------------------------- */
 	const updatePayment = (
 		field: keyof InvoiceData["payment"],
 		value: string,
@@ -44,9 +41,6 @@ export default function InvoiceCustomizeForm({
 		});
 	};
 
-	/* --------------------------------
-	 * SIGNATURE
-	 * -------------------------------- */
 	const updateSignature = (
 		field: keyof InvoiceData["signature"],
 		value: string,
@@ -59,9 +53,6 @@ export default function InvoiceCustomizeForm({
 		});
 	};
 
-	/* --------------------------------
-	 * LOGO UPLOAD
-	 * -------------------------------- */
 	const handleLogoUpload = (event: ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 
@@ -84,22 +75,15 @@ export default function InvoiceCustomizeForm({
 
 		reader.readAsDataURL(file);
 
-		// Allow selecting the same file again later
 		event.target.value = "";
 	};
 
-	/* --------------------------------
-	 * SIGNATURE CANVAS
-	 * -------------------------------- */
 	const signatureCanvasRef = useRef<HTMLCanvasElement | null>(null);
 	const isDrawingRef = useRef(false);
 	const hasDrawnRef = useRef(false);
 
 	const [isDrawing, setIsDrawing] = useState(false);
 
-	/* --------------------------------
-	 * SETUP CANVAS
-	 * -------------------------------- */
 	useEffect(() => {
 		const canvas = signatureCanvasRef.current;
 
@@ -127,9 +111,6 @@ export default function InvoiceCustomizeForm({
 		setupCanvas();
 	}, []);
 
-	/* --------------------------------
-	 * DRAWING POSITION
-	 * -------------------------------- */
 	const getPointerPosition = (event: PointerEvent<HTMLCanvasElement>) => {
 		const canvas = signatureCanvasRef.current;
 
@@ -148,9 +129,6 @@ export default function InvoiceCustomizeForm({
 		};
 	};
 
-	/* --------------------------------
-	 * START DRAWING
-	 * -------------------------------- */
 	const startDrawing = (event: PointerEvent<HTMLCanvasElement>) => {
 		const canvas = signatureCanvasRef.current;
 
@@ -175,9 +153,6 @@ export default function InvoiceCustomizeForm({
 		context.moveTo(x, y);
 	};
 
-	/* --------------------------------
-	 * DRAW
-	 * -------------------------------- */
 	const draw = (event: PointerEvent<HTMLCanvasElement>) => {
 		if (!isDrawingRef.current) return;
 
@@ -197,9 +172,6 @@ export default function InvoiceCustomizeForm({
 		context.stroke();
 	};
 
-	/* --------------------------------
-	 * STOP DRAWING
-	 * -------------------------------- */
 	const stopDrawing = () => {
 		if (!isDrawingRef.current) return;
 
@@ -219,9 +191,6 @@ export default function InvoiceCustomizeForm({
 		saveSignature();
 	};
 
-	/* --------------------------------
-	 * SAVE SIGNATURE
-	 * -------------------------------- */
 	const saveSignature = () => {
 		const canvas = signatureCanvasRef.current;
 
@@ -232,9 +201,6 @@ export default function InvoiceCustomizeForm({
 		updateSignature("image", signatureImage);
 	};
 
-	/* --------------------------------
-	 * CLEAR SIGNATURE
-	 * -------------------------------- */
 	const clearSignature = () => {
 		const canvas = signatureCanvasRef.current;
 
@@ -256,9 +222,6 @@ export default function InvoiceCustomizeForm({
 
 	return (
 		<div className="space-y-8">
-			{/* ============================================
-			    BRANDING
-			============================================ */}
 			<section>
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">Branding</h3>
@@ -269,14 +232,12 @@ export default function InvoiceCustomizeForm({
 				</div>
 
 				<div className="space-y-5">
-					{/* Logo */}
 					<div>
 						<label className="mb-2 block text-sm font-medium text-slate-400">
 							Business Logo
 						</label>
 
 						<div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-							{/* Logo Preview */}
 							<div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#041E50] bg-[#041f5049]">
 								{invoice.branding?.logo ? (
 									<img
@@ -325,7 +286,6 @@ export default function InvoiceCustomizeForm({
 						</div>
 					</div>
 
-					{/* Brand Color */}
 					<div>
 						<label className="mb-2 block text-sm font-medium text-slate-400">
 							Brand Color
@@ -362,9 +322,6 @@ export default function InvoiceCustomizeForm({
 				</div>
 			</section>
 
-			{/* ============================================
-			    PAYMENT INFORMATION
-			============================================ */}
 			<section className="border-t border-white/[0.06] pt-8">
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">
@@ -414,9 +371,6 @@ export default function InvoiceCustomizeForm({
 				</div>
 			</section>
 
-			{/* ============================================
-			    NOTES
-			============================================ */}
 			<section className="border-t border-white/[0.06] pt-8">
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">Notes</h3>
@@ -436,9 +390,6 @@ export default function InvoiceCustomizeForm({
 				</div>
 			</section>
 
-			{/* ============================================
-			    SIGNATURE
-			============================================ */}
 			<section className="border-t border-white/[0.06] pt-8">
 				<div className="mb-5">
 					<h3 className="text-base font-semibold text-white">Signature</h3>
@@ -449,7 +400,6 @@ export default function InvoiceCustomizeForm({
 				</div>
 
 				<div className="space-y-4">
-					{/* Signature Canvas */}
 					<div>
 						<div className="relative h-36 w-full overflow-hidden rounded-xl border border-[#041E50] bg-[#041f5049]">
 							<canvas
@@ -462,7 +412,6 @@ export default function InvoiceCustomizeForm({
 								className="absolute inset-0 h-full w-full cursor-crosshair touch-none"
 							/>
 
-							{/* Placeholder */}
 							{!invoice.signature?.image && !isDrawing && (
 								<div className="pointer-events-none absolute inset-0 flex items-center justify-center">
 									<span className="text-sm text-slate-700">
@@ -471,7 +420,6 @@ export default function InvoiceCustomizeForm({
 								</div>
 							)}
 
-							{/* Signature line */}
 							<div className="pointer-events-none absolute bottom-5 left-6 right-6 border-b border-slate-700/60" />
 						</div>
 
@@ -495,10 +443,6 @@ export default function InvoiceCustomizeForm({
 		</div>
 	);
 }
-
-/* ============================================
-   FORM FIELD
-============================================ */
 
 interface FormFieldProps {
 	label: string;
@@ -531,10 +475,6 @@ function FormField({
 		</div>
 	);
 }
-
-/* ============================================
-   TEXTAREA FIELD
-============================================ */
 
 function TextareaField({
 	label,

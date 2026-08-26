@@ -15,7 +15,7 @@ export default function BusinessDetailsForm({
 	};
 
 	return (
-		<section className="rounded-2xl border border-white/[0.06] bg-[#030c1c]/60 p-5">
+		<section className="rounded-2xl border border-white/6 bg-[#030c1c]/60 p-5">
 			<div className="mb-5 flex items-start gap-3">
 				<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.08] text-blue-400">
 					<svg

@@ -70,12 +70,6 @@ export default function InvoiceWorkspace({
 				return;
 			}
 
-			/*
-		=========================================================
-		INITIAL STATES
-		=========================================================
-		*/
-
 			gsap.set(container, {
 				opacity: 0,
 				y: 25,
@@ -97,26 +91,18 @@ export default function InvoiceWorkspace({
 				},
 			);
 
-			/*
-		=========================================================
-		MAIN ENTRANCE TIMELINE
-		=========================================================
-		*/
-
 			const tl = gsap.timeline({
 				defaults: {
 					ease: "power3.out",
 				},
 			});
 
-			// Main card
 			tl.to(container, {
 				opacity: 1,
 				y: 0,
 				duration: 0.55,
 			});
 
-			// Success emoji
 			tl.to(
 				emoji,
 				{
@@ -130,7 +116,6 @@ export default function InvoiceWorkspace({
 				"-=0.25",
 			);
 
-			// Title
 			tl.to(
 				title,
 				{
@@ -141,7 +126,6 @@ export default function InvoiceWorkspace({
 				"-=0.35",
 			);
 
-			// Description
 			tl.to(
 				description,
 				{
@@ -152,7 +136,6 @@ export default function InvoiceWorkspace({
 				"-=0.25",
 			);
 
-			// Download button
 			tl.to(
 				download,
 				{
@@ -164,7 +147,6 @@ export default function InvoiceWorkspace({
 				"-=0.15",
 			);
 
-			// Divider
 			tl.to(
 				divider,
 				{
@@ -175,7 +157,6 @@ export default function InvoiceWorkspace({
 				"-=0.15",
 			);
 
-			// Create Another Invoice
 			tl.to(
 				createAnother,
 				{
@@ -187,7 +168,6 @@ export default function InvoiceWorkspace({
 				"-=0.15",
 			);
 
-			// Bottom text
 			tl.to(
 				bottomText,
 				{
@@ -198,12 +178,6 @@ export default function InvoiceWorkspace({
 				"-=0.2",
 			);
 
-			/*
-		=========================================================
-		EMOJI FLOATING ANIMATION
-		=========================================================
-		*/
-
 			gsap.to(emoji, {
 				y: -7,
 				rotation: 2,
@@ -213,12 +187,6 @@ export default function InvoiceWorkspace({
 				repeat: -1,
 				delay: 1.2,
 			});
-
-			/*
-		=========================================================
-		EMOJI BREATHING / SUBTLE PULSE
-		=========================================================
-		*/
 
 			gsap.to(emoji, {
 				scale: 1.035,
@@ -237,26 +205,14 @@ export default function InvoiceWorkspace({
 
 	return (
 		<section className="grid min-w-0 w-full gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:gap-7">
-			{/* =========================================================
-			    EDITOR
-			========================================================= */}
 			<div className="min-w-0 w-full sm:rounded-2xl sm:border sm:border-[#041E50] sm:bg-[#041f5049] sm:p-6">
-				{/* Section Header */}
 				<div className="mb-8">
-					{/* <p className="font-semibold uppercase tracking-[0.18em] text-blue-400">
-						{current.label}
-					</p> */}
-
 					<h2 className="mt-1 text-2xl font-bold tracking-tight text-white">
 						{current.title}
 					</h2>
-
 					<p className="text-slate-500">{current.description}</p>
 				</div>
 
-				{/* =====================================================
-				    STEP 1 — TEMPLATE
-				===================================================== */}
 				{currentStep === 1 && (
 					<TemplateSelector
 						selectedTemplate={invoice.template}
@@ -264,9 +220,6 @@ export default function InvoiceWorkspace({
 					/>
 				)}
 
-				{/* =====================================================
-				    STEP 2 — DETAILS
-				===================================================== */}
 				{currentStep === 2 && (
 					<InvoiceDetailsForm
 						invoice={invoice}
@@ -274,9 +227,6 @@ export default function InvoiceWorkspace({
 					/>
 				)}
 
-				{/* =====================================================
-				    STEP 3 — CUSTOMIZE
-				===================================================== */}
 				{currentStep === 3 && (
 					<InvoiceCustomizeForm
 						invoice={invoice}
@@ -284,9 +234,6 @@ export default function InvoiceWorkspace({
 					/>
 				)}
 
-				{/* =====================================================
-				    STEP 4 — PREVIEW
-				===================================================== */}
 				{currentStep === 4 && (
 					<>
 						<div className="min-w-0 w-full max-w-full p-3 overflow-x-auto overflow-y-hidden rounded-xl border border-[#041E50] bg-[#041f5049] p-2 sm:p-6">
@@ -299,7 +246,6 @@ export default function InvoiceWorkspace({
 							</div>
 						</div>
 
-						{/* Review note */}
 						<div className="mt-5 flex min-w-0 items-start gap-3 rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-4">
 							<div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
 								<svg
@@ -336,9 +282,6 @@ export default function InvoiceWorkspace({
 					</>
 				)}
 
-				{/* =====================================================
-				    STEP 5 — DOWNLOAD
-				===================================================== */}
 				{currentStep === 5 && (
 					<div
 						ref={successContainerRef}
@@ -346,10 +289,6 @@ export default function InvoiceWorkspace({
 						<div
 							ref={successContentRef}
 							className="mx-auto max-w-md text-center">
-							{/* =====================================================
-			    SUCCESS EMOJI
-			===================================================== */}
-
 							<Image
 								ref={successRef}
 								src={success}
@@ -358,19 +297,11 @@ export default function InvoiceWorkspace({
 								className="mx-auto mt-1 w-10/12 object-contain will-change-transform"
 							/>
 
-							{/* =====================================================
-			    TITLE
-			===================================================== */}
-
 							<h3
 								ref={successTitleRef}
 								className="mt-5 text-lg font-bold text-white">
 								Your invoice is ready
 							</h3>
-
-							{/* =====================================================
-			    DESCRIPTION
-			===================================================== */}
 
 							<p
 								ref={successDescriptionRef}
@@ -378,10 +309,6 @@ export default function InvoiceWorkspace({
 								Your invoice has been completed. Download it as a PDF or PNG
 								file.
 							</p>
-
-							{/* =====================================================
-			    DOWNLOAD BUTTON
-			===================================================== */}
 
 							<div
 								ref={downloadRef}
@@ -391,10 +318,6 @@ export default function InvoiceWorkspace({
 									fileName={`invoice-${invoice.invoiceNumber || "draft"}`}
 								/>
 							</div>
-
-							{/* =====================================================
-			    DIVIDER
-			===================================================== */}
 
 							<div
 								ref={dividerRef}
@@ -407,10 +330,6 @@ export default function InvoiceWorkspace({
 
 								<div className="h-px flex-1 bg-white/[0.06]" />
 							</div>
-
-							{/* =====================================================
-			    CREATE ANOTHER INVOICE
-			===================================================== */}
 
 							<button
 								ref={createAnotherRef}
@@ -432,10 +351,6 @@ export default function InvoiceWorkspace({
 								Create Another Invoice
 							</button>
 
-							{/* =====================================================
-			    BOTTOM TEXT
-			===================================================== */}
-
 							<p
 								ref={bottomTextRef}
 								className="mt-3 text-slate-600">
@@ -445,16 +360,12 @@ export default function InvoiceWorkspace({
 					</div>
 				)}
 
-				{/* =====================================================
-				    NAVIGATION
-				===================================================== */}
 				{currentStep !== 5 && (
 					<div
 						className={[
 							"mt-8 flex items-center gap-3 border-t border-white/[0.05] pt-5",
 							currentStep === 1 ? "justify-end" : "justify-between",
 						].join(" ")}>
-						{/* Back */}
 						{currentStep > 1 && (
 							<button
 								type="button"
@@ -475,7 +386,6 @@ export default function InvoiceWorkspace({
 							</button>
 						)}
 
-						{/* Continue */}
 						<button
 							type="button"
 							onClick={onNext}
@@ -498,12 +408,8 @@ export default function InvoiceWorkspace({
 				)}
 			</div>
 
-			{/* =========================================================
-			    LIVE PREVIEW
-			========================================================= */}
 			<aside className="hidden min-w-0 lg:block">
 				<div className="sticky top-5 min-w-0 rounded-2xl border border-[#041E50] bg-[#041f5049] p-5 xl:p-6">
-					{/* Preview Header */}
 					<div className="mb-5 flex items-start justify-between gap-4">
 						<div className="min-w-0">
 							<p className="font-semibold uppercase tracking-[0.18em] text-blue-400">
@@ -522,7 +428,6 @@ export default function InvoiceWorkspace({
 						</div>
 					</div>
 
-					{/* Invoice Preview */}
 					<div className="invoice-preview-container flex min-w-0 max-w-full items-start justify-center overflow-auto rounded-xl border border-white/[0.06] bg-[#030c1c]/35 p-5">
 						<div
 							id="invoice-preview"

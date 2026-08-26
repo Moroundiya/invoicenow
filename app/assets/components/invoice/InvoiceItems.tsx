@@ -1,6 +1,5 @@
 "use client";
 
-import type { InvoiceItem } from "@/app/assets/types/invoiceType";
 import { InvoiceItemsProps } from "../../types/invoice";
 
 export default function InvoiceItems({

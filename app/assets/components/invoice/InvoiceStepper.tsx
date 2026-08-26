@@ -1,6 +1,5 @@
 "use client";
 
-import type { InvoiceStep } from "@/app/assets/layouts/invoice/CreateInvoiceLayout";
 import { InvoiceStepperProps } from "../../types/invoice";
 import { steps } from "../../data/invoiceSteps";
 
@@ -10,9 +9,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 			aria-label="Invoice creation steps"
 			className="w-full">
 			<div className="rounded-2xl border border-[#041E50] bg-[#041f5049] px-3 py-4 sm:px-5 sm:py-5">
-				{/* =====================================================
-				    DESKTOP
-				===================================================== */}
 				<div className="hidden items-center md:flex">
 					{steps.map((step, index) => {
 						const isActive = currentStep === step.number;
@@ -30,7 +26,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 												? "text-slate-300"
 												: "text-slate-500"
 									}`}>
-									{/* Step Number / Check */}
 									<div
 										className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border font-bold transition ${
 											isActive
@@ -70,7 +65,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 									</div>
 								</div>
 
-								{/* Connector */}
 								{index < steps.length - 1 && (
 									<div className="mx-4 h-px flex-1 bg-white/[0.07]" />
 								)}
@@ -79,9 +73,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 					})}
 				</div>
 
-				{/* =====================================================
-				    MOBILE
-				===================================================== */}
 				<div className="md:hidden">
 					<div className="mx-auto flex w-full max-w-md items-center justify-center">
 						{steps.map((step, index) => {
@@ -94,7 +85,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 									className={`flex items-center ${
 										index < steps.length - 1 ? "flex-1" : "shrink-0"
 									}`}>
-									{/* Step */}
 									<div className="flex shrink-0 items-center justify-center">
 										<div
 											className={`relative z-10 flex h-9 w-9 items-center justify-center rounded-lg border font-bold transition ${
@@ -122,7 +112,6 @@ export default function InvoiceStepper({ currentStep }: InvoiceStepperProps) {
 										</div>
 									</div>
 
-									{/* Connector */}
 									{index < steps.length - 1 && (
 										<div className="flex flex-1 items-center">
 											<div

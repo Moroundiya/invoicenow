@@ -19,7 +19,6 @@ export default function CreateInvoiceHeader() {
 			</Link>
 
 			<div className="flex items-center gap-2 sm:gap-3">
-				{/* Saved status */}
 				<div className="hidden items-center gap-2 rounded-full border border-emerald-400/15 bg-emerald-400/[0.04] px-4 py-2 sm:flex">
 					<span className="flex h-4 w-4 items-center justify-center rounded-full border border-emerald-400/40">
 						<svg
@@ -37,7 +36,6 @@ export default function CreateInvoiceHeader() {
 					<span className="text-xs font-medium text-emerald-300">Saved</span>
 				</div>
 
-				{/* Download */}
 				<button
 					type="button"
 					className="inline-flex h-10 items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-4 text-xs font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition-all duration-200 hover:from-blue-500 hover:to-cyan-500 sm:h-11 sm:px-5 sm:text-sm">

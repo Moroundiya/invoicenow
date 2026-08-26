@@ -126,8 +126,7 @@ export default function Footer() {
 	return (
 		<footer
 			ref={footerRef}
-			className="
-				relative
+			className="relative
 				block
 				w-full
 				overflow-hidden

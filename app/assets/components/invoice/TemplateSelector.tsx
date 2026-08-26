@@ -3,7 +3,6 @@
 import { invoiceTemplates } from "@/app/assets/data/invoiceTemplates";
 
 import TemplateCard from "./TemplateCard";
-import type { InvoiceTemplate } from "@/app/assets/types/invoiceType";
 import { TemplateSelectorProps } from "../../types/invoice";
 
 export default function TemplateSelector({

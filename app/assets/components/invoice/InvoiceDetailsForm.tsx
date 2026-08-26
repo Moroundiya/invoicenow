@@ -96,10 +96,6 @@ export default function InvoiceDetailsForm({
 
 	return (
 		<div className="space-y-6">
-			{/* ------------------------------------------------------------ */}
-			{/* Invoice Information */}
-			{/* ------------------------------------------------------------ */}
-
 			<FormSection
 				number="01"
 				title="Invoice information"
@@ -167,10 +163,6 @@ export default function InvoiceDetailsForm({
 					</FormField>
 				</div>
 			</FormSection>
-
-			{/* ------------------------------------------------------------ */}
-			{/* Business Details */}
-			{/* ------------------------------------------------------------ */}
 
 			<FormSection
 				number="02"
@@ -241,10 +233,6 @@ export default function InvoiceDetailsForm({
 				</div>
 			</FormSection>
 
-			{/* ------------------------------------------------------------ */}
-			{/* Client Details */}
-			{/* ------------------------------------------------------------ */}
-
 			<FormSection
 				number="03"
 				title="Bill to"
@@ -313,10 +301,6 @@ export default function InvoiceDetailsForm({
 					</FormField>
 				</div>
 			</FormSection>
-
-			{/* ------------------------------------------------------------ */}
-			{/* Items */}
-			{/* ------------------------------------------------------------ */}
 
 			<FormSection
 				number="04"
@@ -453,10 +437,6 @@ export default function InvoiceDetailsForm({
 				</div>
 			</FormSection>
 
-			{/* ------------------------------------------------------------ */}
-			{/* Totals */}
-			{/* ------------------------------------------------------------ */}
-
 			<FormSection
 				number="05"
 				title="Discount & tax"
@@ -555,10 +535,6 @@ export default function InvoiceDetailsForm({
 		</div>
 	);
 }
-
-/* -------------------------------------------------------------------------- */
-/* Reusable UI                                                                */
-/* -------------------------------------------------------------------------- */
 
 const inputClass =
 	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5  text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";

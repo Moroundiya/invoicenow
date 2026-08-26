@@ -6,7 +6,6 @@ export default function InvoiceHeader() {
 	return (
 		<header className="border-b border-white/[0.05] bg-[#020817]">
 			<div className="mx-auto flex h-[86px] max-w-[1720px] items-center justify-between px-5 sm:px-8 lg:px-10">
-				{/* Logo */}
 				<div className="flex items-center gap-3">
 					<div className="relative h-11 w-11 shrink-0">
 						<Image
@@ -29,7 +28,6 @@ export default function InvoiceHeader() {
 					</div>
 				</div>
 
-				{/* Header Actions */}
 				<div className="flex items-center gap-4 sm:gap-5">
 					<button
 						type="button"

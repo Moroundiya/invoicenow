@@ -2,13 +2,11 @@
 
 import InvoiceTemplateRenderer from "@/app/assets/components/invoice/templates/InvoiceTemplateRenderer";
 
-import type { InvoiceData } from "@/app/assets/types/invoiceType";
 import { InvoicePreviewProps } from "../../types/invoice";
 
 export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 	return (
 		<div className="space-y-6">
-			{/* Preview introduction */}
 			<div className="rounded-xl border border-blue-400/10 bg-[#030c1c]/60 p-4 sm:p-5">
 				<div className="flex items-start gap-3">
 					<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-blue-400/15 bg-blue-500/[0.07] text-blue-400">
@@ -41,9 +39,7 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 				</div>
 			</div>
 
-			{/* Invoice preview */}
 			<div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#020817]">
-				{/* Preview toolbar */}
 				<div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3 sm:px-5">
 					<div className="flex items-center gap-2">
 						<span className="h-2 w-2 rounded-full bg-emerald-400" />
@@ -58,7 +54,6 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 					</span>
 				</div>
 
-				{/* Paper area */}
 				<div className="overflow-auto bg-[#010611] p-3 sm:p-5 lg:p-8">
 					<div className="mx-auto w-full max-w-[760px] overflow-hidden rounded-sm bg-white shadow-[0_20px_70px_rgba(0,0,0,0.35)]">
 						<InvoiceTemplateRenderer invoice={invoice} />
@@ -66,7 +61,6 @@ export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 				</div>
 			</div>
 
-			{/* Review summary */}
 			<div className="grid gap-3 sm:grid-cols-3">
 				<PreviewSummary
 					label="Invoice"

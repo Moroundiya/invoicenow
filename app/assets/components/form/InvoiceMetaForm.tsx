@@ -1,6 +1,5 @@
 "use client";
 
-import type { InvoiceData } from "@/app/assets/types/invoiceType";
 import { FieldProps, InvoiceMetaFormProps } from "../../types/form";
 
 const currencies = [

@@ -68,7 +68,6 @@ export default function InvoiceItemsForm({
 
 	return (
 		<section className="rounded-2xl border border-white/[0.06] bg-[#030c1c]/60 p-5">
-			{/* Header */}
 			<div className="mb-5 flex items-start justify-between gap-4">
 				<div className="flex items-start gap-3">
 					<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-blue-400/15 bg-blue-500/[0.08] text-blue-400">
@@ -113,7 +112,6 @@ export default function InvoiceItemsForm({
 				</button>
 			</div>
 
-			{/* Items */}
 			<div className="space-y-3">
 				{items.length === 0 ? (
 					<div className="rounded-xl border border-dashed border-white/[0.08] bg-[#061329]/50 px-5 py-10 text-center">
@@ -219,7 +217,6 @@ export default function InvoiceItemsForm({
 				)}
 			</div>
 
-			{/* Discount / Tax */}
 			<div className="mt-5 grid gap-4 border-t border-white/[0.06] pt-5 sm:grid-cols-2">
 				<NumberField
 					label="Discount (%)"
@@ -242,7 +239,6 @@ export default function InvoiceItemsForm({
 				/>
 			</div>
 
-			{/* Summary */}
 			<div className="mt-5 rounded-xl border border-blue-400/10 bg-[#061329] p-4">
 				<div className="space-y-2.5 text-sm">
 					<div className="flex justify-between">

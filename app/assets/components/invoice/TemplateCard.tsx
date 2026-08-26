@@ -17,7 +17,6 @@ export default function TemplateCard({
 					? "border-blue-400/70 bg-blue-500/[0.07] shadow-[0_0_35px_rgba(0,119,255,0.14)]"
 					: "border-white/[0.08] bg-[#07152b]/70 hover:border-blue-400/30 hover:bg-blue-500/[0.03]"
 			}`}>
-			{/* Selection indicator */}
 			<div
 				className={`absolute right-4 top-4 z-30 flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 ${
 					selected
@@ -35,19 +34,11 @@ export default function TemplateCard({
 				</svg>
 			</div>
 
-			{/* =====================================================
-			    TEMPLATE PREVIEW
-			===================================================== */}
-
 			<div className="relative aspect-[0.9] overflow-hidden bg-transparent p-3">
 				<div className="h-full w-full overflow-hidden rounded-[7px] bg-white shadow-2xl transition-transform duration-500 group-hover:scale-[1.015]">
 					{getTemplatePreview(id)}
 				</div>
 			</div>
-
-			{/* =====================================================
-			    INFORMATION
-			===================================================== */}
 
 			<div className="border-t border-white/[0.06] px-4 py-4 sm:px-5 sm:py-5">
 				<div className="flex items-center justify-between gap-3">
@@ -65,10 +56,6 @@ export default function TemplateCard({
 	);
 }
 
-/* =========================================================
-   TEMPLATE PREVIEW SWITCHER
-========================================================= */
-
 function getTemplatePreview(template: InvoiceTemplate) {
 	if (template === "modern") {
 		return <ModernPreview />;
@@ -80,10 +67,6 @@ function getTemplatePreview(template: InvoiceTemplate) {
 
 	return <SimplePreview />;
 }
-
-/* =========================================================
-   SHARED SKELETONS
-========================================================= */
 
 function SkeletonLine({
 	className = "",
@@ -158,16 +141,10 @@ function TableSkeleton({
 	);
 }
 
-/* =========================================================
-   SIMPLE TEMPLATE
-========================================================= */
-
 function SimplePreview() {
 	return (
 		<div className="h-full overflow-hidden bg-white">
 			<div className="flex h-full flex-col px-[5%] py-[4%]">
-				{/* Header */}
-
 				<div className="flex items-start justify-between">
 					<div className="w-[45%]" />
 
@@ -182,8 +159,6 @@ function SimplePreview() {
 					</div>
 				</div>
 
-				{/* Bill From / Bill To */}
-
 				<div className="mt-[8%] grid grid-cols-2 overflow-hidden rounded-[4px] border border-[#b8d2ff]">
 					<SimpleAddressSkeleton />
 
@@ -192,16 +167,12 @@ function SimplePreview() {
 					</div>
 				</div>
 
-				{/* Table */}
-
 				<div className="mt-[5%]">
 					<TableSkeleton
 						columns={4}
 						rows={4}
 					/>
 				</div>
-
-				{/* Bottom */}
 
 				<div className="mt-[5%] grid grid-cols-[1.05fr_1.25fr] gap-[5%]">
 					<div className="rounded-[4px] border border-[#b8d2ff] p-[5%]">
@@ -235,8 +206,6 @@ function SimplePreview() {
 					</div>
 				</div>
 
-				{/* Footer */}
-
 				<div className="mt-auto border-t-2 border-[#2166df] pt-[3%]">
 					<div className="grid grid-cols-3 gap-3">
 						<SkeletonLine className="mx-auto h-[3px] w-[65%]" />
@@ -249,18 +218,10 @@ function SimplePreview() {
 	);
 }
 
-/* =========================================================
-   MODERN TEMPLATE
-========================================================= */
-
 function ModernPreview() {
 	return (
 		<div className="h-full overflow-hidden bg-[#061631]">
-			{/* Dark Header */}
-
 			<div className="relative h-[25%] overflow-hidden px-[5%] py-[5%]">
-				{/* Decorative circles */}
-
 				<div className="absolute -right-[18%] -top-[100%] h-[230%] w-[55%] rounded-full border-[12px] border-blue-600/10" />
 
 				<div className="absolute right-[-20%] top-[45%] h-[100%] w-[50%] rounded-full border-[10px] border-blue-500/10" />
@@ -294,11 +255,7 @@ function ModernPreview() {
 				</div>
 			</div>
 
-			{/* White Invoice Body */}
-
 			<div className="h-[75%] bg-white px-[5%] py-[3%]">
-				{/* Addresses */}
-
 				<div className="grid grid-cols-2 overflow-hidden rounded-[4px] border border-[#d2e1fa]">
 					<ModernAddressSkeleton />
 
@@ -307,8 +264,6 @@ function ModernPreview() {
 					</div>
 				</div>
 
-				{/* Items */}
-
 				<div className="mt-[3%]">
 					<TableSkeleton
 						columns={5}
@@ -316,8 +271,6 @@ function ModernPreview() {
 						headerClass="bg-[#092a62]"
 					/>
 				</div>
-
-				{/* Bottom */}
 
 				<div className="mt-[3%] grid grid-cols-[1.1fr_1.25fr] gap-[4%]">
 					<div className="rounded-[4px] border border-[#d2e1fa] p-[5%]">
@@ -351,8 +304,6 @@ function ModernPreview() {
 					</div>
 				</div>
 
-				{/* Footer */}
-
 				<div className="mt-[3%] border-t-2 border-[#2166df] pt-[2%]">
 					<div className="mx-auto h-[4px] w-[20%] rounded bg-[#0c387c]" />
 				</div>
@@ -361,20 +312,12 @@ function ModernPreview() {
 	);
 }
 
-/* =========================================================
-   CLASSIC TEMPLATE
-========================================================= */
-
 function ClassicPreview() {
 	return (
 		<div className="relative h-full overflow-hidden bg-white">
-			{/* Left blue line */}
-
 			<div className="absolute bottom-0 left-0 top-0 w-[5px] bg-[#1769ed]" />
 
 			<div className="h-full px-[7%] py-[5%]">
-				{/* Header */}
-
 				<div className="flex items-start justify-between">
 					<div>
 						<div className="h-[14px] w-[62px] rounded bg-black/90" />
@@ -402,8 +345,6 @@ function ClassicPreview() {
 						<div className="mt-2 ml-auto h-[3px] w-[65px] rounded bg-[#1769ed]" />
 					</div>
 				</div>
-
-				{/* Bill To / Payment */}
 
 				<div className="mt-[7%] grid grid-cols-2 gap-[9%]">
 					<div>
@@ -436,8 +377,6 @@ function ClassicPreview() {
 					</div>
 				</div>
 
-				{/* Table */}
-
 				<div className="mt-[6%]">
 					<TableSkeleton
 						columns={5}
@@ -445,8 +384,6 @@ function ClassicPreview() {
 						headerClass="bg-[#1769ed]"
 					/>
 				</div>
-
-				{/* Bottom */}
 
 				<div className="mt-[5%] grid grid-cols-[1.25fr_.9fr] gap-[8%]">
 					<div>
@@ -479,8 +416,6 @@ function ClassicPreview() {
 					</div>
 				</div>
 
-				{/* Footer */}
-
 				<div className="absolute bottom-[3%] left-[7%] right-[5%] border-t-2 border-[#1769ed] pt-[2%]">
 					<div className="grid grid-cols-3 gap-4">
 						<SkeletonLine className="mx-auto h-[3px] w-[70%]" />
@@ -492,10 +427,6 @@ function ClassicPreview() {
 		</div>
 	);
 }
-
-/* =========================================================
-   SKELETON ADDRESS
-========================================================= */
 
 function SimpleAddressSkeleton() {
 	return (
@@ -521,10 +452,6 @@ function SimpleAddressSkeleton() {
 		</div>
 	);
 }
-
-/* =========================================================
-   MODERN ADDRESS SKELETON
-========================================================= */
 
 function ModernAddressSkeleton() {
 	return (
@@ -554,10 +481,6 @@ function ModernAddressSkeleton() {
 	);
 }
 
-/* =========================================================
-   CLASSIC PAYMENT ROW
-========================================================= */
-
 function ClassicSkeletonRow() {
 	return (
 		<div className="grid grid-cols-[.85fr_.1fr_1.2fr] gap-1">
@@ -567,10 +490,6 @@ function ClassicSkeletonRow() {
 		</div>
 	);
 }
-
-/* =========================================================
-   TOTAL ROWS
-========================================================= */
 
 function SkeletonTotalRows() {
 	return (

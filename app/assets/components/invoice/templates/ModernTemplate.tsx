@@ -13,15 +13,9 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 		swift_code?: string;
 	};
 
-	/*
-	 * Support all possible SWIFT field names.
-	 */
 	const swiftCode =
 		payment.swiftCode || payment.swift || payment.swift_code || "";
 
-	/*
-	 * Calculate totals
-	 */
 	const subtotal = invoice.items.reduce(
 		(total, item) => total + item.quantity * item.rate,
 		0,
@@ -41,9 +35,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 			currency: invoice.currency || "USD",
 		}).format(amount);
 
-	/*
-	 * Business location
-	 */
 	const fromLocation = [
 		invoice.from.address,
 		invoice.from.city,
@@ -52,9 +43,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 		.filter(Boolean)
 		.join(", ");
 
-	/*
-	 * Client location
-	 */
 	const clientLocation = [
 		invoice.billTo.address,
 		invoice.billTo.city,
@@ -70,9 +58,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 		!!swiftCode ||
 		!!payment.method;
 
-	/*
-	 * Signature
-	 */
 	const hasSignature = !!invoice.signature?.image;
 
 	return (
@@ -86,10 +71,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				padding: 0,
 				boxSizing: "border-box",
 			}}>
-			{/* =========================================================
-			    HEADER
-			========================================================= */}
-
 			<div
 				className="relative overflow-hidden px-7 py-7"
 				style={{
@@ -97,7 +78,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						"linear-gradient(135deg, #101827 0%, #17243a 55%, #0d1422 100%)",
 					color: "#ffffff",
 				}}>
-				{/* Top-right decorative circle */}
 				<div
 					className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-20"
 					style={{
@@ -105,7 +85,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					}}
 				/>
 
-				{/* Bottom-left decorative circle */}
 				<div
 					className="pointer-events-none absolute -bottom-28 -left-24 h-56 w-56 rounded-full opacity-10"
 					style={{
@@ -114,7 +93,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				/>
 
 				<div className="relative z-10 flex items-start justify-between gap-8">
-					{/* Invoice information */}
 					<div className="min-w-0 flex-1">
 						<h1 className="text-[32px] font-bold leading-none tracking-tight">
 							INVOICE
@@ -162,7 +140,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						</div>
 					</div>
 
-					{/* Brand */}
 					<div className="flex w-[175px] shrink-0 flex-col items-end text-right">
 						{invoice.branding.logo ? (
 							<img
@@ -191,13 +168,8 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				</div>
 			</div>
 
-			{/* =========================================================
-			    BILL TO / PAYMENT INFO
-			========================================================= */}
-
 			<div className="px-7 py-6">
 				<div className="grid grid-cols-[1fr_1fr] gap-8">
-					{/* Bill To */}
 					<div className="min-w-0">
 						<div className="mb-3 flex items-center gap-2">
 							<div
@@ -262,7 +234,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						</div>
 					</div>
 
-					{/* Payment Info */}
 					<div
 						className="min-w-0 rounded-xl border px-4 py-3.5"
 						style={{
@@ -359,13 +330,8 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				</div>
 			</div>
 
-			{/* =========================================================
-			    ITEMS TABLE
-			========================================================= */}
-
 			<div className="px-7">
 				<div className="overflow-hidden rounded-lg border border-slate-300">
-					{/* Header */}
 					<div
 						className="grid grid-cols-[42px_minmax(0,1fr)_minmax(75px,108px)_55px_minmax(75px,108px)] items-center text-[10px] font-bold uppercase tracking-wide text-white"
 						style={{
@@ -390,18 +356,15 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						<div className="min-w-0 px-2 py-2 text-right">Total</div>
 					</div>
 
-					{/* Rows */}
 					{invoice.items.length > 0 ? (
 						invoice.items.map((item, index) => (
 							<div
 								key={item.id}
 								className="grid grid-cols-[42px_minmax(0,1fr)_minmax(75px,108px)_55px_minmax(75px,108px)] items-stretch border-t border-slate-200 text-[11px]">
-								{/* No */}
 								<div className="flex min-w-0 items-center justify-center border-r border-slate-200 px-2 py-3">
 									{String(index + 1).padStart(2, "0")}
 								</div>
 
-								{/* Description */}
 								<div className="min-w-0 border-r border-slate-200 px-3 py-3">
 									<p className="break-words font-semibold">
 										{item.description || "Item description"}
@@ -414,19 +377,16 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									)}
 								</div>
 
-								{/* Unit Price */}
 								<div className="flex min-w-0 items-center justify-end border-r border-slate-200 px-2 py-3 text-right">
 									<span className="min-w-0 max-w-full break-all text-[10px] leading-tight">
 										{formatMoney(item.rate)}
 									</span>
 								</div>
 
-								{/* Quantity */}
 								<div className="flex min-w-0 items-center justify-center border-r border-slate-200 px-2 py-3">
 									<span className="whitespace-nowrap">{item.quantity}</span>
 								</div>
 
-								{/* Total */}
 								<div className="flex min-w-0 items-center justify-end px-2 py-3 text-right font-medium">
 									<span className="min-w-0 max-w-full break-all text-[10px] leading-tight">
 										{formatMoney(item.quantity * item.rate)}
@@ -442,13 +402,8 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				</div>
 			</div>
 
-			{/* =========================================================
-			    BOTTOM SECTION
-			========================================================= */}
-
 			<div className="px-7 py-6">
 				<div className="grid grid-cols-[1fr_1fr] gap-4">
-					{/* Notes / Contact */}
 					<div className="min-w-0">
 						<h3
 							className="text-[12px] font-bold uppercase tracking-wide"
@@ -487,14 +442,12 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							}}
 						/>
 
-						{/* Contact */}
 						<div className="mt-4 flex gap-3">
 							<div
 								className="flex w-7 shrink-0 flex-col items-center justify-center gap-2 rounded-lg py-2 text-white"
 								style={{
 									backgroundColor: "#172033",
 								}}>
-								{/* Phone */}
 								<svg
 									width="11"
 									height="11"
@@ -505,7 +458,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z" />
 								</svg>
 
-								{/* Email */}
 								<svg
 									width="11"
 									height="11"
@@ -556,9 +508,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 						</div>
 					</div>
 
-					{/* Totals + Signature */}
 					<div className="min-w-0">
-						{/* Totals */}
 						<div
 							className="rounded-lg border px-2 py-3.5"
 							style={{
@@ -606,7 +556,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								}}
 							/>
 
-							{/* Grand Total */}
 							<div className="flex min-w-0 items-start justify-between gap-3">
 								<span
 									className="min-w-0 shrink text-[14px] font-bold uppercase"
@@ -625,10 +574,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								</span>
 							</div>
 						</div>
-
-						{/* =====================================================
-						    SIGNATURE
-						===================================================== */}
 
 						{hasSignature && (
 							<div className="mt-8 ml-auto w-full max-w-[220px] text-center">
@@ -656,10 +601,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 					</div>
 				</div>
 			</div>
-
-			{/* =========================================================
-			    FOOTER
-			========================================================= */}
 
 			<div
 				className="px-7 py-3"

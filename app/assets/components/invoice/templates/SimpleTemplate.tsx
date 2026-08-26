@@ -56,10 +56,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 					boxSizing: "border-box",
 					overflow: "hidden",
 				}}>
-				{/* =====================================================
-				    HEADER
-				===================================================== */}
-
 				<div
 					style={{
 						width: "100%",
@@ -70,16 +66,12 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 						gap: "28px",
 						boxSizing: "border-box",
 					}}>
-					{/* Empty left side */}
-
 					<div
 						style={{
 							flex: "1 1 0%",
 							minWidth: 0,
 						}}
 					/>
-
-					{/* Invoice Information */}
 
 					<div
 						style={{
@@ -125,10 +117,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 					</div>
 				</div>
 
-				{/* =====================================================
-				    BILL FROM / BILL TO
-				===================================================== */}
-
 				<div
 					style={{
 						width: "100%",
@@ -141,8 +129,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 						overflow: "hidden",
 						boxSizing: "border-box",
 					}}>
-					{/* Bill From */}
-
 					<div
 						style={{
 							minWidth: 0,
@@ -205,8 +191,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 							)}
 						</div>
 					</div>
-
-					{/* Bill To */}
 
 					<div
 						style={{
@@ -271,12 +255,7 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 					</div>
 				</div>
 
-				{/* =====================================================
-				    ITEMS TABLE
-				===================================================== */}
-
 				<div className="mt-[21px] w-full max-w-full overflow-hidden rounded-[5px] border border-[#dbe3f0] box-border">
-					{/* Table Header */}
 					<div
 						className="grid w-full grid-cols-[minmax(0,1fr)_45px_minmax(0,75px)_minmax(0,80px)] items-stretch gap-0 bg-[var(--primary-color)] text-[10px] font-bold uppercase tracking-[0.2px] text-white"
 						style={
@@ -284,33 +263,27 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 								"--primary-color": primaryColor,
 							} as React.CSSProperties
 						}>
-						{/* Description */}
 						<div className="flex min-w-0 items-center border-r border-white/30 px-2 py-[5px] box-border">
 							Description
 						</div>
 
-						{/* Quantity */}
 						<div className="flex min-w-0 items-center justify-center border-r border-white/30 px-[5px] py-[5px] text-center box-border">
 							Qty
 						</div>
 
-						{/* Rate */}
 						<div className="flex min-w-0 items-center justify-end border-r border-white/30 px-[7px] py-[5px] text-right box-border">
 							Rate
 						</div>
 
-						{/* Amount */}
 						<div className="flex min-w-0 items-center justify-end px-[7px] py-[5px] text-right box-border">
 							Amount
 						</div>
 					</div>
 
-					{/* Table Rows */}
 					{invoice.items.map((item, index) => (
 						<div
 							key={item.id}
 							className="grid w-full grid-cols-[minmax(0,1fr)_45px_minmax(0,75px)_minmax(0,80px)] items-stretch gap-0 border-t border-[#dbe3f0] text-[11px] box-border">
-							{/* Description */}
 							<div className="flex min-w-0 flex-col justify-center overflow-hidden border-r border-[#dbe3f0] px-2 py-[7px] box-border">
 								<div className="break-words text-[11.5px] font-semibold leading-[1.35] text-[#172033]">
 									{item.description || "Item description"}
@@ -323,34 +296,26 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 								)}
 							</div>
 
-							{/* Quantity */}
 							<div className="flex min-w-0 items-center justify-center border-r border-[#dbe3f0] px-[5px] py-[7px] text-center box-border">
 								{item.quantity}
 							</div>
 
-							{/* Rate */}
 							<div className="flex min-w-0 max-w-full items-center justify-end overflow-hidden border-r border-[#dbe3f0] px-[7px] py-[7px] text-right leading-[1.2] box-border whitespace-normal break-all">
 								{formatMoney(item.rate)}
 							</div>
 
-							{/* Amount */}
 							<div className="flex min-w-0 max-w-full items-center justify-end overflow-hidden px-[7px] py-[7px] text-right font-semibold leading-[1.2] box-border whitespace-normal break-all">
 								{formatMoney(item.quantity * item.rate)}
 							</div>
 						</div>
 					))}
 
-					{/* Empty State */}
 					{invoice.items.length === 0 && (
 						<div className="border-t border-[#dbe3f0] px-[10px] py-[18px] text-center text-[10.5px] text-[#94a3b8]">
 							No invoice items
 						</div>
 					)}
 				</div>
-
-				{/* =====================================================
-				    TOTALS
-				===================================================== */}
 
 				<div
 					style={{
@@ -452,10 +417,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 					</div>
 				</div>
 
-				{/* =====================================================
-				    FOOTER
-				===================================================== */}
-
 				<div
 					style={{
 						width: "100%",
@@ -468,8 +429,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 						borderTop: "1px solid #dbe3f0",
 						boxSizing: "border-box",
 					}}>
-					{/* Payment Information */}
-
 					<div
 						style={{
 							minWidth: 0,
@@ -511,8 +470,6 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 							)}
 						</div>
 					</div>
-
-					{/* Notes */}
 
 					<div
 						style={{
