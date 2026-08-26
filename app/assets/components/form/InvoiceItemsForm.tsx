@@ -1,16 +1,11 @@
 "use client";
 
 import type { InvoiceItem } from "@/app/assets/types/invoiceType";
-
-interface InvoiceItemsFormProps {
-	items: InvoiceItem[];
-	currency: string;
-	discount: number;
-	tax: number;
-	onItemsChange: (items: InvoiceItem[]) => void;
-	onDiscountChange: (discount: number) => void;
-	onTaxChange: (tax: number) => void;
-}
+import {
+	FieldProps,
+	InvoiceItemsFormProps,
+	NumberFieldProps,
+} from "../../types/form";
 
 export default function InvoiceItemsForm({
 	items,
@@ -289,17 +284,6 @@ export default function InvoiceItemsForm({
 	);
 }
 
-/* ---------------------------------------------
-   Reusable text field
---------------------------------------------- */
-
-interface FieldProps {
-	label: string;
-	value: string;
-	placeholder?: string;
-	onChange: (value: string) => void;
-}
-
 function Field({ label, value, placeholder, onChange }: FieldProps) {
 	return (
 		<label className="block">
@@ -318,19 +302,6 @@ function Field({ label, value, placeholder, onChange }: FieldProps) {
 	);
 }
 
-/* ---------------------------------------------
-   Reusable number field
---------------------------------------------- */
-
-interface NumberFieldProps {
-	label: string;
-	value: number;
-	min?: number;
-	max?: number;
-	step?: number;
-	onChange: (value: number) => void;
-}
-
 function NumberField({
 	label,
 	value,
@@ -344,7 +315,6 @@ function NumberField({
 			<span className="mb-1.5 block text-xs font-medium text-slate-400">
 				{label}
 			</span>
-
 			<input
 				type="number"
 				min={min}

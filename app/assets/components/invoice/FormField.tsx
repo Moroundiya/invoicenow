@@ -1,11 +1,4 @@
-interface FormFieldProps {
-	label: string;
-	placeholder?: string;
-	value: string | number;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	type?: string;
-	required?: boolean;
-}
+import { FormFieldProps } from "../../types/invoice";
 
 export default function FormField({
 	label,

@@ -1,11 +1,7 @@
 "use client";
 
 import type { InvoiceData, InvoiceItem } from "@/app/assets/types/invoiceType";
-
-interface InvoiceDetailsFormProps {
-	invoice: InvoiceData;
-	onInvoiceChange: (updates: Partial<InvoiceData>) => void;
-}
+import { InvoiceDetailsFormProps } from "../../types/invoice";
 
 export default function InvoiceDetailsForm({
 	invoice,

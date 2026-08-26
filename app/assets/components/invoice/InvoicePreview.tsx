@@ -3,10 +3,7 @@
 import InvoiceTemplateRenderer from "@/app/assets/components/invoice/templates/InvoiceTemplateRenderer";
 
 import type { InvoiceData } from "@/app/assets/types/invoiceType";
-
-interface InvoicePreviewProps {
-	invoice: InvoiceData;
-}
+import { InvoicePreviewProps } from "../../types/invoice";
 
 export default function InvoicePreview({ invoice }: InvoicePreviewProps) {
 	return (

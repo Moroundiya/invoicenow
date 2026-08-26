@@ -1,12 +1,5 @@
 import type { InvoiceTemplate } from "@/app/assets/types/invoiceType";
-
-interface TemplateCardProps {
-	id: InvoiceTemplate;
-	name: string;
-	description: string;
-	selected: boolean;
-	onSelect: (template: InvoiceTemplate) => void;
-}
+import { TemplateCardProps } from "../../types/invoice";
 
 export default function TemplateCard({
 	id,
@@ -64,8 +57,6 @@ export default function TemplateCard({
 						}`}>
 						{name}
 					</h3>
-
-					
 				</div>
 
 				<p className="mt-1.5 leading-5 text-slate-500">{description}</p>

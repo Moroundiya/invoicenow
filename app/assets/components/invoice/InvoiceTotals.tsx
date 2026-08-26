@@ -1,12 +1,4 @@
-interface InvoiceTotalsProps {
-	subtotal: number;
-	discount: number;
-	tax: number;
-	currency: string;
-
-	onDiscountChange: (value: number) => void;
-	onTaxChange: (value: number) => void;
-}
+import { InvoiceTotalsProps } from "../../types/invoice";
 
 export default function InvoiceTotals({
 	subtotal,

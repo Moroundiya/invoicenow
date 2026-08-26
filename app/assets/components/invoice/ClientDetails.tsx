@@ -1,10 +1,5 @@
+import { ClientDetailsProps } from "../../types/invoice";
 import FormField from "./FormField";
-import type { ClientDetails as ClientDetailsType } from "@/app/assets/types/invoiceType";
-
-interface ClientDetailsProps {
-	value: ClientDetailsType;
-	onChange: (field: keyof ClientDetailsType, value: string) => void;
-}
 
 export default function ClientDetails({ value, onChange }: ClientDetailsProps) {
 	return (

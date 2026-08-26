@@ -1,10 +1,5 @@
+import { BusinessDetailsProps } from "../../types/invoice";
 import FormField from "./FormField";
-import type { BusinessDetails as BusinessDetailsType } from "@/app/assets/types/invoiceType";
-
-interface BusinessDetailsProps {
-	value: BusinessDetailsType;
-	onChange: (field: keyof BusinessDetailsType, value: string) => void;
-}
 
 export default function BusinessDetails({
 	value,

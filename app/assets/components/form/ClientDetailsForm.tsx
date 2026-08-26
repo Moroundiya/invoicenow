@@ -1,11 +1,7 @@
 "use client";
 
 import type { ClientDetails } from "@/app/assets/types/invoiceType";
-
-interface ClientDetailsFormProps {
-	value: ClientDetails;
-	onChange: (value: ClientDetails) => void;
-}
+import { ClientDetailsFormProps, FieldProps } from "../../types/form";
 
 export default function ClientDetailsForm({
 	value,
@@ -101,14 +97,6 @@ export default function ClientDetailsForm({
 	);
 }
 
-interface FieldProps {
-	label: string;
-	value: string;
-	placeholder?: string;
-	type?: string;
-	onChange: (value: string) => void;
-}
-
 function Field({
 	label,
 	value,
@@ -121,7 +109,6 @@ function Field({
 			<span className="mb-1.5 block text-xs font-medium text-slate-400">
 				{label}
 			</span>
-
 			<input
 				type={type}
 				value={value}

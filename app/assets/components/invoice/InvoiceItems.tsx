@@ -1,22 +1,7 @@
 "use client";
 
 import type { InvoiceItem } from "@/app/assets/types/invoiceType";
-
-interface InvoiceItemsProps {
-	items: InvoiceItem[];
-
-	currency: string;
-
-	onAdd: () => void;
-
-	onRemove: (id: string) => void;
-
-	onChange: (
-		id: string,
-		field: keyof InvoiceItem,
-		value: string | number,
-	) => void;
-}
+import { InvoiceItemsProps } from "../../types/invoice";
 
 export default function InvoiceItems({
 	items,

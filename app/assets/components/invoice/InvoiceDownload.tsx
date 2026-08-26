@@ -7,11 +7,7 @@ import { createRoot, type Root } from "react-dom/client";
 
 import type { InvoiceData } from "@/app/assets/types/invoiceType";
 import InvoiceTemplateRenderer from "./templates/InvoiceTemplateRenderer";
-
-interface InvoiceDownloadProps {
-	invoice: InvoiceData;
-	fileName?: string;
-}
+import { InvoiceDownloadProps } from "../../types/invoice";
 
 export default function InvoiceDownload({
 	invoice,

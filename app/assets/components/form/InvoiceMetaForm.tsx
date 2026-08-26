@@ -1,11 +1,7 @@
 "use client";
 
 import type { InvoiceData } from "@/app/assets/types/invoiceType";
-
-interface InvoiceMetaFormProps {
-	invoice: InvoiceData;
-	onChange: (updates: Partial<InvoiceData>) => void;
-}
+import { FieldProps, InvoiceMetaFormProps } from "../../types/form";
 
 const currencies = [
 	{ code: "USD", name: "US Dollar", symbol: "$" },
@@ -109,14 +105,6 @@ export default function InvoiceMetaForm({
 			</div>
 		</section>
 	);
-}
-
-interface FieldProps {
-	label: string;
-	value: string;
-	placeholder?: string;
-	type?: string;
-	onChange: (value: string) => void;
 }
 
 function Field({

@@ -7,12 +7,8 @@ import {
 	type ChangeEvent,
 	type PointerEvent,
 } from "react";
-import type { InvoiceData } from "@/app/assets/types/invoiceType";
-
-interface InvoiceCustomizeFormProps {
-	invoice: InvoiceData;
-	onInvoiceChange: (updates: Partial<InvoiceData>) => void;
-}
+import { InvoiceCustomizeFormProps, TextareaFieldProps } from "../../types/invoice";
+import { InvoiceData } from "../../types/invoiceType";
 
 export default function InvoiceCustomizeForm({
 	invoice,
@@ -539,13 +535,6 @@ function FormField({
 /* ============================================
    TEXTAREA FIELD
 ============================================ */
-
-interface TextareaFieldProps {
-	label: string;
-	value: string;
-	onChange: (value: string) => void;
-	placeholder?: string;
-}
 
 function TextareaField({
 	label,

@@ -1,16 +1,5 @@
+import { InvoiceMetaProps } from "../../types/invoice";
 import FormField from "./FormField";
-
-interface InvoiceMetaProps {
-	invoiceNumber: string;
-	issueDate: string;
-	dueDate: string;
-	currency: string;
-
-	onChange: (
-		field: "invoiceNumber" | "issueDate" | "dueDate" | "currency",
-		value: string,
-	) => void;
-}
 
 export default function InvoiceMeta({
 	invoiceNumber,

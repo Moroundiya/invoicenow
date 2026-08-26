@@ -4,11 +4,7 @@ import { invoiceTemplates } from "@/app/assets/data/invoiceTemplates";
 
 import TemplateCard from "./TemplateCard";
 import type { InvoiceTemplate } from "@/app/assets/types/invoiceType";
-
-interface TemplateSelectorProps {
-	selectedTemplate: InvoiceTemplate;
-	onTemplateChange: (template: InvoiceTemplate) => void;
-}
+import { TemplateSelectorProps } from "../../types/invoice";
 
 export default function TemplateSelector({
 	selectedTemplate,
@@ -16,8 +12,6 @@ export default function TemplateSelector({
 }: TemplateSelectorProps) {
 	return (
 		<section>
-			
-
 			<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 				{invoiceTemplates.map((template) => (
 					<TemplateCard

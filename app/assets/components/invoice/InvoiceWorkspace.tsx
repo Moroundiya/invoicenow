@@ -1,13 +1,12 @@
 "use client";
 
-import success from '@/app/assets/images/success.png'
+import success from "@/app/assets/images/success.png";
 
 import TemplateSelector from "./TemplateSelector";
 import InvoiceTemplateRenderer from "./templates/InvoiceTemplateRenderer";
 import InvoiceDetailsForm from "./InvoiceDetailsForm";
 import InvoiceCustomizeForm from "./InvoiceCustomizeForm";
 import InvoiceDownload from "./InvoiceDownload";
-
 
 import { useRef } from "react";
 import gsap from "gsap";
@@ -20,51 +19,8 @@ import type {
 
 import type { InvoiceStep } from "@/app/assets/layouts/invoice/CreateInvoiceLayout";
 import Image from "next/image";
-
-interface InvoiceWorkspaceProps {
-	currentStep: InvoiceStep;
-	invoice: InvoiceData;
-	onTemplateChange: (template: InvoiceTemplate) => void;
-	onInvoiceChange: (updates: Partial<InvoiceData>) => void;
-	onNext: () => void;
-	onBack: () => void;
-	onCreateAnother: () => void;
-}
-
-const content: Record<
-	InvoiceStep,
-	{
-		label: string;
-		title: string;
-		description: string;
-	}
-> = {
-	1: {
-		label: "Step 1",
-		title: "Choose Template",
-		description: "Select a professional invoice template.",
-	},
-	2: {
-		label: "Step 2",
-		title: "Invoice Details",
-		description: "Add your company, client, and invoice information.",
-	},
-	3: {
-		label: "Step 3",
-		title: "Customize",
-		description: "Make the invoice match your brand.",
-	},
-	4: {
-		label: "Step 4",
-		title: "Preview",
-		description: "Review your completed invoice.",
-	},
-	5: {
-		label: "Step 5",
-		title: "Download",
-		description: "Download your finished invoice.",
-	},
-};
+import { InvoiceWorkspaceProps } from "../../types/invoice";
+import { content } from "../../data/content";
 
 export default function InvoiceWorkspace({
 	currentStep,
@@ -86,200 +42,198 @@ export default function InvoiceWorkspace({
 	const createAnotherRef = useRef<HTMLButtonElement>(null);
 	const bottomTextRef = useRef<HTMLParagraphElement>(null);
 
-useGSAP(
-	() => {
-		if (currentStep !== 5) return;
+	useGSAP(
+		() => {
+			if (currentStep !== 5) return;
 
-		const emoji = successRef.current;
-		const container = successContainerRef.current;
-		const content = successContentRef.current;
-		const title = successTitleRef.current;
-		const description = successDescriptionRef.current;
-		const download = downloadRef.current;
-		const divider = dividerRef.current;
-		const createAnother = createAnotherRef.current;
-		const bottomText = bottomTextRef.current;
+			const emoji = successRef.current;
+			const container = successContainerRef.current;
+			const content = successContentRef.current;
+			const title = successTitleRef.current;
+			const description = successDescriptionRef.current;
+			const download = downloadRef.current;
+			const divider = dividerRef.current;
+			const createAnother = createAnotherRef.current;
+			const bottomText = bottomTextRef.current;
 
-		if (
-			!emoji ||
-			!container ||
-			!content ||
-			!title ||
-			!description ||
-			!download ||
-			!divider ||
-			!createAnother ||
-			!bottomText
-		) {
-			return;
-		}
+			if (
+				!emoji ||
+				!container ||
+				!content ||
+				!title ||
+				!description ||
+				!download ||
+				!divider ||
+				!createAnother ||
+				!bottomText
+			) {
+				return;
+			}
 
-		/*
+			/*
 		=========================================================
 		INITIAL STATES
 		=========================================================
 		*/
 
-		gsap.set(container, {
-			opacity: 0,
-			y: 25,
-		});
-
-		gsap.set(emoji, {
-			opacity: 0,
-			scale: 0.45,
-			y: 30,
-			rotation: -10,
-			transformOrigin: "50% 50%",
-		});
-
-		gsap.set(
-			[title, description, download, divider, createAnother, bottomText],
-			{
+			gsap.set(container, {
 				opacity: 0,
-				y: 18,
-			},
-		);
+				y: 25,
+			});
 
-		/*
+			gsap.set(emoji, {
+				opacity: 0,
+				scale: 0.45,
+				y: 30,
+				rotation: -10,
+				transformOrigin: "50% 50%",
+			});
+
+			gsap.set(
+				[title, description, download, divider, createAnother, bottomText],
+				{
+					opacity: 0,
+					y: 18,
+				},
+			);
+
+			/*
 		=========================================================
 		MAIN ENTRANCE TIMELINE
 		=========================================================
 		*/
 
-		const tl = gsap.timeline({
-			defaults: {
-				ease: "power3.out",
-			},
-		});
+			const tl = gsap.timeline({
+				defaults: {
+					ease: "power3.out",
+				},
+			});
 
-		// Main card
-		tl.to(container, {
-			opacity: 1,
-			y: 0,
-			duration: 0.55,
-		});
-
-		// Success emoji
-		tl.to(
-			emoji,
-			{
-				opacity: 1,
-				scale: 1,
-				y: 0,
-				rotation: 0,
-				duration: 0.8,
-				ease: "back.out(1.8)",
-			},
-			"-=0.25",
-		);
-
-		// Title
-		tl.to(
-			title,
-			{
+			// Main card
+			tl.to(container, {
 				opacity: 1,
 				y: 0,
-				duration: 0.45,
-			},
-			"-=0.35",
-		);
+				duration: 0.55,
+			});
 
-		// Description
-		tl.to(
-			description,
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-			},
-			"-=0.25",
-		);
+			// Success emoji
+			tl.to(
+				emoji,
+				{
+					opacity: 1,
+					scale: 1,
+					y: 0,
+					rotation: 0,
+					duration: 0.8,
+					ease: "back.out(1.8)",
+				},
+				"-=0.25",
+			);
 
-		// Download button
-		tl.to(
-			download,
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.5,
-				ease: "back.out(1.4)",
-			},
-			"-=0.15",
-		);
+			// Title
+			tl.to(
+				title,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.45,
+				},
+				"-=0.35",
+			);
 
-		// Divider
-		tl.to(
-			divider,
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.4,
-			},
-			"-=0.15",
-		);
+			// Description
+			tl.to(
+				description,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.4,
+				},
+				"-=0.25",
+			);
 
-		// Create Another Invoice
-		tl.to(
-			createAnother,
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.45,
-				ease: "back.out(1.3)",
-			},
-			"-=0.15",
-		);
+			// Download button
+			tl.to(
+				download,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.5,
+					ease: "back.out(1.4)",
+				},
+				"-=0.15",
+			);
 
-		// Bottom text
-		tl.to(
-			bottomText,
-			{
-				opacity: 1,
-				y: 0,
-				duration: 0.35,
-			},
-			"-=0.2",
-		);
+			// Divider
+			tl.to(
+				divider,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.4,
+				},
+				"-=0.15",
+			);
 
-		/*
+			// Create Another Invoice
+			tl.to(
+				createAnother,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.45,
+					ease: "back.out(1.3)",
+				},
+				"-=0.15",
+			);
+
+			// Bottom text
+			tl.to(
+				bottomText,
+				{
+					opacity: 1,
+					y: 0,
+					duration: 0.35,
+				},
+				"-=0.2",
+			);
+
+			/*
 		=========================================================
 		EMOJI FLOATING ANIMATION
 		=========================================================
 		*/
 
-		gsap.to(emoji, {
-			y: -7,
-			rotation: 2,
-			duration: 1.8,
-			ease: "sine.inOut",
-			yoyo: true,
-			repeat: -1,
-			delay: 1.2,
-		});
+			gsap.to(emoji, {
+				y: -7,
+				rotation: 2,
+				duration: 1.8,
+				ease: "sine.inOut",
+				yoyo: true,
+				repeat: -1,
+				delay: 1.2,
+			});
 
-		/*
+			/*
 		=========================================================
 		EMOJI BREATHING / SUBTLE PULSE
 		=========================================================
 		*/
 
-		gsap.to(emoji, {
-			scale: 1.035,
-			duration: 1.5,
-			ease: "sine.inOut",
-			yoyo: true,
-			repeat: -1,
-			delay: 1.2,
-		});
-	},
-	{
-		dependencies: [currentStep],
-		revertOnUpdate: true,
-	},
-);
-
-
+			gsap.to(emoji, {
+				scale: 1.035,
+				duration: 1.5,
+				ease: "sine.inOut",
+				yoyo: true,
+				repeat: -1,
+				delay: 1.2,
+			});
+		},
+		{
+			dependencies: [currentStep],
+			revertOnUpdate: true,
+		},
+	);
 
 	return (
 		<section className="grid min-w-0 w-full gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:gap-7">
