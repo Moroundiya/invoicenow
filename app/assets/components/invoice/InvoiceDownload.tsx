@@ -577,7 +577,7 @@ export default function InvoiceDownload({
 					type="button"
 					onClick={downloadPDF}
 					disabled={downloading}
-					className="inline-flex h-11 py-4 flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500 disabled:pointer-events-none disabled:opacity-50">
+					className="inline-flex h-11 py-4 flex-1 items-center justify-center gap-2 rounded-xl cursor-pointer bg-gradient-to-r from-blue-600 to-blue-500 px-5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500 disabled:pointer-events-none disabled:opacity-50">
 					{isDownloading === "pdf" ? (
 						<>
 							<span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -611,7 +611,7 @@ export default function InvoiceDownload({
 					type="button"
 					onClick={downloadPNG}
 					disabled={downloading}
-					className="inline-flex h-11 py-4 flex-1 items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 text-sm font-semibold text-blue-400 transition hover:border-blue-400/25 hover:bg-blue-500/10 disabled:pointer-events-none disabled:opacity-50">
+					className="inline-flex h-11 py-4 flex-1 items-center justify-center cursor-pointer gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 text-sm font-semibold text-blue-400 transition hover:border-blue-400/25 hover:bg-blue-500/10 disabled:pointer-events-none disabled:opacity-50">
 					{isDownloading === "png" ? (
 						<>
 							<span className="h-4 w-4 animate-spin rounded-full border-2 border-blue-400/30 border-t-blue-400" />

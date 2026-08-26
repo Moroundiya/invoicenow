@@ -61,7 +61,6 @@ export default function Questions() {
 			className="grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-x-8">
 			{faqs.map((faq, index) => {
 				const isOpen = openIndex === index;
-
 				return (
 					<div
 						key={faq.question}

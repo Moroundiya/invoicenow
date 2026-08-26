@@ -182,8 +182,6 @@ export default function Footer() {
 							max-w-md
 							px-2
 							font-inter
-							text-sm
-							leading-relaxed
 							text-white/50
 							lg:my-5
 						">

@@ -10,13 +10,7 @@ body {
     --font-italianno: var(--font-italianno);
 }
 
-::-webkit-scrollbar {
-    /* display: none; */
-}
-
 * {
-    /* scrollbar-width: none; */
-    /* -ms-overflow-style: none; */
     scroll-behavior: smooth;
 }
 

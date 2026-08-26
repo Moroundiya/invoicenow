@@ -462,7 +462,7 @@ useGSAP(
 								ref={createAnotherRef}
 								type="button"
 								onClick={onCreateAnother}
-								className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.10] hover:text-blue-300">
+								className="inline-flex h-11 w-full items-center cursor-pointer justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.10] hover:text-blue-300">
 								<svg
 									width="17"
 									height="17"

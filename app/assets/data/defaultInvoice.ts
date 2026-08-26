@@ -5,8 +5,6 @@ export const defaultInvoice: InvoiceData = {
 
 	invoiceNumber: "INV-001",
 
-	// Do not use new Date() here.
-	// This object can be rendered on both server and client.
 	issueDate: "",
 
 	dueDate: "",

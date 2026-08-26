@@ -1,11 +1,7 @@
 "use client";
 
 import type { BusinessDetails } from "@/app/assets/types/invoiceType";
-
-interface BusinessDetailsFormProps {
-	value: BusinessDetails;
-	onChange: (value: BusinessDetails) => void;
-}
+import { BusinessDetailsFormProps, FieldProps } from "../../types/form";
 
 export default function BusinessDetailsForm({
 	value,
@@ -97,14 +93,6 @@ export default function BusinessDetailsForm({
 			</div>
 		</section>
 	);
-}
-
-interface FieldProps {
-	label: string;
-	value: string;
-	placeholder?: string;
-	type?: string;
-	onChange: (value: string) => void;
 }
 
 function Field({
