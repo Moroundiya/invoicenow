@@ -15,7 +15,7 @@ const italianno = Italianno({
 });
 
 export const metadata: Metadata = {
-	title: "InvoiceNow — Free Invoice Generator",
+	title: "InvoiceNow - Free Invoice Generator",
 	description:
 		"Create professional invoices in seconds with InvoiceNow. Generate, customize, and download invoices quickly and easily—no sign-up required.",
 	keywords: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "website",
 		url: "https://createinvoicenow.vercel.app",
-		title: "InvoiceNow — Free Invoice Generator",
+		title: "InvoiceNow - Free Invoice Generator",
 		description:
 			"Create professional invoices in seconds. Simple, fast, and free.",
 		siteName: "InvoiceNow",
@@ -47,14 +47,14 @@ export const metadata: Metadata = {
 				url: "/logoblue.png",
 				width: 1200,
 				height: 630,
-				alt: "InvoiceNow — Free Invoice Generator",
+				alt: "InvoiceNow - Free Invoice Generator",
 			},
 		],
 	},
 
 	twitter: {
 		card: "summary_large_image",
-		title: "InvoiceNow — Free Invoice Generator",
+		title: "InvoiceNow - Free Invoice Generator",
 		description:
 			"Create professional invoices in seconds. Simple, fast, and free.",
 		images: ["/logoblue.png"],
