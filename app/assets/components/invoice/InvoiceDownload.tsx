@@ -316,6 +316,7 @@ export default function InvoiceDownload({
 				height,
 				windowWidth: EXPORT_WIDTH,
 				windowHeight: height,
+				foreignObjectRendering: true,
 
 				onclone: (clonedDocument) => {
 					fixUnsupportedColors(clonedDocument);
