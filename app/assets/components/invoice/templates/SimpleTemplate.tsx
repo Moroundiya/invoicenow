@@ -258,7 +258,7 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 
 				<div className="mt-[21px] w-full max-w-full overflow-hidden rounded-[5px] border border-[#dbe3f0] box-border">
 					<div
-						className="grid w-full grid-cols-[minmax(0,1fr)_45px_minmax(0,75px)_minmax(0,80px)] text-center items-stretch gap-0 bg-[var(--primary-color)] text-[10px] font-bold uppercase tracking-[0.2px] text-white"
+						className="grid w-full grid-cols-[minmax(0,1fr)_40px_110px_110px] text-center items-stretch gap-0 bg-[var(--primary-color)] text-[10px] font-bold uppercase tracking-[0.2px] text-white"
 						style={
 							{
 								"--primary-color": primaryColor,
@@ -272,11 +272,11 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 							Qty
 						</div>
 
-						<div className="flex min-w-0 items-center justify-end border-r border-white/30 px-[7px] py-[5px] box-border">
+						<div className="flex min-w-0 items-center justify-center border-r border-white/30 px-[7px] py-[5px] box-border">
 							Rate
 						</div>
 
-						<div className="flex min-w-0 items-center justify-end px-[7px] py-[5px] box-border">
+						<div className="flex min-w-0 items-center justify-center px-[7px] py-[5px] box-border">
 							Amount
 						</div>
 					</div>
@@ -284,14 +284,14 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 					{invoice.items.map((item, index) => (
 						<div
 							key={item.id}
-							className="grid w-full grid-cols-[minmax(0,1fr)_45px_minmax(0,75px)_minmax(0,80px)] items-stretch gap-0 border-t border-[#dbe3f0] text-[11px] box-border">
+							className="grid w-full grid-cols-[minmax(0,1fr)_40px_110px_110px] items-stretch gap-0 border-t border-[#dbe3f0] text-[11px] box-border">
 							<div className="flex min-w-0 flex-col justify-center overflow-hidden border-r border-[#dbe3f0] px-2 py-[7px] box-border">
-								<div className="break-words text-[11.5px] font-semibold leading-[1.35] text-[#172033]">
+								<div className="min-w-0 break-words [overflow-wrap:anywhere] text-[11.5px] font-semibold leading-[1.35] text-[#172033]">
 									{item.description || "Item description"}
 								</div>
 
 								{item.details && (
-									<div className="mt-[2px] break-words text-[10px] leading-[1.35] text-[#7a879c]">
+									<div className="mt-[2px] min-w-0 break-words [overflow-wrap:anywhere] text-[10px] leading-[1.35] text-[#7a879c]">
 										{item.details}
 									</div>
 								)}
@@ -301,11 +301,11 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 								{item.quantity}
 							</div>
 
-							<div className="flex min-w-0 max-w-full items-center justify-end overflow-hidden border-r border-[#dbe3f0] px-[7px] py-[7px] text-right leading-[1.2] box-border whitespace-normal break-all">
+							<div className="flex min-w-0 max-w-full items-center justify-center overflow-hidden border-r border-[#dbe3f0] px-[7px] py-[7px] text-center leading-[1.2] box-border whitespace-normal break-all">
 								{formatMoney(item.rate)}
 							</div>
 
-							<div className="flex min-w-0 max-w-full items-center justify-end overflow-hidden px-[7px] py-[7px] text-right font-semibold leading-[1.2] box-border whitespace-normal break-all">
+							<div className="flex min-w-0 max-w-full items-center justify-center overflow-hidden px-[7px] py-[7px] text-right font-semibold leading-[1.2] box-border whitespace-normal break-all">
 								{formatMoney(item.quantity * item.rate)}
 							</div>
 						</div>
@@ -324,7 +324,7 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 						maxWidth: "100%",
 						display: "flex",
 						justifyContent: "flex-end",
-						marginTop: "15px",
+						marginTop: "30px",
 						boxSizing: "border-box",
 					}}>
 					<div
