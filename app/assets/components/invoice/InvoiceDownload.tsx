@@ -209,8 +209,8 @@ export default function InvoiceDownload({
 			margin: "0",
 			padding: "0",
 			backgroundColor: "#ffffff",
-			overflow: "hidden",
-			zIndex: "-1",
+			overflow: "visible",
+			zIndex: "9999",
 		});
 
 		const rootElement = document.createElement("div");
@@ -314,8 +314,8 @@ export default function InvoiceDownload({
 				scrollY: 0,
 				width,
 				height,
-				windowWidth: window.innerWidth,
-				windowHeight: window.innerHeight,
+				windowWidth: EXPORT_WIDTH,
+				windowHeight: height,
 
 				onclone: (clonedDocument) => {
 					fixUnsupportedColors(clonedDocument);
@@ -332,16 +332,14 @@ export default function InvoiceDownload({
 					clonedRoot.style.minWidth = `${EXPORT_WIDTH}px`;
 					clonedRoot.style.maxWidth = `${EXPORT_WIDTH}px`;
 					clonedRoot.style.overflow = "hidden";
-
-					// Test with a system font in the exported canvas
-					clonedRoot.style.fontFamily = "Arial, sans-serif";
+					clonedRoot.style.fontFamily = "var(--font-jakarta)";
 
 					const clonedElements = clonedDocument.querySelectorAll<HTMLElement>(
 						"[data-invoice-export] *",
 					);
 
 					clonedElements.forEach((element) => {
-						element.style.fontFamily = "Arial, sans-serif";
+						element.style.fontFamily = "var(--font-jakarta)";
 						element.style.letterSpacing = "normal";
 						element.style.wordSpacing = "normal";
 					});
