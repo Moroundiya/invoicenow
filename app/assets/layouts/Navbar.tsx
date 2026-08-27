@@ -13,7 +13,6 @@ export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const navRef = useRef<HTMLElement>(null);
-	const menuIconRef = useRef<HTMLButtonElement>(null);
 	const mobileMenuRef = useRef<HTMLDivElement>(null);
 
 	const closeMenu = () => {
@@ -22,43 +21,36 @@ export default function Navbar() {
 
 	useGSAP(
 		() => {
+			const nav = navRef.current;
+
+			if (!nav) return;
+
 			const reduceMotion = window.matchMedia(
 				"(prefers-reduced-motion: reduce)",
 			).matches;
 
-			if (reduceMotion) return;
+			if (reduceMotion) {
+				gsap.set(
+					[
+						".navbar-logo",
+						".navbar-link",
+						".navbar-cta",
+						".navbar-mobile-button",
+					],
+					{
+						opacity: 1,
+						y: 0,
+						scale: 1,
+					},
+				);
+
+				return;
+			}
 
 			const tl = gsap.timeline({
 				defaults: {
 					ease: "power3.out",
 				},
-			});
-
-			gsap.set(".navbar-logo", {
-				opacity: 0,
-				scale: 1.5,
-			});
-
-			gsap.set(".navbar-link", {
-				opacity: 0,
-				y: -15,
-			});
-
-			gsap.set(".navbar-cta", {
-				opacity: 0,
-				scale: 0.9,
-			});
-
-			gsap.set(".navbar-mobile-button", {
-				opacity: 0,
-				scale: 0.8,
-			});
-
-			gsap.from(menuIconRef.current, {
-				scale: 2,
-				opacity: 0,
-				duration: 1,
-				ease: "power3.out",
 			});
 
 			tl.to(".navbar-logo", {
@@ -154,7 +146,11 @@ export default function Navbar() {
 				<Link
 					href="/"
 					onClick={closeMenu}
-					className="navbar-logo origin-center">
+					className="navbar-logo origin-center"
+					style={{
+						opacity: 0,
+						transform: "scale(1.5)",
+					}}>
 					<Image
 						src="/logo.png"
 						alt="InvoiceNow"
@@ -167,21 +163,33 @@ export default function Navbar() {
 				<div className="hidden items-center gap-8 lg:flex">
 					<Link
 						href="#features"
-						className="navbar-link group relative text-white">
+						className="navbar-link group relative text-white"
+						style={{
+							opacity: 0,
+							transform: "translateY(-15px)",
+						}}>
 						Features
 						<span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#00B7FF] transition-all duration-300 ease-out group-hover:w-full" />
 					</Link>
 
 					<Link
 						href="#how-it-works"
-						className="navbar-link group relative text-white">
+						className="navbar-link group relative text-white"
+						style={{
+							opacity: 0,
+							transform: "translateY(-15px)",
+						}}>
 						How it works
 						<span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#00B7FF] transition-all duration-300 ease-out group-hover:w-full" />
 					</Link>
 
 					<Link
 						href="#testimonials"
-						className="navbar-link group relative text-white">
+						className="navbar-link group relative text-white"
+						style={{
+							opacity: 0,
+							transform: "translateY(-15px)",
+						}}>
 						Testimonials
 						<span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-[#00B7FF] transition-all duration-300 ease-out group-hover:w-full" />
 					</Link>
@@ -189,17 +197,24 @@ export default function Navbar() {
 
 				<Link
 					href="/create"
-					className="navbar-cta hidden rounded-sm bg-[#00B7FF] px-4 py-1.5  font-semibold text-[#041636] transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(0,183,255,0.25)] lg:flex">
+					className="navbar-cta hidden rounded-xl bg-[#00B7FF] px-4 py-1.5 font-semibold text-[#041636] transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(0,183,255,0.25)] lg:flex"
+					style={{
+						opacity: 0,
+						transform: "scale(0.9)",
+					}}>
 					Get Started
 				</Link>
 
 				<button
-					ref={menuIconRef}
 					type="button"
 					onClick={toggleMenu}
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
-					className="navbar-mobile-button flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00B7FF] bg-[#041f5049] text-white transition hover:bg-white/10 lg:hidden">
+					className="navbar-mobile-button flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-[#00B7FF] bg-[#041f5049] text-white transition hover:bg-white/10 lg:hidden"
+					style={{
+						opacity: 0,
+						transform: "scale(0.8)",
+					}}>
 					{isOpen ? (
 						<X className="h-5 w-5 text-[#00B7FF]" />
 					) : (
@@ -220,28 +235,28 @@ export default function Navbar() {
 						<Link
 							href="#features"
 							onClick={closeMenu}
-							className="rounded-xl px-4 py-3  text-white/70 transition hover:bg-white/5 hover:text-white">
+							className="rounded-xl px-4 py-3 text-white/70 transition hover:bg-white/5 hover:text-white">
 							Features
 						</Link>
 
 						<Link
 							href="#how-it-works"
 							onClick={closeMenu}
-							className="rounded-xl px-4 py-3  text-white/70 transition hover:bg-white/5 hover:text-white">
+							className="rounded-xl px-4 py-3 text-white/70 transition hover:bg-white/5 hover:text-white">
 							How it works
 						</Link>
 
 						<Link
 							href="#testimonials"
 							onClick={closeMenu}
-							className="rounded-xl px-4 py-3  text-white/70 transition hover:bg-white/5 hover:text-white">
+							className="rounded-xl px-4 py-3 text-white/70 transition hover:bg-white/5 hover:text-white">
 							Testimonials
 						</Link>
 
 						<Link
 							href="/create"
 							onClick={closeMenu}
-							className="mt-2 flex items-center justify-center rounded-xl bg-[#00B7FF] px-4 py-3  font-semibold text-[#041636] transition-all duration-300 hover:bg-white">
+							className="mt-2 sm:max-w-fit flex items-center justify-center rounded-xl bg-[#00B7FF] px-5 py-2 font-semibold text-[#041636] transition-all duration-300 hover:bg-white">
 							Create Invoice
 						</Link>
 					</div>

@@ -20,50 +20,49 @@ export default function HeroSection() {
 
 	useGSAP(
 		() => {
+			const hero = heroRef.current;
+
+			if (!hero) return;
+
 			const reduceMotion = window.matchMedia(
 				"(prefers-reduced-motion: reduce)",
 			).matches;
 
-			if (reduceMotion) return;
+			if (reduceMotion) {
+				gsap.set(hero, {
+					visibility: "visible",
+				});
+
+				gsap.set(
+					[
+						".hero-badge",
+						".hero-char",
+						".hero-description-word",
+						".hero-benefit",
+						".hero-cta",
+						".hero-invoice",
+					],
+					{
+						opacity: 1,
+						x: 0,
+						y: 0,
+						scale: 1,
+						filter: "blur(0px)",
+					},
+				);
+
+				return;
+			}
 
 			const tl = gsap.timeline({
 				defaults: {
 					ease: "power3.out",
 				},
-			});
-
-			gsap.set(".hero-badge", {
-				opacity: 0,
-				y: 15,
-				scale: 0.95,
-			});
-
-			gsap.set(".hero-char", {
-				opacity: 0,
-				y: 18,
-				filter: "blur(5px)",
-			});
-
-			gsap.set(".hero-description-word", {
-				opacity: 0,
-				y: 10,
-				filter: "blur(3px)",
-			});
-
-			gsap.set(".hero-benefit", {
-				opacity: 0,
-				x: -35,
-			});
-
-			gsap.set(".hero-cta", {
-				opacity: 0,
-				y: 20,
-			});
-
-			gsap.set(".hero-invoice", {
-				opacity: 0,
-				scale: 1.12,
-				y: 15,
+				onStart: () => {
+					gsap.set(hero, {
+						visibility: "visible",
+					});
+				},
 			});
 
 			tl.to(".hero-badge", {
@@ -180,12 +179,20 @@ export default function HeroSection() {
 	return (
 		<div
 			ref={heroRef}
+			style={{
+				visibility: "hidden",
+			}}
 			className="min-h-dvh w-full overflow-hidden bg-[url('/background-mobile.png')] bg-cover bg-center bg-no-repeat px-3 py-5 lg:bg-[url('/background.webp')] lg:px-6 lg:py-7 xl:px-10">
 			<Navbar />
 
 			<div className="mx-auto mt-18 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
 				<div className="flex w-full flex-col items-start justify-center">
-					<div className="hero-badge mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 font-semibold text-[#041636] lg:px-3">
+					<div
+						className="hero-badge mb-3 flex items-center justify-center space-x-1 rounded-full bg-[#00B7FF] px-2 py-1 font-semibold text-[#041636] lg:px-3"
+						style={{
+							opacity: 0,
+							transform: "translateY(15px) scale(0.95)",
+						}}>
 						<FlashIcon className="h-2.5 text-[#041636] md:h-3.5" />
 
 						<div className="flex items-center justify-center space-x-0.5 text-[11px] md:text-xs lg:text-sm">
@@ -213,7 +220,12 @@ export default function HeroSection() {
 								{line.split("").map((char, charIndex) => (
 									<span
 										key={`${lineIndex}-${char}-${charIndex}`}
-										className="hero-char inline-block">
+										className="hero-char inline-block"
+										style={{
+											opacity: 0,
+											transform: "translateY(18px)",
+											filter: "blur(5px)",
+										}}>
 										{char === " " ? "\u00A0" : char}
 									</span>
 								))}
@@ -222,6 +234,9 @@ export default function HeroSection() {
 									<span
 										className="hero-char ms-4 inline-block font-italianno text-[2.8rem] text-[#00B7FF] sm:text-5xl md:text-6xl lg:ms-4 lg:text-7xl"
 										style={{
+											opacity: 0,
+											transform: "translateY(18px)",
+											filter: "blur(5px)",
 											textShadow: "1px .5px 0 #fff",
 										}}>
 										<RoughNotation
@@ -246,14 +261,24 @@ export default function HeroSection() {
 							.map((word, index) => (
 								<span
 									key={`${word}-${index}`}
-									className="hero-description-word mr-[0.25em] inline-block">
+									className="hero-description-word mr-[0.25em] inline-block"
+									style={{
+										opacity: 0,
+										transform: "translateY(10px)",
+										filter: "blur(3px)",
+									}}>
 									{word}
 								</span>
 							))}
 					</p>
 
 					<div className="mt-5 flex w-full flex-col gap-x-3 gap-y-2 text-white/70 lg:flex-row lg:items-center">
-						<div className="hero-benefit flex items-center gap-2">
+						<div
+							className="hero-benefit flex items-center gap-2"
+							style={{
+								opacity: 0,
+								transform: "translateX(-35px)",
+							}}>
 							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
 									className="h-3 w-3 text-[#041636]"
@@ -266,7 +291,12 @@ export default function HeroSection() {
 
 						<div className="hidden h-4 w-px bg-white/20 lg:block" />
 
-						<div className="hero-benefit flex items-center gap-2">
+						<div
+							className="hero-benefit flex items-center gap-2"
+							style={{
+								opacity: 0,
+								transform: "translateX(-35px)",
+							}}>
 							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
 									className="h-3 w-3 text-[#041636]"
@@ -279,7 +309,12 @@ export default function HeroSection() {
 
 						<div className="hidden h-4 w-px bg-white/20 lg:block" />
 
-						<div className="hero-benefit flex items-center gap-2">
+						<div
+							className="hero-benefit flex items-center gap-2"
+							style={{
+								opacity: 0,
+								transform: "translateX(-35px)",
+							}}>
 							<div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#009EFF]">
 								<Check
 									className="h-3 w-3 text-[#041636]"
@@ -291,12 +326,17 @@ export default function HeroSection() {
 						</div>
 					</div>
 
-					<div className="hero-cta mt-8 w-full sm:mt-10">
+					<div
+						className="hero-cta mt-8 w-full sm:mt-10"
+						style={{
+							opacity: 0,
+							transform: "translateY(20px)",
+						}}>
 						<Link
 							href="/create"
 							onMouseEnter={(e) => handleButtonEnter(e.currentTarget)}
 							onMouseLeave={(e) => handleButtonLeave(e.currentTarget)}
-							className="group max-w-fit flex items-center justify-center space-x-1 rounded-xl bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-3 py-3 font-semibold text-white shadow-[0_8px_30px_rgba(0,183,255,0.08)] transition-shadow duration-300 hover:shadow-[0_10px_35px_rgba(0,183,255,0.2)] sm:w-auto lg:space-x-2 lg:px-5 lg:text-base">
+							className="group flex max-w-fit items-center justify-center space-x-1 rounded-xl bg-linear-to-br from-[#00B7FF] via-[#0066FF] to-[#041E50] px-3 py-3 font-semibold text-white shadow-[0_8px_30px_rgba(0,183,255,0.08)] transition-shadow duration-300 hover:shadow-[0_10px_35px_rgba(0,183,255,0.2)] sm:w-auto lg:space-x-2 lg:px-5 lg:text-base">
 							<span>Create your first invoice</span>
 
 							<ArrowRightLineIcon className="hero-arrow h-5 text-white" />
@@ -305,7 +345,12 @@ export default function HeroSection() {
 				</div>
 
 				<div className="flex w-full items-center justify-center">
-					<div className="hero-invoice">
+					<div
+						className="hero-invoice"
+						style={{
+							opacity: 0,
+							transform: "translateY(15px) scale(1.12)",
+						}}>
 						<Image
 							src={invoice}
 							alt="InvoiceNow invoice preview"
