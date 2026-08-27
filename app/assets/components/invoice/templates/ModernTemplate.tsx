@@ -70,6 +70,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 				margin: 0,
 				padding: 0,
 				boxSizing: "border-box",
+				fontFamily: "var(--font-jakarta)",
 			}}>
 			<div
 				className="relative overflow-hidden px-7 py-7"

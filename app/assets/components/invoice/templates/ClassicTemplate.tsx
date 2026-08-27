@@ -210,7 +210,9 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 	const hasSignature = !!invoice.signature?.image;
 
 	return (
-		<div className="w-full bg-white text-[#171717]">
+		<div
+			className="w-full bg-white text-[#171717]"
+			style={{ fontFamily: "var(--font-jakarta)" }}>
 			<div
 				id="classic-invoice"
 				className="

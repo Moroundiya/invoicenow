@@ -46,6 +46,7 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 				padding: 0,
 				boxSizing: "border-box",
 				overflow: "hidden",
+				fontFamily: "var(--font-jakarta)",
 			}}>
 			<div
 				style={{
