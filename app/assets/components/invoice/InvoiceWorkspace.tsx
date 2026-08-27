@@ -8,7 +8,7 @@ import InvoiceDetailsForm from "./InvoiceDetailsForm";
 import InvoiceCustomizeForm from "./InvoiceCustomizeForm";
 import InvoiceDownload from "./InvoiceDownload";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -41,6 +41,16 @@ export default function InvoiceWorkspace({
 	const dividerRef = useRef<HTMLDivElement>(null);
 	const createAnotherRef = useRef<HTMLButtonElement>(null);
 	const bottomTextRef = useRef<HTMLParagraphElement>(null);
+
+	useEffect(() => {
+		requestAnimationFrame(() => {
+			window.scrollTo({
+				top: 0,
+				left: 0,
+				behavior: "instant",
+			});
+		});
+	}, [currentStep]);
 
 	useGSAP(
 		() => {

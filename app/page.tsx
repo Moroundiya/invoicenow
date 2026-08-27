@@ -8,7 +8,9 @@ import Footer from "./assets/components/Footer";
 
 export default function Home() {
 	return (
-		<div className="relative w-full min-h-dvh">
+		<div
+			className="relative w-full min-h-dvh"
+			id="homepage">
 			<HeroSection />
 			<Features />
 			<HowItWorks />

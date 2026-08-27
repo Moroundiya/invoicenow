@@ -10,7 +10,7 @@ body {
     --font-italianno: var(--font-italianno);
 }
 
-* {
+html {
     scroll-behavior: smooth;
 }
 
