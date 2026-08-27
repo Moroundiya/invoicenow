@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import jsPDF from "jspdf";
 import html2canvas from "html2canvas-pro";
-import InvoiceTemplateRenderer from "./templates/InvoiceTemplateRenderer";
+import jsPDF from "jspdf";
 import { createRoot, type Root } from "react-dom/client";
+
+import type { InvoiceData } from "@/app/assets/types/invoiceType";
+import InvoiceTemplateRenderer from "./templates/InvoiceTemplateRenderer";
 import { InvoiceDownloadProps } from "../../types/invoice";
 
 export default function InvoiceDownload({
@@ -15,10 +17,31 @@ export default function InvoiceDownload({
 		null,
 	);
 
+	/*
+	 * =========================================================
+	 * EXPORT SETTINGS
+	 * =========================================================
+	 *
+	 * All invoice templates use 700px as their base width.
+	 *
+	 * 3.25x gives slightly better quality than 3x while
+	 * keeping the output reasonably sized.
+	 */
 	const EXPORT_WIDTH = 700;
+
 	const EXPORT_SCALE = 3.25;
+
+	/*
+	 * Maximum canvas area.
+	 *
+	 * This prevents very long invoices from creating an
+	 * unnecessarily massive canvas and huge download files.
+	 */
 	const MAX_CANVAS_PIXELS = 8_000_000;
 
+	/**
+	 * Wait until all images inside the invoice have loaded.
+	 */
 	const waitForImages = async (element: HTMLElement) => {
 		const images = Array.from(element.querySelectorAll("img"));
 
@@ -38,20 +61,9 @@ export default function InvoiceDownload({
 		);
 	};
 
-	const waitForFonts = async () => {
-		if (document.fonts?.ready) {
-			await document.fonts.ready;
-		}
-
-		await new Promise<void>((resolve) => {
-			requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					resolve();
-				});
-			});
-		});
-	};
-
+	/**
+	 * Wait for browser rendering/layout.
+	 */
 	const waitForRender = async () => {
 		await new Promise<void>((resolve) => {
 			requestAnimationFrame(() => {
@@ -62,6 +74,9 @@ export default function InvoiceDownload({
 		});
 	};
 
+	/**
+	 * Convert unsupported modern CSS colors into RGB/RGBA.
+	 */
 	const convertColorToRGB = (value: string, doc: Document): string | null => {
 		if (!value) {
 			return null;
@@ -90,11 +105,17 @@ export default function InvoiceDownload({
 
 		doc.body.appendChild(testElement);
 
+		/*
+		 * Background color test.
+		 */
 		testElement.style.backgroundColor = value;
 
 		let converted =
 			doc.defaultView?.getComputedStyle(testElement).backgroundColor || "";
 
+		/*
+		 * Text color fallback.
+		 */
 		if (
 			!converted ||
 			converted === "rgba(0, 0, 0, 0)" ||
@@ -124,6 +145,9 @@ export default function InvoiceDownload({
 		return converted;
 	};
 
+	/**
+	 * Fix unsupported CSS colors inside cloned document.
+	 */
 	const fixUnsupportedColors = (clonedDocument: Document) => {
 		const root = clonedDocument.querySelector(
 			"[data-invoice-export]",
@@ -180,6 +204,9 @@ export default function InvoiceDownload({
 				}
 			});
 
+			/*
+			 * Remove problematic shadows.
+			 */
 			const boxShadow = computedStyle.boxShadow;
 
 			if (boxShadow && containsUnsupportedColor(boxShadow)) {
@@ -194,9 +221,13 @@ export default function InvoiceDownload({
 		});
 	};
 
+	/**
+	 * Create a temporary invoice for exporting.
+	 *
+	 * Width is fixed at 700px.
+	 * Height is completely dynamic.
+	 */
 	const createExportElement = async () => {
-		await waitForFonts();
-
 		const wrapper = document.createElement("div");
 
 		Object.assign(wrapper.style, {
@@ -209,8 +240,8 @@ export default function InvoiceDownload({
 			margin: "0",
 			padding: "0",
 			backgroundColor: "#ffffff",
-			overflow: "visible",
-			zIndex: "9999",
+			overflow: "hidden",
+			zIndex: "-1",
 		});
 
 		const rootElement = document.createElement("div");
@@ -224,7 +255,6 @@ export default function InvoiceDownload({
 			backgroundColor: "#ffffff",
 			overflow: "hidden",
 			boxSizing: "border-box",
-			fontFamily: "var(--font-jakarta)",
 		});
 
 		wrapper.appendChild(rootElement);
@@ -244,20 +274,20 @@ export default function InvoiceDownload({
 					backgroundColor: "#ffffff",
 					boxSizing: "border-box",
 					overflow: "hidden",
-					fontFamily: "var(--font-jakarta)",
 				}}>
 				<InvoiceTemplateRenderer invoice={invoice} />
 			</div>,
 		);
 
 		await waitForRender();
-		await waitForFonts();
 
+		/*
+		 * Give fonts, images and layout time to settle.
+		 */
 		await new Promise((resolve) => setTimeout(resolve, 200));
 
 		await waitForImages(rootElement);
 
-		await waitForFonts();
 		await waitForRender();
 
 		return {
@@ -267,6 +297,14 @@ export default function InvoiceDownload({
 		};
 	};
 
+	/**
+	 * Calculate an appropriate render scale.
+	 *
+	 * Normal invoices use 3.25x.
+	 *
+	 * Very long invoices automatically reduce the scale
+	 * slightly to prevent massive files.
+	 */
 	const getRenderScale = (height: number) => {
 		if (!height) {
 			return EXPORT_SCALE;
@@ -280,17 +318,29 @@ export default function InvoiceDownload({
 
 		const safeScale = Math.sqrt(MAX_CANVAS_PIXELS / (EXPORT_WIDTH * height));
 
+		/*
+		 * Never go below 2x.
+		 *
+		 * Even very long invoices should remain reasonably sharp.
+		 */
 		return Math.max(2, Math.min(EXPORT_SCALE, safeScale));
 	};
 
+	/**
+	 * Create high-resolution canvas.
+	 *
+	 * Width remains exactly 700px.
+	 * Height comes from the actual invoice.
+	 */
 	const createCanvas = async () => {
 		const { wrapper, rootElement, reactRoot } = await createExportElement();
 
 		try {
-			await waitForFonts();
-
 			const width = EXPORT_WIDTH;
 
+			/*
+			 * Get the actual rendered invoice height.
+			 */
 			const height = Math.ceil(
 				Math.max(
 					rootElement.scrollHeight,
@@ -298,52 +348,62 @@ export default function InvoiceDownload({
 				),
 			);
 
+			console.log("Invoice export dimensions:", {
+				width,
+				height,
+			});
+
 			if (!width || !height) {
 				throw new Error("Invoice export element has no dimensions.");
 			}
 
+			/*
+			 * Dynamic quality.
+			 */
 			const scale = getRenderScale(height);
+
+			console.log("Invoice render scale:", scale);
 
 			const canvas = await html2canvas(rootElement, {
 				scale,
+
 				backgroundColor: "#ffffff",
+
 				useCORS: true,
+
 				allowTaint: false,
+
 				logging: false,
+
 				scrollX: 0,
+
 				scrollY: 0,
+
 				width,
+
 				height,
-				windowWidth: EXPORT_WIDTH,
+
+				windowWidth: width,
+
 				windowHeight: height,
-				foreignObjectRendering: true,
 
 				onclone: (clonedDocument) => {
 					fixUnsupportedColors(clonedDocument);
 
+					/*
+					 * Force the cloned export root to remain
+					 * exactly 700px wide.
+					 */
 					const clonedRoot = clonedDocument.querySelector(
 						"[data-invoice-export]",
 					) as HTMLElement | null;
 
-					if (!clonedRoot) {
-						return;
+					if (clonedRoot) {
+						clonedRoot.style.width = `${EXPORT_WIDTH}px`;
+						clonedRoot.style.minWidth = `${EXPORT_WIDTH}px`;
+						clonedRoot.style.maxWidth = `${EXPORT_WIDTH}px`;
+						clonedRoot.style.overflow = "hidden";
 					}
-
-					clonedRoot.style.width = `${EXPORT_WIDTH}px`;
-					clonedRoot.style.minWidth = `${EXPORT_WIDTH}px`;
-					clonedRoot.style.maxWidth = `${EXPORT_WIDTH}px`;
-					clonedRoot.style.overflow = "hidden";
-					clonedRoot.style.fontFamily = "var(--font-jakarta)";
-
-					const clonedElements = clonedDocument.querySelectorAll<HTMLElement>(
-						"[data-invoice-export] *",
-					);
-
-					clonedElements.forEach((element) => {
-						element.style.fontFamily = "var(--font-jakarta)";
-						element.style.letterSpacing = "normal";
-						element.style.wordSpacing = "normal";
-					});
 				},
 			});
 
@@ -354,6 +414,12 @@ export default function InvoiceDownload({
 		}
 	};
 
+	/**
+	 * Download PNG.
+	 *
+	 * PNG remains lossless and therefore gives the sharpest
+	 * possible image output.
+	 */
 	const downloadPNG = async () => {
 		if (isDownloading) return;
 
@@ -368,19 +434,22 @@ export default function InvoiceDownload({
 				}
 
 				const url = URL.createObjectURL(blob);
+
 				const link = document.createElement("a");
 
 				link.href = url;
 				link.download = `${fileName}.png`;
 
 				document.body.appendChild(link);
+
 				link.click();
+
 				link.remove();
 
 				URL.revokeObjectURL(url);
 			}, "image/png");
 		} catch (error) {
-			console.error("PNG generation error:", error);
+			console.error("Failed to download PNG:", error);
 
 			alert("Something went wrong while creating the PNG. Please try again.");
 		} finally {
@@ -388,6 +457,16 @@ export default function InvoiceDownload({
 		}
 	};
 
+	/**
+	 * Download PDF.
+	 *
+	 * The PDF page size is calculated directly from
+	 * the invoice canvas.
+	 *
+	 * No A4.
+	 * No fixed landscape page.
+	 * No cropping.
+	 */
 	const downloadPDF = async () => {
 		if (isDownloading) return;
 
@@ -396,31 +475,84 @@ export default function InvoiceDownload({
 
 			const canvas = await createCanvas();
 
+			/*
+			 * -----------------------------------------------------
+			 * PDF SIZE
+			 * -----------------------------------------------------
+			 *
+			 * 1 CSS pixel ≈ 0.264583mm.
+			 *
+			 * We use the original 700px invoice width rather
+			 * than the high-resolution canvas width.
+			 */
 			const MM_PER_PX = 25.4 / 96;
 
 			const pdfWidth = EXPORT_WIDTH * MM_PER_PX;
 
+			/*
+			 * Preserve the exact invoice aspect ratio.
+			 */
 			const imageRatio = canvas.width / canvas.height;
 
 			const pdfHeight = pdfWidth / imageRatio;
 
+			console.log("PDF dimensions:", {
+				width: pdfWidth,
+				height: pdfHeight,
+				canvasWidth: canvas.width,
+				canvasHeight: canvas.height,
+			});
+
+			/*
+			 * -----------------------------------------------------
+			 * JPEG FOR PDF
+			 * -----------------------------------------------------
+			 *
+			 * PNG is lossless but can make the PDF unnecessarily
+			 * large.
+			 *
+			 * JPEG quality 0.90 gives a good balance between:
+			 *
+			 * - sharp text
+			 * - clean borders
+			 * - small PDF size
+			 */
 			const image = canvas.toDataURL("image/jpeg", 0.9);
 
+			/*
+			 * Determine orientation automatically.
+			 */
 			const orientation = pdfWidth >= pdfHeight ? "landscape" : "portrait";
 
 			const pdf = new jsPDF({
 				orientation,
 				unit: "mm",
+
+				/*
+				 * Dynamic custom page size.
+				 *
+				 * The page exactly matches the invoice.
+				 */
 				format: [pdfWidth, pdfHeight],
+
 				compress: true,
+
 				precision: 12,
 			});
 
+			/*
+			 * Image fills the entire PDF.
+			 *
+			 * No margins.
+			 * No A4.
+			 * No cropping.
+			 * No stretching.
+			 */
 			pdf.addImage(image, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, "FAST");
 
 			pdf.save(`${fileName}.pdf`);
 		} catch (error) {
-			console.error("PDF generation error:", error);
+			console.error("Failed to download PDF:", error);
 
 			alert("Something went wrong while creating the PDF. Please try again.");
 		} finally {
@@ -433,11 +565,15 @@ export default function InvoiceDownload({
 	return (
 		<div className="flex w-full flex-col gap-3">
 			<div className="flex w-full flex-col gap-3 sm:flex-row">
+				{/* =================================================
+				    PDF
+				================================================= */}
+
 				<button
 					type="button"
 					onClick={downloadPDF}
 					disabled={downloading}
-					className="inline-flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-4 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500 disabled:pointer-events-none disabled:opacity-50">
+					className="inline-flex h-11 py-4 flex-1 items-center justify-center gap-2 rounded-xl cursor-pointer bg-gradient-to-r from-blue-600 to-blue-500 px-5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500 disabled:pointer-events-none disabled:opacity-50">
 					{isDownloading === "pdf" ? (
 						<>
 							<span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -463,11 +599,15 @@ export default function InvoiceDownload({
 					)}
 				</button>
 
+				{/* =================================================
+				    PNG
+				================================================= */}
+
 				<button
 					type="button"
 					onClick={downloadPNG}
 					disabled={downloading}
-					className="inline-flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 py-4 text-sm font-semibold text-blue-400 transition hover:border-blue-400/25 hover:bg-blue-500/10 disabled:pointer-events-none disabled:opacity-50">
+					className="inline-flex h-11 py-4 flex-1 items-center justify-center cursor-pointer gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 text-sm font-semibold text-blue-400 transition hover:border-blue-400/25 hover:bg-blue-500/10 disabled:pointer-events-none disabled:opacity-50">
 					{isDownloading === "png" ? (
 						<>
 							<span className="h-4 w-4 animate-spin rounded-full border-2 border-blue-400/30 border-t-blue-400" />
