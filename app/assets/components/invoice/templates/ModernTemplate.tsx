@@ -574,7 +574,6 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 								</span>
 							</div>
 						</div>
-
 						{hasSignature && (
 							<div className="mt-8 ml-auto w-full max-w-[220px] text-center">
 								<div className="flex h-20 items-end justify-center">
