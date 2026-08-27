@@ -378,7 +378,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									)}
 								</div>
 
-								<div className="flex min-w-0 items-center justify-end border-r border-slate-200 px-2 py-3 text-right">
+								<div className="flex min-w-0 items-center justify-center border-r border-slate-200 px-2 py-3 text-center">
 									<span className="min-w-0 max-w-full break-all text-[10px] leading-tight">
 										{formatMoney(item.rate)}
 									</span>
@@ -388,7 +388,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 									<span className="whitespace-nowrap">{item.quantity}</span>
 								</div>
 
-								<div className="flex min-w-0 items-center justify-end px-2 py-3 text-right font-medium">
+								<div className="flex min-w-0 items-center justify-center text-center px-2 py-3 text-right font-medium">
 									<span className="min-w-0 max-w-full break-all text-[10px] leading-tight">
 										{formatMoney(item.quantity * item.rate)}
 									</span>
