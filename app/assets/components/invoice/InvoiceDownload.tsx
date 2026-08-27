@@ -332,18 +332,14 @@ export default function InvoiceDownload({
 					clonedRoot.style.minWidth = `${EXPORT_WIDTH}px`;
 					clonedRoot.style.maxWidth = `${EXPORT_WIDTH}px`;
 					clonedRoot.style.overflow = "hidden";
-
-					// Test with a system font in the exported canvas
-					clonedRoot.style.fontFamily = "Arial, sans-serif";
+					clonedRoot.style.fontFamily = "var(--font-jakarta)";
 
 					const clonedElements = clonedDocument.querySelectorAll<HTMLElement>(
 						"[data-invoice-export] *",
 					);
 
 					clonedElements.forEach((element) => {
-						element.style.fontFamily = "Arial, sans-serif";
-						element.style.letterSpacing = "normal";
-						element.style.wordSpacing = "normal";
+						element.style.fontFamily = "var(--font-jakarta)";
 					});
 				},
 			});
