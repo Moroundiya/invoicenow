@@ -16,14 +16,9 @@ export default function InvoiceDownload({
 	);
 
 	const EXPORT_WIDTH = 700;
-
 	const EXPORT_SCALE = 3.25;
-
 	const MAX_CANVAS_PIXELS = 8_000_000;
 
-	/**
-	 * Wait until all images inside the invoice have loaded.
-	 */
 	const waitForImages = async (element: HTMLElement) => {
 		const images = Array.from(element.querySelectorAll("img"));
 
@@ -43,9 +38,20 @@ export default function InvoiceDownload({
 		);
 	};
 
-	/**
-	 * Wait for browser rendering/layout.
-	 */
+	const waitForFonts = async () => {
+		if (document.fonts?.ready) {
+			await document.fonts.ready;
+		}
+
+		await new Promise<void>((resolve) => {
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					resolve();
+				});
+			});
+		});
+	};
+
 	const waitForRender = async () => {
 		await new Promise<void>((resolve) => {
 			requestAnimationFrame(() => {
@@ -56,9 +62,6 @@ export default function InvoiceDownload({
 		});
 	};
 
-	/**
-	 * Convert unsupported modern CSS colors into RGB/RGBA.
-	 */
 	const convertColorToRGB = (value: string, doc: Document): string | null => {
 		if (!value) {
 			return null;
@@ -121,9 +124,6 @@ export default function InvoiceDownload({
 		return converted;
 	};
 
-	/**
-	 * Fix unsupported CSS colors inside cloned document.
-	 */
 	const fixUnsupportedColors = (clonedDocument: Document) => {
 		const root = clonedDocument.querySelector(
 			"[data-invoice-export]",
@@ -194,13 +194,9 @@ export default function InvoiceDownload({
 		});
 	};
 
-	/**
-	 * Create a temporary invoice for exporting.
-	 *
-	 * Width is fixed at 700px.
-	 * Height is completely dynamic.
-	 */
 	const createExportElement = async () => {
+		await waitForFonts();
+
 		const wrapper = document.createElement("div");
 
 		Object.assign(wrapper.style, {
@@ -228,6 +224,7 @@ export default function InvoiceDownload({
 			backgroundColor: "#ffffff",
 			overflow: "hidden",
 			boxSizing: "border-box",
+			fontFamily: "var(--font-jakarta)",
 		});
 
 		wrapper.appendChild(rootElement);
@@ -247,17 +244,20 @@ export default function InvoiceDownload({
 					backgroundColor: "#ffffff",
 					boxSizing: "border-box",
 					overflow: "hidden",
+					fontFamily: "var(--font-jakarta)",
 				}}>
 				<InvoiceTemplateRenderer invoice={invoice} />
 			</div>,
 		);
 
 		await waitForRender();
+		await waitForFonts();
 
 		await new Promise((resolve) => setTimeout(resolve, 200));
 
 		await waitForImages(rootElement);
 
+		await waitForFonts();
 		await waitForRender();
 
 		return {
@@ -267,14 +267,6 @@ export default function InvoiceDownload({
 		};
 	};
 
-	/**
-	 * Calculate an appropriate render scale.
-	 *
-	 * Normal invoices use 3.25x.
-	 *
-	 * Very long invoices automatically reduce the scale
-	 * slightly to prevent massive files.
-	 */
 	const getRenderScale = (height: number) => {
 		if (!height) {
 			return EXPORT_SCALE;
@@ -291,16 +283,12 @@ export default function InvoiceDownload({
 		return Math.max(2, Math.min(EXPORT_SCALE, safeScale));
 	};
 
-	/**
-	 * Create high-resolution canvas.
-	 *
-	 * Width remains exactly 700px.
-	 * Height comes from the actual invoice.
-	 */
 	const createCanvas = async () => {
 		const { wrapper, rootElement, reactRoot } = await createExportElement();
 
 		try {
+			await waitForFonts();
+
 			const width = EXPORT_WIDTH;
 
 			const height = Math.ceil(
@@ -318,26 +306,16 @@ export default function InvoiceDownload({
 
 			const canvas = await html2canvas(rootElement, {
 				scale,
-
 				backgroundColor: "#ffffff",
-
 				useCORS: true,
-
 				allowTaint: false,
-
 				logging: false,
-
 				scrollX: 0,
-
 				scrollY: 0,
-
 				width,
-
 				height,
-
-				windowWidth: width,
-
-				windowHeight: height,
+				windowWidth: window.innerWidth,
+				windowHeight: window.innerHeight,
 
 				onclone: (clonedDocument) => {
 					fixUnsupportedColors(clonedDocument);
@@ -346,12 +324,23 @@ export default function InvoiceDownload({
 						"[data-invoice-export]",
 					) as HTMLElement | null;
 
-					if (clonedRoot) {
-						clonedRoot.style.width = `${EXPORT_WIDTH}px`;
-						clonedRoot.style.minWidth = `${EXPORT_WIDTH}px`;
-						clonedRoot.style.maxWidth = `${EXPORT_WIDTH}px`;
-						clonedRoot.style.overflow = "hidden";
+					if (!clonedRoot) {
+						return;
 					}
+
+					clonedRoot.style.width = `${EXPORT_WIDTH}px`;
+					clonedRoot.style.minWidth = `${EXPORT_WIDTH}px`;
+					clonedRoot.style.maxWidth = `${EXPORT_WIDTH}px`;
+					clonedRoot.style.overflow = "hidden";
+					clonedRoot.style.fontFamily = "var(--font-jakarta)";
+
+					const clonedElements = clonedDocument.querySelectorAll<HTMLElement>(
+						"[data-invoice-export] *",
+					);
+
+					clonedElements.forEach((element) => {
+						element.style.fontFamily = "var(--font-jakarta)";
+					});
 				},
 			});
 
@@ -362,12 +351,6 @@ export default function InvoiceDownload({
 		}
 	};
 
-	/**
-	 * Download PNG.
-	 *
-	 * PNG remains lossless and therefore gives the sharpest
-	 * possible image output.
-	 */
 	const downloadPNG = async () => {
 		if (isDownloading) return;
 
@@ -382,37 +365,26 @@ export default function InvoiceDownload({
 				}
 
 				const url = URL.createObjectURL(blob);
-
 				const link = document.createElement("a");
 
 				link.href = url;
 				link.download = `${fileName}.png`;
 
 				document.body.appendChild(link);
-
 				link.click();
-
 				link.remove();
 
 				URL.revokeObjectURL(url);
 			}, "image/png");
 		} catch (error) {
+			console.error("PNG generation error:", error);
+
 			alert("Something went wrong while creating the PNG. Please try again.");
 		} finally {
 			setIsDownloading(null);
 		}
 	};
 
-	/**
-	 * Download PDF.
-	 *
-	 * The PDF page size is calculated directly from
-	 * the invoice canvas.
-	 *
-	 * No A4.
-	 * No fixed landscape page.
-	 * No cropping.
-	 */
 	const downloadPDF = async () => {
 		if (isDownloading) return;
 
@@ -436,11 +408,8 @@ export default function InvoiceDownload({
 			const pdf = new jsPDF({
 				orientation,
 				unit: "mm",
-
 				format: [pdfWidth, pdfHeight],
-
 				compress: true,
-
 				precision: 12,
 			});
 
@@ -448,6 +417,8 @@ export default function InvoiceDownload({
 
 			pdf.save(`${fileName}.pdf`);
 		} catch (error) {
+			console.error("PDF generation error:", error);
+
 			alert("Something went wrong while creating the PDF. Please try again.");
 		} finally {
 			setIsDownloading(null);
@@ -463,7 +434,7 @@ export default function InvoiceDownload({
 					type="button"
 					onClick={downloadPDF}
 					disabled={downloading}
-					className="inline-flex h-11 py-4 flex-1 items-center justify-center gap-2 rounded-xl cursor-pointer bg-gradient-to-r from-blue-600 to-blue-500 px-5 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500 disabled:pointer-events-none disabled:opacity-50">
+					className="inline-flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-4 text-sm font-semibold text-white shadow-[0_0_25px_rgba(0,119,255,0.18)] transition hover:from-blue-500 hover:to-cyan-500 disabled:pointer-events-none disabled:opacity-50">
 					{isDownloading === "pdf" ? (
 						<>
 							<span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -493,7 +464,7 @@ export default function InvoiceDownload({
 					type="button"
 					onClick={downloadPNG}
 					disabled={downloading}
-					className="inline-flex h-11 py-4 flex-1 items-center justify-center cursor-pointer gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 text-sm font-semibold text-blue-400 transition hover:border-blue-400/25 hover:bg-blue-500/10 disabled:pointer-events-none disabled:opacity-50">
+					className="inline-flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-blue-400/15 bg-blue-500/[0.05] px-5 py-4 text-sm font-semibold text-blue-400 transition hover:border-blue-400/25 hover:bg-blue-500/10 disabled:pointer-events-none disabled:opacity-50">
 					{isDownloading === "png" ? (
 						<>
 							<span className="h-4 w-4 animate-spin rounded-full border-2 border-blue-400/30 border-t-blue-400" />

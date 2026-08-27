@@ -334,7 +334,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 			<div className="px-7">
 				<div className="overflow-hidden rounded-lg border border-slate-300">
 					<div
-						className="grid grid-cols-[42px_minmax(0,1fr)_minmax(75px,108px)_55px_minmax(75px,108px)] items-center text-[10px] font-bold uppercase tracking-wide text-white"
+						className="grid grid-cols-[42px_minmax(0,1fr)_minmax(75px,108px)_55px_minmax(75px,108px)] text-center items-center text-[10px] font-bold uppercase tracking-wide text-white"
 						style={{
 							backgroundColor: "#172033",
 						}}>
@@ -346,7 +346,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							Description
 						</div>
 
-						<div className="min-w-0 border-r border-white/20 px-2 py-2 text-right">
+						<div className="min-w-0 border-r border-white/20 px-2 py-2">
 							Unit Price
 						</div>
 
@@ -354,7 +354,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							Qty
 						</div>
 
-						<div className="min-w-0 px-2 py-2 text-right">Total</div>
+						<div className="min-w-0 px-2 py-2">Total</div>
 					</div>
 
 					{invoice.items.length > 0 ? (

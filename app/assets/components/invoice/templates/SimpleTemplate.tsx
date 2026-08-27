@@ -258,7 +258,7 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 
 				<div className="mt-[21px] w-full max-w-full overflow-hidden rounded-[5px] border border-[#dbe3f0] box-border">
 					<div
-						className="grid w-full grid-cols-[minmax(0,1fr)_45px_minmax(0,75px)_minmax(0,80px)] items-stretch gap-0 bg-[var(--primary-color)] text-[10px] font-bold uppercase tracking-[0.2px] text-white"
+						className="grid w-full grid-cols-[minmax(0,1fr)_45px_minmax(0,75px)_minmax(0,80px)] text-center items-stretch gap-0 bg-[var(--primary-color)] text-[10px] font-bold uppercase tracking-[0.2px] text-white"
 						style={
 							{
 								"--primary-color": primaryColor,
@@ -268,15 +268,15 @@ export default function SimpleTemplate({ invoice }: SimpleTemplateProps) {
 							Description
 						</div>
 
-						<div className="flex min-w-0 items-center justify-center border-r border-white/30 px-[5px] py-[5px] text-center box-border">
+						<div className="flex min-w-0 items-center justify-center border-r border-white/30 px-[5px] py-[5px] box-border">
 							Qty
 						</div>
 
-						<div className="flex min-w-0 items-center justify-end border-r border-white/30 px-[7px] py-[5px] text-right box-border">
+						<div className="flex min-w-0 items-center justify-end border-r border-white/30 px-[7px] py-[5px] box-border">
 							Rate
 						</div>
 
-						<div className="flex min-w-0 items-center justify-end px-[7px] py-[5px] text-right box-border">
+						<div className="flex min-w-0 items-center justify-end px-[7px] py-[5px] box-border">
 							Amount
 						</div>
 					</div>
