@@ -17,31 +17,12 @@ export default function InvoiceDownload({
 		null,
 	);
 
-	/*
-	 * =========================================================
-	 * EXPORT SETTINGS
-	 * =========================================================
-	 *
-	 * All invoice templates use 700px as their base width.
-	 *
-	 * 3.25x gives slightly better quality than 3x while
-	 * keeping the output reasonably sized.
-	 */
 	const EXPORT_WIDTH = 700;
 
 	const EXPORT_SCALE = 3.25;
 
-	/*
-	 * Maximum canvas area.
-	 *
-	 * This prevents very long invoices from creating an
-	 * unnecessarily massive canvas and huge download files.
-	 */
 	const MAX_CANVAS_PIXELS = 8_000_000;
 
-	/**
-	 * Wait until all images inside the invoice have loaded.
-	 */
 	const waitForImages = async (element: HTMLElement) => {
 		const images = Array.from(element.querySelectorAll("img"));
 
@@ -61,9 +42,6 @@ export default function InvoiceDownload({
 		);
 	};
 
-	/**
-	 * Wait for browser rendering/layout.
-	 */
 	const waitForRender = async () => {
 		await new Promise<void>((resolve) => {
 			requestAnimationFrame(() => {
@@ -74,9 +52,6 @@ export default function InvoiceDownload({
 		});
 	};
 
-	/**
-	 * Convert unsupported modern CSS colors into RGB/RGBA.
-	 */
 	const convertColorToRGB = (value: string, doc: Document): string | null => {
 		if (!value) {
 			return null;
@@ -105,17 +80,11 @@ export default function InvoiceDownload({
 
 		doc.body.appendChild(testElement);
 
-		/*
-		 * Background color test.
-		 */
 		testElement.style.backgroundColor = value;
 
 		let converted =
 			doc.defaultView?.getComputedStyle(testElement).backgroundColor || "";
 
-		/*
-		 * Text color fallback.
-		 */
 		if (
 			!converted ||
 			converted === "rgba(0, 0, 0, 0)" ||
@@ -145,9 +114,6 @@ export default function InvoiceDownload({
 		return converted;
 	};
 
-	/**
-	 * Fix unsupported CSS colors inside cloned document.
-	 */
 	const fixUnsupportedColors = (clonedDocument: Document) => {
 		const root = clonedDocument.querySelector(
 			"[data-invoice-export]",
@@ -204,9 +170,6 @@ export default function InvoiceDownload({
 				}
 			});
 
-			/*
-			 * Remove problematic shadows.
-			 */
 			const boxShadow = computedStyle.boxShadow;
 
 			if (boxShadow && containsUnsupportedColor(boxShadow)) {
@@ -221,12 +184,6 @@ export default function InvoiceDownload({
 		});
 	};
 
-	/**
-	 * Create a temporary invoice for exporting.
-	 *
-	 * Width is fixed at 700px.
-	 * Height is completely dynamic.
-	 */
 	const createExportElement = async () => {
 		const wrapper = document.createElement("div");
 
@@ -281,9 +238,6 @@ export default function InvoiceDownload({
 
 		await waitForRender();
 
-		/*
-		 * Give fonts, images and layout time to settle.
-		 */
 		await new Promise((resolve) => setTimeout(resolve, 200));
 
 		await waitForImages(rootElement);
@@ -297,14 +251,6 @@ export default function InvoiceDownload({
 		};
 	};
 
-	/**
-	 * Calculate an appropriate render scale.
-	 *
-	 * Normal invoices use 3.25x.
-	 *
-	 * Very long invoices automatically reduce the scale
-	 * slightly to prevent massive files.
-	 */
 	const getRenderScale = (height: number) => {
 		if (!height) {
 			return EXPORT_SCALE;
@@ -318,29 +264,15 @@ export default function InvoiceDownload({
 
 		const safeScale = Math.sqrt(MAX_CANVAS_PIXELS / (EXPORT_WIDTH * height));
 
-		/*
-		 * Never go below 2x.
-		 *
-		 * Even very long invoices should remain reasonably sharp.
-		 */
 		return Math.max(2, Math.min(EXPORT_SCALE, safeScale));
 	};
 
-	/**
-	 * Create high-resolution canvas.
-	 *
-	 * Width remains exactly 700px.
-	 * Height comes from the actual invoice.
-	 */
 	const createCanvas = async () => {
 		const { wrapper, rootElement, reactRoot } = await createExportElement();
 
 		try {
 			const width = EXPORT_WIDTH;
 
-			/*
-			 * Get the actual rendered invoice height.
-			 */
 			const height = Math.ceil(
 				Math.max(
 					rootElement.scrollHeight,
@@ -357,9 +289,6 @@ export default function InvoiceDownload({
 				throw new Error("Invoice export element has no dimensions.");
 			}
 
-			/*
-			 * Dynamic quality.
-			 */
 			const scale = getRenderScale(height);
 
 			console.log("Invoice render scale:", scale);
@@ -390,10 +319,6 @@ export default function InvoiceDownload({
 				onclone: (clonedDocument) => {
 					fixUnsupportedColors(clonedDocument);
 
-					/*
-					 * Force the cloned export root to remain
-					 * exactly 700px wide.
-					 */
 					const clonedRoot = clonedDocument.querySelector(
 						"[data-invoice-export]",
 					) as HTMLElement | null;
@@ -414,12 +339,6 @@ export default function InvoiceDownload({
 		}
 	};
 
-	/**
-	 * Download PNG.
-	 *
-	 * PNG remains lossless and therefore gives the sharpest
-	 * possible image output.
-	 */
 	const downloadPNG = async () => {
 		if (isDownloading) return;
 
@@ -457,16 +376,6 @@ export default function InvoiceDownload({
 		}
 	};
 
-	/**
-	 * Download PDF.
-	 *
-	 * The PDF page size is calculated directly from
-	 * the invoice canvas.
-	 *
-	 * No A4.
-	 * No fixed landscape page.
-	 * No cropping.
-	 */
 	const downloadPDF = async () => {
 		if (isDownloading) return;
 
@@ -475,23 +384,10 @@ export default function InvoiceDownload({
 
 			const canvas = await createCanvas();
 
-			/*
-			 * -----------------------------------------------------
-			 * PDF SIZE
-			 * -----------------------------------------------------
-			 *
-			 * 1 CSS pixel ≈ 0.264583mm.
-			 *
-			 * We use the original 700px invoice width rather
-			 * than the high-resolution canvas width.
-			 */
 			const MM_PER_PX = 25.4 / 96;
 
 			const pdfWidth = EXPORT_WIDTH * MM_PER_PX;
 
-			/*
-			 * Preserve the exact invoice aspect ratio.
-			 */
 			const imageRatio = canvas.width / canvas.height;
 
 			const pdfHeight = pdfWidth / imageRatio;
@@ -503,36 +399,14 @@ export default function InvoiceDownload({
 				canvasHeight: canvas.height,
 			});
 
-			/*
-			 * -----------------------------------------------------
-			 * JPEG FOR PDF
-			 * -----------------------------------------------------
-			 *
-			 * PNG is lossless but can make the PDF unnecessarily
-			 * large.
-			 *
-			 * JPEG quality 0.90 gives a good balance between:
-			 *
-			 * - sharp text
-			 * - clean borders
-			 * - small PDF size
-			 */
 			const image = canvas.toDataURL("image/jpeg", 0.9);
 
-			/*
-			 * Determine orientation automatically.
-			 */
 			const orientation = pdfWidth >= pdfHeight ? "landscape" : "portrait";
 
 			const pdf = new jsPDF({
 				orientation,
 				unit: "mm",
 
-				/*
-				 * Dynamic custom page size.
-				 *
-				 * The page exactly matches the invoice.
-				 */
 				format: [pdfWidth, pdfHeight],
 
 				compress: true,
@@ -540,14 +414,6 @@ export default function InvoiceDownload({
 				precision: 12,
 			});
 
-			/*
-			 * Image fills the entire PDF.
-			 *
-			 * No margins.
-			 * No A4.
-			 * No cropping.
-			 * No stretching.
-			 */
 			pdf.addImage(image, "JPEG", 0, 0, pdfWidth, pdfHeight, undefined, "FAST");
 
 			pdf.save(`${fileName}.pdf`);
@@ -565,10 +431,6 @@ export default function InvoiceDownload({
 	return (
 		<div className="flex w-full flex-col gap-3">
 			<div className="flex w-full flex-col gap-3 sm:flex-row">
-				{/* =================================================
-				    PDF
-				================================================= */}
-
 				<button
 					type="button"
 					onClick={downloadPDF}
@@ -598,10 +460,6 @@ export default function InvoiceDownload({
 						</>
 					)}
 				</button>
-
-				{/* =================================================
-				    PNG
-				================================================= */}
 
 				<button
 					type="button"
