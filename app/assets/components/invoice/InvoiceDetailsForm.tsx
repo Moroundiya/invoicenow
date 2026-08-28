@@ -2,11 +2,14 @@
 
 import type { InvoiceData, InvoiceItem } from "@/app/assets/types/invoiceType";
 import { InvoiceDetailsFormProps } from "../../types/invoice";
+import { useState } from "react";
 
 export default function InvoiceDetailsForm({
 	invoice,
 	onInvoiceChange,
 }: InvoiceDetailsFormProps) {
+	const [quantity, setQuantity] = useState("1");
+
 	const updateFrom = (field: keyof InvoiceData["from"], value: string) => {
 		onInvoiceChange({
 			from: {
@@ -359,16 +362,18 @@ export default function InvoiceDetailsForm({
 								<FormField label="Quantity">
 									<input
 										type="number"
-										min="0"
+										min="1"
 										step="1"
-										value={item.quantity}
-										onChange={(event) =>
-											updateItem(
-												item.id,
-												"quantity",
-												Math.max(0, Number(event.target.value)),
-											)
-										}
+										value={quantity}
+										onChange={(event) => {
+											const value = event.target.value;
+
+											setQuantity(value);
+
+											if (value !== "") {
+												updateItem(item.id, "quantity", Number(value));
+											}
+										}}
 										className={inputClass}
 									/>
 								</FormField>

@@ -520,7 +520,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 							</div>
 						</div>
 
-						<div className="relative min-h-[160px] mt-5 mb-8">
+						<div className="relative min-h-[160px] mt-5 pb-8 mb-5">
 							<div
 								className="
 									mt-[4px]
@@ -574,12 +574,12 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 							</div>
 
 							{hasSignature ? (
-								<div className="absolute bottom-[11px] right-[2px] w-[96px] text-center">
-									<div className="flex h-[34px] items-end justify-center overflow-hidden">
+								<div className="absolute bottom-0 right-[2px] w-[96px] text-center">
+									<div className="flex h-[30px] items-end justify-center overflow-hidden">
 										<img
 											src={invoice.signature!.image}
 											alt="Authorized signature"
-											className="mx-auto mb-[2px] h-full w-full object-cover"
+											className="mx-auto block h-[28px] w-[96px] object-contain object-bottom"
 											style={{
 												filter: "brightness(0)",
 											}}
@@ -593,18 +593,18 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										}}
 									/>
 
-									<p className="mt-[5px] text-[10px] font-normal text-[#222]">
+									<p className="mt-[4px] text-[10px] font-normal leading-[12px] text-[#222]">
 										{invoice.signature?.name || "Authorized Signature"}
 									</p>
 
 									{invoice.signature?.title && (
-										<p className="mt-[1px] text-[8px] text-[#666]">
+										<p className="mt-[1px] text-[8px] leading-[10px] text-[#666]">
 											{invoice.signature.title}
 										</p>
 									)}
 								</div>
 							) : (
-								<div className="absolute -bottom-4 right-[2px] w-[96px] text-center">
+								<div className="absolute bottom-0 right-[2px] w-[96px] text-center">
 									<div
 										className="h-px w-full"
 										style={{
@@ -612,7 +612,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 										}}
 									/>
 
-									<div className="mt-[5px] text-[10px] text-[#222]">
+									<div className="mt-[4px] text-[10px] leading-[12px] text-[#222]">
 										Signature
 									</div>
 								</div>

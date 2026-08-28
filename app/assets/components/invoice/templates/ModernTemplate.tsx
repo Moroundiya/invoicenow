@@ -159,12 +159,11 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 										? invoice.from.name.charAt(0).toUpperCase()
 										: "I"}
 								</div>
-
-								<p className="mt-2 max-w-[175px] break-words text-[20px] font-bold leading-tight">
-									{invoice.from.name || "Your Business"}
-								</p>
 							</>
 						)}
+						<p className="mt-2 max-w-[175px] break-words text-[20px] font-bold leading-tight">
+							{invoice.from.name || "Your Business"}
+						</p>
 					</div>
 				</div>
 			</div>
