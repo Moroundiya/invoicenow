@@ -16,24 +16,18 @@ function FooterIcon({ type }: { type: FooterIconType }) {
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 				aria-hidden="true">
-				<circle
-					cx="12"
-					cy="12"
-					r="8"
-					stroke="currentColor"
-					strokeWidth="2.2"
-				/>
-
-				<path
-					d="M8.5 10.5L12 13L15.5 10.5"
+				<rect
+					x="3"
+					y="5"
+					width="18"
+					height="14"
+					rx="2"
 					stroke="currentColor"
 					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
 				/>
 
 				<path
-					d="M8.5 10.5V15H15.5V10.5"
+					d="M3 7L12 13L21 7"
 					stroke="currentColor"
 					strokeWidth="2"
 					strokeLinecap="round"
@@ -52,30 +46,28 @@ function FooterIcon({ type }: { type: FooterIconType }) {
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 				aria-hidden="true">
+				<rect
+					x="6"
+					y="2.5"
+					width="12"
+					height="19"
+					rx="2.5"
+					stroke="currentColor"
+					strokeWidth="2"
+				/>
+
+				<path
+					d="M10 5H14"
+					stroke="currentColor"
+					strokeWidth="2"
+					strokeLinecap="round"
+				/>
+
 				<circle
 					cx="12"
-					cy="12"
-					r="8"
-					stroke="currentColor"
-					strokeWidth="2.2"
-				/>
-
-				<path
-					d="M4 12H20"
-					stroke="currentColor"
-					strokeWidth="2"
-				/>
-
-				<path
-					d="M12 4C14.2 6.2 15.2 8.8 15.2 12C15.2 15.2 14.2 17.8 12 20"
-					stroke="currentColor"
-					strokeWidth="2"
-				/>
-
-				<path
-					d="M12 4C9.8 6.2 8.8 8.8 8.8 12C8.8 15.2 9.8 17.8 12 20"
-					stroke="currentColor"
-					strokeWidth="2"
+					cy="18.5"
+					r="1"
+					fill="currentColor"
 				/>
 			</svg>
 		);
@@ -199,11 +191,11 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 
 	const fromLocation = joinLocation(invoice.from.city, invoice.from.country);
 
-	const fromWithWebsite = invoice.from as typeof invoice.from & {
-		website?: string;
-	};
+	// const fromWithWebsite = invoice.from as typeof invoice.from & {
+	// 	website?: string;
+	// };
 
-	const footerWebsite = fromWithWebsite.website || "www.yourdomain.com";
+	const footerWebsite = invoice.from.phone || "+10000000";
 
 	const businessName = invoice.from.name?.trim() || "Brand Name";
 
