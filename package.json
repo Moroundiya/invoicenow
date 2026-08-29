@@ -20,6 +20,7 @@
     "@iconify-react/tabler": "^1.0.12",
     "@iconify-react/tdesign": "^1.0.7",
     "@iconify-react/vadivam": "^1.0.0",
+    "@vercel/analytics": "^2.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gsap": "^3.15.0",
