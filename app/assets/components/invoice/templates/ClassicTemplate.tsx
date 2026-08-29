@@ -353,7 +353,7 @@ export default function ClassicTemplate({ invoice }: ClassicTemplateProps) {
 								NO
 							</span>
 
-							<span className="min-w-0 border-r border-white/30 pl-[10px] text-left">
+							<span className="min-w-0 border-r border-white/30 text-center">
 								PRODUCT DESCRIPTION
 							</span>
 
