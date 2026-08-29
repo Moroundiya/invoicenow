@@ -50,7 +50,7 @@ export default function TemplateCard({
 					</h3>
 				</div>
 
-				<p className="mt-1.5 leading-5 text-slate-500">{description}</p>
+				<p className="mt-1.5 leading-5 text-slate-500 text-sm">{description}</p>
 			</div>
 		</button>
 	);

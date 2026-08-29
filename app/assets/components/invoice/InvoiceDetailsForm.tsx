@@ -8,7 +8,9 @@ export default function InvoiceDetailsForm({
 	invoice,
 	onInvoiceChange,
 }: InvoiceDetailsFormProps) {
-	const [quantity, setQuantity] = useState("1");
+	const [quantityInputs, setQuantityInputs] = useState<Record<string, string>>(
+		{},
+	);
 
 	const updateFrom = (field: keyof InvoiceData["from"], value: string) => {
 		onInvoiceChange({
@@ -45,6 +47,17 @@ export default function InvoiceDetailsForm({
 		});
 	};
 
+	const handleQuantityChange = (id: string, value: string) => {
+		setQuantityInputs((previous) => ({
+			...previous,
+			[id]: value,
+		}));
+
+		if (value !== "") {
+			updateItem(id, "quantity", Number(value));
+		}
+	};
+
 	const addItem = () => {
 		const newItem: InvoiceItem = {
 			id: crypto.randomUUID(),
@@ -60,6 +73,12 @@ export default function InvoiceDetailsForm({
 	};
 
 	const removeItem = (id: string) => {
+		setQuantityInputs((previous) => {
+			const next = { ...previous };
+			delete next[id];
+			return next;
+		});
+
 		if (invoice.items.length === 1) {
 			onInvoiceChange({
 				items: [],
@@ -320,7 +339,7 @@ export default function InvoiceDetailsForm({
 										{index + 1}
 									</span>
 
-									<span className=" font-semibold text-slate-300">
+									<span className="font-semibold text-slate-300">
 										Item {index + 1}
 									</span>
 								</div>
@@ -364,16 +383,14 @@ export default function InvoiceDetailsForm({
 										type="number"
 										min="1"
 										step="1"
-										value={quantity}
-										onChange={(event) => {
-											const value = event.target.value;
-
-											setQuantity(value);
-
-											if (value !== "") {
-												updateItem(item.id, "quantity", Number(value));
-											}
-										}}
+										value={
+											quantityInputs[item.id] !== undefined
+												? quantityInputs[item.id]
+												: String(item.quantity)
+										}
+										onChange={(event) =>
+											handleQuantityChange(item.id, event.target.value)
+										}
 										className={inputClass}
 									/>
 								</FormField>
@@ -414,9 +431,9 @@ export default function InvoiceDetailsForm({
 							</div>
 
 							<div className="mt-4 flex items-center justify-between border-t border-white/[0.05] pt-3">
-								<span className=" text-slate-600">Item amount</span>
+								<span className="text-slate-600">Item amount</span>
 
-								<span className=" font-semibold text-slate-200">
+								<span className="font-semibold text-slate-200">
 									{formatMoney(item.quantity * item.rate)}
 								</span>
 							</div>
@@ -426,7 +443,7 @@ export default function InvoiceDetailsForm({
 					<button
 						type="button"
 						onClick={addItem}
-						className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#041E50] bg-[#041f5049]  font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]">
+						className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#041E50] bg-[#041f5049] font-semibold text-blue-400 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]">
 						<svg
 							width="16"
 							height="16"
@@ -505,7 +522,7 @@ export default function InvoiceDetailsForm({
 				</div>
 
 				<div className="mt-5 rounded-xl border border-[#041E50] bg-[#041f5049] p-4">
-					<div className="space-y-2.5 ">
+					<div className="space-y-2.5">
 						<TotalRow
 							label="Subtotal"
 							value={formatMoney(subtotal)}
@@ -542,7 +559,7 @@ export default function InvoiceDetailsForm({
 }
 
 const inputClass =
-	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5  text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
+	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
 
 function FormSection({
 	number,
@@ -563,7 +580,7 @@ function FormSection({
 				</div>
 
 				<div>
-					<h3 className=" font-semibold text-white">{title}</h3>
+					<h3 className="font-semibold text-white">{title}</h3>
 
 					<p className="mt-1 text-sm leading-5 text-slate-600">{description}</p>
 				</div>
