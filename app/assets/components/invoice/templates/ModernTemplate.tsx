@@ -278,7 +278,7 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 							<div className="space-y-1 text-[11px]">
 								{payment.method && (
 									<div className="grid grid-cols-[72px_8px_minmax(0,1fr)] gap-1">
-										<span className="text-slate-500">Payment Method</span>
+										<span className="text-slate-500">Method</span>
 
 										<span>:</span>
 
