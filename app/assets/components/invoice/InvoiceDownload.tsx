@@ -280,10 +280,10 @@ export default function InvoiceDownload({
 				),
 			);
 
-			console.log("Invoice export dimensions:", {
-				width,
-				height,
-			});
+			// console.log("Invoice export dimensions:", {
+			// 	width,
+			// 	height,
+			// });
 
 			if (!width || !height) {
 				throw new Error("Invoice export element has no dimensions.");
@@ -291,7 +291,7 @@ export default function InvoiceDownload({
 
 			const scale = getRenderScale(height);
 
-			console.log("Invoice render scale:", scale);
+			// console.log("Invoice render scale:", scale);
 
 			const canvas = await html2canvas(rootElement, {
 				scale,
@@ -368,7 +368,7 @@ export default function InvoiceDownload({
 				URL.revokeObjectURL(url);
 			}, "image/png");
 		} catch (error) {
-			console.error("Failed to download PNG:", error);
+			// console.error("Failed to download PNG:", error);
 
 			alert("Something went wrong while creating the PNG. Please try again.");
 		} finally {
@@ -392,12 +392,12 @@ export default function InvoiceDownload({
 
 			const pdfHeight = pdfWidth / imageRatio;
 
-			console.log("PDF dimensions:", {
-				width: pdfWidth,
-				height: pdfHeight,
-				canvasWidth: canvas.width,
-				canvasHeight: canvas.height,
-			});
+			// console.log("PDF dimensions:", {
+			// 	width: pdfWidth,
+			// 	height: pdfHeight,
+			// 	canvasWidth: canvas.width,
+			// 	canvasHeight: canvas.height,
+			// });
 
 			const image = canvas.toDataURL("image/jpeg", 0.9);
 
@@ -418,7 +418,7 @@ export default function InvoiceDownload({
 
 			pdf.save(`${fileName}.pdf`);
 		} catch (error) {
-			console.error("Failed to download PDF:", error);
+			// console.error("Failed to download PDF:", error);
 
 			alert("Something went wrong while creating the PDF. Please try again.");
 		} finally {
