@@ -127,11 +127,11 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 							<span>{invoice.dueDate || "—"}</span>
 
-							<span className="font-medium text-white/65">Payment Terms</span>
+							{/* <span className="font-medium text-white/65">Payment Terms</span>
 
 							<span className="text-white/35">:</span>
 
-							<span>{payment.method || "—"}</span>
+							<span>{payment.method || "—"}</span> */}
 
 							<span className="font-medium text-white/65">Currency</span>
 
@@ -276,6 +276,17 @@ export default function ModernTemplate({ invoice }: ModernTemplateProps) {
 
 						{hasPaymentInformation ? (
 							<div className="space-y-1 text-[11px]">
+								{payment.method && (
+									<div className="grid grid-cols-[72px_8px_minmax(0,1fr)] gap-1">
+										<span className="text-slate-500">Payment Method</span>
+
+										<span>:</span>
+
+										<span className="break-words font-medium">
+											{payment.method}
+										</span>
+									</div>
+								)}
 								{payment.accountNumber && (
 									<div className="grid grid-cols-[72px_8px_minmax(0,1fr)] gap-1">
 										<span className="text-slate-500">Account</span>
