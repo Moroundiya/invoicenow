@@ -182,7 +182,7 @@ export default function HeroSection() {
 			style={{
 				visibility: "hidden",
 			}}
-			className="min-h-dvh w-full overflow-hidden bg-[url('/background-mobile.png')] bg-cover bg-center bg-no-repeat px-3 py-5 lg:bg-[url('/background.webp')] lg:px-6 lg:py-7 xl:px-10">
+			className="w-full overflow-hidden bg-[url('/background-mobile.png')] bg-cover bg-center bg-no-repeat px-3 py-5 lg:bg-[url('/background.webp')] lg:px-6 lg:py-7 xl:px-10">
 			<Navbar />
 
 			<div className="mx-auto mt-18 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-2 lg:gap-0">
@@ -209,7 +209,7 @@ export default function HeroSection() {
 					</div>
 
 					<p
-						className="max-w-3xl text-[2.5rem] font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]"
+						className="max-w-3xl text-4xl font-bold leading-[1.1] text-white sm:text-5xl md:text-6xl 2xl:text-7xl lg:leading-[0.95]"
 						style={{
 							textShadow: "1.5px 1.5px 0 #00B7FF",
 						}}>
