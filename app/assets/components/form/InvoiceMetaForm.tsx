@@ -114,7 +114,7 @@ function Field({
 	onChange,
 }: FieldProps) {
 	return (
-		<label className="block">
+		<label className="block min-w-0">
 			<span className="mb-1.5 block text-xs font-medium text-slate-400">
 				{label}
 			</span>
@@ -124,7 +124,7 @@ function Field({
 				value={value}
 				placeholder={placeholder}
 				onChange={(event) => onChange(event.target.value)}
-				className="h-11 w-full rounded-xl border border-white/[0.07] bg-[#061329] px-3.5 text-sm text-white outline-none placeholder:text-slate-600 transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10"
+				className="h-11 min-w-0 w-full max-w-full rounded-xl border border-white/[0.07] bg-[#061329] px-3.5 text-sm text-white outline-none placeholder:text-slate-600 transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/10"
 			/>
 		</label>
 	);

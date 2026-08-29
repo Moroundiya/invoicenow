@@ -122,7 +122,7 @@ export default function InvoiceDetailsForm({
 				number="01"
 				title="Invoice information"
 				description="Set the basic information for this invoice.">
-				<div className="grid gap-4 sm:grid-cols-2">
+				<div className="grid min-w-0 gap-4 sm:grid-cols-2">
 					<FormField label="Invoice number">
 						<input
 							type="text"
