@@ -167,7 +167,7 @@ export default function InvoiceDetailsForm({
 									issueDate: event.target.value,
 								})
 							}
-							className={inputClass}
+							className={`${inputClass} appearance-none`}
 						/>
 					</FormField>
 
@@ -180,7 +180,7 @@ export default function InvoiceDetailsForm({
 									dueDate: event.target.value,
 								})
 							}
-							className={inputClass}
+							className={`${inputClass} appearance-none`}
 						/>
 					</FormField>
 				</div>
@@ -559,7 +559,7 @@ export default function InvoiceDetailsForm({
 }
 
 const inputClass =
-	"mt-1.5 h-11 w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
+	"mt-1.5 h-11 min-w-0 w-full max-w-full rounded-xl border border-[#041E50] bg-[#041f5049] px-3.5 text-slate-200 outline-none transition placeholder:text-slate-700 focus:border-blue-500/40 focus:ring-2 focus:ring-[#041f5049]";
 
 function FormSection({
 	number,
