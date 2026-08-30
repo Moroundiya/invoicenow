@@ -1,7 +1,6 @@
 "use client";
 
 import success from "@/app/assets/images/success.png";
-
 import TemplateSelector from "./TemplateSelector";
 import InvoiceTemplateRenderer from "./templates/InvoiceTemplateRenderer";
 import InvoiceDetailsForm from "./InvoiceDetailsForm";
