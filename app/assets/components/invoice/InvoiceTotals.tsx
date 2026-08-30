@@ -9,13 +9,9 @@ export default function InvoiceTotals({
 	onTaxChange,
 }: InvoiceTotalsProps) {
 	const discountAmount = subtotal * (discount / 100);
-
 	const taxableAmount = subtotal - discountAmount;
-
 	const taxAmount = taxableAmount * (tax / 100);
-
 	const total = taxableAmount + taxAmount;
-
 	const formatMoney = (amount: number) =>
 		new Intl.NumberFormat("en-US", {
 			style: "currency",
